@@ -28,214 +28,305 @@ class m211013_090726_init_rbac extends Migration
         /*Criacao Permissoes */
 
         # - - - - - - - - - Create - - - - - - - - - 
-        // Create Users
-        $createUser = $auth->createPermission('createUser');
-        $createUser->description = 'Create an User';
-        $auth->add($createUser);
+        // Create Order
+        $createOrder = $auth->createPermission('createOrder');
+        $createOrder->description = 'Create an Order';
+        $auth->add($createOrder);
+
+        // Create Payment
+        $createPayment = $auth->createPermission('createPayment');
+        $createPayment->description = 'Create a Payment';
+        $auth->add($createPayment);
+
+        // Create Contract
+        $createContract = $auth->createPermission('createContract');
+        $createContract->description = 'Create a Contract';
+        $auth->add($createContract);
+
+        // Create Chat Cliente 
+        $createChatClient = $auth->createPermission('createChatClient');
+        $createChatClient->description = 'Create an Chat Client Side';
+        $auth->add($createChatClient);
+
+        // Create Chat Personal Trainer
+        $createChatPersonalTrainer = $auth->createPermission('createChatPersonalTrainer');
+        $createChatPersonalTrainer->description = 'Create an Chat Personal Trainer Side';
+        $auth->add($createChatPersonalTrainer);
+
+        // Create Request to be a Personal Trainer
+        $createPTApplication  = $auth->createPermission('createPTApplication');
+        $createPTApplication->description = 'Create an Request to be a Personal Trainer';
+        $auth->add($createPTApplication);
 
         // Create Exercises
         $createExercise = $auth->createPermission('createExercise');
         $createExercise->description = 'Create an Exercise';
         $auth->add($createExercise);
 
-        // Create Workouts | Treinos | 
-        $createWorkout = $auth->createPermission('createWorkout');
-        $createWorkout->description = 'Create a Workout';
-        $auth->add($createWorkout);
-
-        // Create Plans | Planos de Treino |
-        $createPlan = $auth->createPermission('createPlan');
-        $createPlan->description = 'Create a Plan';
-        $auth->add($createPlan);
-
         // Create Products
         $createProduct = $auth->createPermission('createProduct');
-        $createProduct->description = 'Create a Product';
+        $createProduct->description = 'Create an Product';
         $auth->add($createProduct);
 
-        // Create Parcel | Encomenda |
-        $createParcel = $auth->createPermission('createParcel');
-        $createParcel->description = 'Create an Parcel';
-        $auth->add($createParcel);
+        // Create Workout Plans
+        $createWorkoutPlan = $auth->createPermission('createWorkoutPlan');
+        $createWorkoutPlan->description = 'Create an Workout Plans';
+        $auth->add($createWorkoutPlan);
 
-        // Create Parcel Payment | Pagamento Encomenda |
-        $createParcelPayment = $auth->createPermission('createParcelPayment');
-        $createParcelPayment->description = 'Create a Parcel Payment';
-        $auth->add($createParcelPayment);
+        // Create Workouts Personal Trainer
+        $createWorkoutPT = $auth->createPermission('createWorkoutPT');
+        $createWorkoutPT->description = 'Create an Workout Personal Trainer';
+        $auth->add($createWorkoutPT);
 
-        // Create PTPayment | Pagamento Personal Trainer |
-        $createPTPayment = $auth->createPermission('createPTPayment');
-        $createPTPayment->description = 'Create a Personal Trainer Payment';
-        $auth->add($createPTPayment);
+        // Create Workouts Admin
+        $createWorkoutAdmin = $auth->createPermission('createWorkoutAdmin');
+        $createWorkoutAdmin->description = 'Create an Workout Admin';
+        $auth->add($createWorkoutAdmin);
 
-        //Create ClientRating | Avaliacao Cliente pelo PT |
-        $createClientRating = $auth->createPermission('createClientRating');
-        $createClientRating->description = 'Create a Client Rating';
-        $auth->add($createClientRating);
+        // Create ExerciseSuggestion
+        $createExerciseSuggestion = $auth->createPermission('createExerciseSuggestion');
+        $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
+        $auth->add($createExerciseSuggestion);
+
+        // Create ExerciseSuggestion
+        $createExerciseSuggestion = $auth->createPermission('createExerciseSuggestion');
+        $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
+        $auth->add($createExerciseSuggestion);
 
         # - - - - - - - - - Read - - - - - - - - - 
-        // Read Users
-        $readUser = $auth->createPermission('readUser');
-        $readUser->description = 'Read an User';
-        $auth->add($readUser);
-
-        // Read Personal Trainer
-        $readPT = $auth->createPermission('readPT');
-        $readPT->description = 'Read a Personal Trainer';
-        $auth->add($readPT);
-
-        // Read Exercises
-        $readExercise = $auth->createPermission('readExercise');
-        $readExercise->description = 'Read an Exercise';
-        $auth->add($readExercise);
-
-        // Read Workouts | Ver Treinos |
-        $readWorkout = $auth->createPermission('readWorkout');
-        $readWorkout->description = 'Read a Workout';
-        $auth->add($readWorkout);
-
-        // Read Plans | Ver Planos Treino |
-        $readPlan = $auth->createPermission('readPlan');
-        $readPlan->description = 'Read a Plan';
-        $auth->add($readPlan);
+        // Read Statistics
+        $readStatistics = $auth->createPermission('readStatistics');
+        $readStatistics->description = 'Read Statistics';
+        $auth->add($readStatistics);
 
         // Read Products
-        $readProduct = $auth->createPermission('readProduct');
-        $readProduct->description = 'Read a Product';
-        $auth->add($readProduct);
+        $readProducts = $auth->createPermission('readProducts');
+        $readProducts->description = 'Read Products';
+        $auth->add($readProducts);
 
-        // Read Parcel | Ver Encomenda |
-        $readParcel = $auth->createPermission('readParcel');
-        $readParcel->description = 'Read a Parcel';
-        $auth->add($readParcel);
+        // Read Profile Data Client
+        $readProfileDataClient = $auth->createPermission('readProfileDataClient');
+        $readProfileDataClient->description = 'Read Profile Data Client';
+        $auth->add($readProfileDataClient);
 
-        //Read ClientRating | Avaliacao Cliente pelo PT |
-        $readClientRating = $auth->createPermission('ReadClientRating');
-        $readClientRating->description = 'Read a Client Rating';
-        $auth->add($readClientRating);
+        // Read Profile Data Personal Trainer
+        $readProfileDataPT = $auth->createPermission('readProfileDataPT');
+        $readProfileDataPT->description = 'Read Profile Data Personal Trainer';
+        $auth->add($readProfileDataPT);
+
+        // Read Personal Trainers
+        $readPersonalTrainers = $auth->createPermission('readPersonalTrainers');
+        $readPersonalTrainers->description = 'Read Personal Trainers';
+        $auth->add($readPersonalTrainers);
+
+        // Read Order Status
+        $readOrderStatus = $auth->createPermission('readOrderStatus');
+        $readOrderStatus->description = 'Read Order Status';
+        $auth->add($readOrderStatus);
+
+        // Read Chat Cliente 
+        $readChatClient = $auth->createPermission('readChatClient');
+        $readChatClient->description = 'Read an Chat Client Side';
+        $auth->add($readChatClient);
+
+        // Read Chat Personal Trainer
+        $readChatPersonalTrainer = $auth->createPermission('readChatPersonalTrainer');
+        $readChatPersonalTrainer->description = 'Read an Chat Personal Trainer Side';
+        $auth->add($readChatPersonalTrainer);
+
+        // Read Users
+        $readUsers = $auth->createPermission('readUsers');
+        $readUsers->description = 'Read Users';
+        $auth->add($readUsers);
+
+        // Read Exercises
+        $readExercises = $auth->createPermission('readExercises');
+        $readExercises->description = 'Read Exercises';
+        $auth->add($readExercises);
+
+        // Read Products
+        $readProducts = $auth->createPermission('readProducts');
+        $readProducts->description = 'Read Products';
+        $auth->add($readProducts);
+
+        // Read Orders Admin
+        $readOrders = $auth->createPermission('readOrders');
+
+        $readOrders->description = 'Read Orders Admin';
+        $auth->add($readOrders);
+
+        // Read WorkoutPlansPT
+        $readWorkoutPlansPT = $auth->createPermission('readWorkoutPlansPT');
+        $readWorkoutPlansPT->description = 'Read Workout Plans Personal Trainer';
+        $auth->add($readWorkoutPlansPT);
+
+        // Read WorkoutsPT
+        $readWorkoutsPT = $auth->createPermission('readWorkoutsPT');
+        $readWorkoutsPT->description = 'Read Workout Personal Trainer';
+        $auth->add($readWorkoutsPT);
+
+        // Read Exercises Suggestions PT
+        $readExercisesSuggestionsPT = $auth->createPermission('readExercisesSuggestionsPT');
+        $readExercisesSuggestionsPT->description = 'Read Exercises Suggestions PT';
+        $auth->add($readExercisesSuggestionsPT);
+
+        // Read Exercises Suggestions Admin
+        $readExercisesSuggestionsAdmin = $auth->createPermission('readExercisesSuggestionsAdmin');
+        $readExercisesSuggestionsAdmin->description = 'Read Exercises Suggestions Admin';
+        $auth->add($readExercisesSuggestionsAdmin);
+
+        // Read Apllications for Personal Trainer
+        $readPTApplication  = $auth->createPermission('readPTApplication');
+        $readPTApplication->description = 'Read Apllications for Personal Trainer';
+        $auth->add($readPTApplication);
+
+        // Read Workouts Admin
+        $readWorkouts  = $auth->createPermission('readWorkouts');
+        $readWorkouts->description = 'Read Workouts';
+        $auth->add($readWorkouts);
 
         # - - - - - - - - - Update - - - - - - - - -  
+        // Update Client Profile Data
+        $updateProfileDataClient  = $auth->createPermission('updateProfileDataClient');
+        $updateProfileDataClient->description = 'Update Client Profile Data';
+        $auth->add($updateProfileDataClient);
+
+        // Update Personal Trainer Profile Data
+        $updateProfileDataPersonalTrainer  = $auth->createPermission('updateProfileDataPersonalTrainer');
+        $updateProfileDataPersonalTrainer->description = 'Update Personal Trainer Profile Data';
+        $auth->add($updateProfileDataPersonalTrainer);
+
+        // Update Personal Trainer Contract
+        $updatePersonalTrainerContract  = $auth->createPermission('updatePersonalTrainerContract');
+        $updatePersonalTrainerContract->description = 'Update Personal Trainer Contract';
+        $auth->add($updatePersonalTrainerContract);
+
         // Update Users
-        $updateUser = $auth->createPermission('updateUser');
-        $updateUser->description = 'Update an User';
-        $auth->add($updateUser);
+        $updateUsers = $auth->createPermission('updateUsers');
+        $updateUsers->description = 'Update Users';
+        $auth->add($updateUsers);
 
         // Update Exercises
-        $updateExercise = $auth->createPermission('updateExercise');
-        $updateExercise->description = 'Update an Exercise';
-        $auth->add($updateExercise);
-
-        // Update Workouts | Ver Treinos |
-        $updateWorkout = $auth->createPermission('updateWorkout');
-        $updateWorkout->description = 'Update a Workout';
-        $auth->add($updateWorkout);
-
-        // Update Plans | Ver Planos Treino |
-        $updatePlan = $auth->createPermission('updatePlan');
-        $updatePlan->description = 'Update a Plan';
-        $auth->add($updatePlan);
+        $updateExercises = $auth->createPermission('updateExercises');
+        $updateExercises->description = 'Update Exercises';
+        $auth->add($updateExercises);
 
         // Update Products
-        $updateProduct = $auth->createPermission('updateProduct');
-        $updateProduct->description = 'Update a Product';
-        $auth->add($updateProduct);
+        $updateProducts = $auth->createPermission('updateProducts');
+        $updateProducts->description = 'Update Products';
+        $auth->add($updateProducts);
 
-        //Update Parcel
-        $updateParcel = $auth->createPermission('updateParcel');
-        $updateParcel->description = 'Update an Parcel';
-        $auth->add($updateParcel);
+        // Update Orders Status
+        $updateOrdersStatus = $auth->createPermission('updateOrdersStatus');
+        $updateOrdersStatus->description = 'Update Order Status';
+        $auth->add($updateOrdersStatus);
 
-        //Update User Profile
-        $updateUserProfile = $auth->createPermission('updateUserProfile');
-        $updateUserProfile->description = 'Update an User Profile';
-        $auth->add($updateUserProfile);
+        // Update WorkoutPlans Personal Trainer
+        $updateWorkoutPlansPT = $auth->createPermission('updateWorkoutPlansPT');
+        $updateWorkoutPlansPT->description = 'Update Workout Plans Personal Trainer';
+        $auth->add($updateWorkoutPlansPT);
 
-        //Update ClientRating | Avaliacao Cliente pelo PT |
-        $updateClientRating = $auth->createPermission('updateClientRating');
-        $updateClientRating->description = 'Update a Client Rating';
-        $auth->add($updateClientRating);
+        // Update Workouts Personal Trainer
+        $updateWorkoutsPT = $auth->createPermission('updateWorkoutsPT');
+        $updateWorkoutsPT->description = 'Update Plans Personal Trainer';
+        $auth->add($updateWorkoutsPT);
+
+        // Update Exercises Suggestions
+        $updateExercisesSuggestions = $auth->createPermission('updateExercisesSuggestions');
+        $updateExercisesSuggestions->description = 'Update Exercises Suggestions';
+        $auth->add($updateExercisesSuggestions);
+
+        // Update Apllications for Personal Trainer
+        $updatePTApplication  = $auth->createPermission('updatePTApplication');
+        $updatePTApplication->description = 'Update Apllications for Personal Trainer';
+        $auth->add($updatePTApplication);
+
+        // Update Workouts Admin
+        $updateWorkoutsAdmin  = $auth->createPermission('updateWorkoutsAdmin');
+        $updateWorkoutsAdmin->description = 'Update Workouts Admin';
+        $auth->add($updateWorkoutsAdmin);
 
         # - - - - - - - - Delete - - - - - - - - - 
         // Delete Exercises
-        $deleteExercise = $auth->createPermission('deleteExercise');
-        $deleteExercise->description = 'Update an Exercise';
-        $auth->add($deleteExercise);
+        $deleteExercises  = $auth->createPermission('deleteExercises');
+        $deleteExercises->description = 'Delete Exercises';
+        $auth->add($deleteExercises);
 
-        // Delete Workouts | Apagar Treinos |
-        $deleteWorkout = $auth->createPermission('deleteWorkout');
-        $deleteWorkout->description = 'Delete a Workout';
-        $auth->add($deleteWorkout);
+        // Delete WorkoutPlans
+        $deleteWorkoutPlans = $auth->createPermission('deleteWorkoutPlans');
+        $deleteWorkoutPlans->description = 'Delete Workout Plans';
+        $auth->add($deleteWorkoutPlans);
 
-        // Delete Plans | Apagar Planos de Treino |
-        $deletePlan = $auth->createPermission('deletePlan');
-        $deletePlan->description = 'Update a Plan';
-        $auth->add($deletePlan);
+        // Delete Workouts Personal Trainer
+        $deleteWorkoutsPT = $auth->createPermission('deleteWorkoutsPT');
+        $deleteWorkoutsPT->description = 'Delete Workouts Personal Trainer';
+        $auth->add($deleteWorkoutsPT);
 
-        // Delete Products
-        $deleteProduct = $auth->createPermission('deleteProduct');
-        $deleteProduct->description = 'Update a Product';
-        $auth->add($deleteProduct);
+        // Delete Workouts Admin
+        $deleteWorkoutsAdmin = $auth->createPermission('deleteWorkoutsAdmin');
+        $deleteWorkoutsAdmin->description = 'Delete Workouts';
+        $auth->add($deleteWorkoutsAdmin);
 
         /* Atribuição Permissões aos Roles */
         //Admin
-        $auth->addChild($admin, $createUser);
         $auth->addChild($admin, $createExercise);
         $auth->addChild($admin, $createProduct);
+        $auth->addChild($admin, $createWorkoutAdmin);
 
-        $auth->addChild($admin, $readUser);
-        $auth->addChild($admin, $readExercise);
-        $auth->addChild($admin, $readProduct);
-        $auth->addChild($admin, $readParcel);
+        $auth->addChild($admin, $readUsers);
+        $auth->addChild($admin, $readExercises);
+        $auth->addChild($admin, $readProducts);
+        $auth->addChild($admin, $readOrders);
+        $auth->addChild($admin, $readExercisesSuggestionsAdmin);
+        $auth->addChild($admin, $readPTApplication);
+        $auth->addChild($admin, $readWorkouts);
 
-        $auth->addChild($admin, $updateUser);
-        $auth->addChild($admin, $updateExercise);
-        $auth->addChild($admin, $updateProduct);
-        $auth->addChild($admin, $updateParcel);
+        $auth->addChild($admin, $updateUsers);
+        $auth->addChild($admin, $updateExercises);
+        $auth->addChild($admin, $updateProducts);
+        $auth->addChild($admin, $updateOrdersStatus);
+        $auth->addChild($admin, $updateExercisesSuggestions);
+        $auth->addChild($admin, $updatePTApplication);
+        $auth->addChild($admin, $updateWorkoutsAdmin);
 
-        $auth->addChild($admin, $deleteExercise);
-        $auth->addChild($admin, $deleteProduct);
+        $auth->addChild($admin, $deleteExercises);
+        $auth->addChild($admin, $deleteWorkoutsAdmin);
 
         //Cliente
-        $auth->addChild($client, $createWorkout);
-        $auth->addChild($client, $createParcel);
-        $auth->addChild($client, $createParcelPayment);
-        $auth->addChild($client, $createPTPayment);
+        $auth->addChild($client, $createOrder);
+        $auth->addChild($client, $createPayment);
+        $auth->addChild($client, $createContract);
+        $auth->addChild($client, $createChatClient);
+        $auth->addChild($client, $createPTApplication);
 
-        $auth->addChild($client, $readPT);
-        $auth->addChild($client, $readExercise);
-        $auth->addChild($client, $readWorkout);
-        $auth->addChild($client, $readPlan);
-        $auth->addChild($client, $readProduct);
-        $auth->addChild($client, $readParcel);
-        $auth->addChild($client, $readClientRating);
+        $auth->addChild($client, $readStatistics);
+        $auth->addChild($client, $readProducts);
+        $auth->addChild($client, $readProfileDataClient);
+        $auth->addChild($client, $readOrderStatus);
+        $auth->addChild($client, $readPersonalTrainers);
+        $auth->addChild($client, $readChatClient);
 
-        $auth->addChild($client, $updateUserProfile);
-
-        $auth->addChild($client, $deletePlan);
-        $auth->addChild($client, $updateUserProfile);
-        $auth->addChild($client, $updateUserProfile);
+        $auth->addChild($client, $updateProfileDataClient);
+        $auth->addChild($client, $updatePersonalTrainerContract);
 
         //Personal Trainer
-        $auth->addChild($personalTrainer, $createWorkout);
-        $auth->addChild($personalTrainer, $createPlan);
-        $auth->addChild($personalTrainer, $createClientRating);
-        $auth->addChild($personalTrainer, $createUser);
-        $auth->addChild($personalTrainer, $createUser);
+        $auth->addChild($personalTrainer, $createChatPersonalTrainer);
+        $auth->addChild($personalTrainer, $createWorkoutPlan);
+        $auth->addChild($personalTrainer, $createWorkoutPT);
+        $auth->addChild($personalTrainer, $createExerciseSuggestion);
 
-        $auth->addChild($personalTrainer, $readUser);
-        $auth->addChild($personalTrainer, $readExercise);
-        $auth->addChild($personalTrainer, $readWorkout);
-        $auth->addChild($personalTrainer, $readPlan);
-        $auth->addChild($personalTrainer, $readClientRating);
+        $auth->addChild($personalTrainer, $readChatPersonalTrainer);
+        $auth->addChild($personalTrainer, $readWorkoutPlansPT);
+        $auth->addChild($personalTrainer, $readProfileDataPT);
+        $auth->addChild($personalTrainer, $readWorkoutsPT);
+        $auth->addChild($personalTrainer, $readExercisesSuggestionsPT);
 
-        $auth->addChild($personalTrainer, $updateWorkout);
-        $auth->addChild($personalTrainer, $updatePlan);
-        $auth->addChild($personalTrainer, $updateUserProfile);
-        $auth->addChild($personalTrainer, $readClientRating);
+        $auth->addChild($personalTrainer, $updateWorkoutPlansPT);
+        $auth->addChild($personalTrainer, $updateProfileDataPersonalTrainer);
+        $auth->addChild($personalTrainer, $updateWorkoutsPT);
 
-        $auth->addChild($personalTrainer, $deleteWorkout);
-        $auth->addChild($personalTrainer, $deletePlan);
-        $auth->addChild($personalTrainer, $deleteProduct);
+        $auth->addChild($personalTrainer, $deleteWorkoutPlans);
+        $auth->addChild($personalTrainer, $deleteWorkoutsPT);
     }
 
     public function down()
