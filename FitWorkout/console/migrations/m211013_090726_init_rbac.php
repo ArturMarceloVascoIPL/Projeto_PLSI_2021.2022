@@ -25,6 +25,26 @@ class m211013_090726_init_rbac extends Migration
         $admin = $auth->createRole('admin');
         $auth->add($admin);
 
+        //Definicao manual dos dados do administrador
+        $adminUsername = '{adminUsernameExemplo}';
+        $adminPassword = '{adminPasswordExemplo}';
+        $adminEmail = '{admin@exemplo.com}';
+
+        $authKey = Yii::$app->getSecurity()->generateRandomString();
+        $hash = Yii::$app->getSecurity()->generatePasswordHash($adminPassword);
+
+        //Criação do User Admin
+        $this->insert('user', [
+            'username' => $adminUsername,
+            'auth_key' => $authKey,
+            'password_hash' => $hash,
+            'email' => $adminEmail,
+            'status' => 10,
+            'created_at' => Yii::$app->formatter->asTimestamp('now'),
+            'updated_at' => Yii::$app->formatter->asTimestamp('now'),
+        ]);
+        $auth->assign($admin, $this->db->getLastInsertID());
+
         /*Criacao Permissoes */
 
         # - - - - - - - - - Create - - - - - - - - - 

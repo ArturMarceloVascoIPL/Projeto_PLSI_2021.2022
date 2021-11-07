@@ -8,6 +8,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\helpers\Url;
+
 
 /**
  * Site controller
@@ -26,6 +28,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['login', 'error'],
                         'allow' => true,
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout', 'index'],
@@ -80,7 +83,20 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
+
+            foreach ($userRoles as $role) {
+                if ($role->name != 'admin') {
+                    Yii::$app->user->logout();
+                    return $this->redirect(Url::to(['site/login']));
+
+                    #TODO verificar se o usuário tem permissão para acessar o sistema
+
+                    // Yii::$app->session->setFlash('error', 'No !!!');
+                    // return $this->$this->redirect(Url::to(Yii::$app->urlManagerFrontend->createUrl('site/login')));
+                } else
+                    return  $this->goHome();
+            }
         }
 
         $model->password = '';
@@ -98,7 +114,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }
