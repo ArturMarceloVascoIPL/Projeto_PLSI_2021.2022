@@ -13,11 +13,17 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/style.css'
+    ];
+    public $scss = [
+        'scss/site.css'
     ];
     public $js = [
+        'jss/script.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
+        '\rmrevin\yii\fontawesome\AssetBundle'
     ];
 }

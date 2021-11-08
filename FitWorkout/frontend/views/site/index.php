@@ -2,52 +2,92 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use rmrevin\yii\fontawesome\FA;
+
+$this->title = 'Fit Workout';
 ?>
-<div class="site-index">
 
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
+<html lang="en">
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+<head>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <!-- FAVICON -->
+    <link href="img/favicon.png" rel="shortcut icon">
+
+    <!-- Owl Carousel -->
+    <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+    <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+    <!-- Fancy Box -->
+    <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+    <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="body-wrapper">
+    <div class="site-index">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-header">
+                            <?php
+
+                            if (Yii::$app->user->isGuest)
+                                echo "<h2>Bem Vindo | Inicie a sessão</h2>";
+                            else
+                                echo "<h2>Bem Vindo <b>" . Yii::$app->user->identity->username . "</b></h2>";
+                            ?>
+                        </div>
+
+                        <div class="jumbotron text-center bg-transparent">
+                            <h1 class="display-4">😎</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="body-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h2>Encomendas</h2>
+
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
+                                quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
+                                harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
+
+                            <a class="btn btn-outline-secondary"> AA</a>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <h2>Plano de Treinos</h2>
+
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
+                                quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
+                                harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
+                            <a class="btn btn-outline-secondary"> AA</a>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+
+                        <h2>Notificacoes de Chat com PT</h2>
+
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
+                            quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
+                            harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
+                        <a class="btn btn-outline-secondary"> AA</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
     </div>
+    </section>
 
-    <div class="body-content">
+</body>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
+</html>
