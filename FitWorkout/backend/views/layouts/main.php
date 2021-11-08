@@ -10,10 +10,12 @@ use yii\helpers\Html;
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+$assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,31 +23,37 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/img/favicon.ico" type="image/x-icon" />
+
 </head>
+
 <body class="hold-transition sidebar-mini">
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrapper">
-    <!-- Navbar -->
-    <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
-    <!-- /.navbar -->
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => '@web/favicon.png', 'href' => '/favicon.png']); ?>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
+        <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
-    <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
+        <!-- Main Sidebar Container -->
+        <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
-    <!-- Content Wrapper. Contains page content -->
-    <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
-    <!-- /.content-wrapper -->
+        <!-- Content Wrapper. Contains page content -->
+        <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+        <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <?= $this->render('control-sidebar') ?>
-    <!-- /.control-sidebar -->
+        <!-- Control Sidebar -->
+        <?= $this->render('control-sidebar') ?>
+        <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <?= $this->render('footer') ?>
-</div>
+        <!-- Main Footer -->
+        <?= $this->render('footer') ?>
+    </div>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>
