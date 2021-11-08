@@ -108,11 +108,6 @@ class m211013_090726_init_rbac extends Migration
         $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
         $auth->add($createExerciseSuggestion);
 
-        // Create ExerciseSuggestion
-        $createExerciseSuggestion = $auth->createPermission('createExerciseSuggestion');
-        $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
-        $auth->add($createExerciseSuggestion);
-
         # - - - - - - - - - Read - - - - - - - - - 
         // Read Statistics
         $readStatistics = $auth->createPermission('readStatistics');
@@ -164,14 +159,8 @@ class m211013_090726_init_rbac extends Migration
         $readExercises->description = 'Read Exercises';
         $auth->add($readExercises);
 
-        // Read Products
-        $readProducts = $auth->createPermission('readProducts');
-        $readProducts->description = 'Read Products';
-        $auth->add($readProducts);
-
         // Read Orders Admin
         $readOrders = $auth->createPermission('readOrders');
-
         $readOrders->description = 'Read Orders Admin';
         $auth->add($readOrders);
 
