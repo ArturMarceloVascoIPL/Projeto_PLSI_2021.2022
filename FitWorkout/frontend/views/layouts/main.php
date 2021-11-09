@@ -37,7 +37,7 @@ AppAsset::register($this);
         <section class="position-fixed">
             <div class="row">
                 <div class="col-md-10">
-                    <nav class="navbar navbar-expand-lg navigation fixed-top" style="background-color: salmon;">
+                    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #5672f9">
                         <a class="navbar-brand" href="index">
                             <?=
                             Html::img('@web/img/logo.png', $options = [Url::to('/site/index'), 'class' => 'img-fluid', 'alt' => 'logo'])
@@ -89,7 +89,7 @@ AppAsset::register($this);
                                         <a class="dropdown-item" href="">
                                             Dados Perfil
                                         </a>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item d-none" href="">
                                             Trocar para Personal Trainer
                                         </a>
                                         <div class="dropdown-divider"></div>
@@ -104,7 +104,7 @@ AppAsset::register($this);
                 <?php } ?>
     </nav>
 
-    <main role="main" class="flex-shrink-0">
+    <main role="main" class="flex-shrink-0" style="z-index: -1;">
         <div class="container">
             <div class="py-5">
                 <?= Breadcrumbs::widget([
