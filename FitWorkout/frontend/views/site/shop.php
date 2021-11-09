@@ -9,7 +9,6 @@ $this->title = 'Loja';
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-
     <body class="body-wrapper">
         <div class="site-index">
             <div class="col-12">
@@ -139,6 +138,5 @@ $this->title = 'Loja';
                 </div>
             </div>
         </div>
-</div>
 </div>
 </body>
