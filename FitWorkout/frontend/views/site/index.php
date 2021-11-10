@@ -3,27 +3,11 @@
 /* @var $this yii\web\View */
 
 use rmrevin\yii\fontawesome\FA;
+use yii\bootstrap4\Html;
 
 $this->title = 'Fit Workout';
 ?>
 
-<html lang="en">
-
-<head>
-
-    <!-- FAVICON -->
-    <link href="img/favicon.png" rel="shortcut icon">
-
-    <!-- Owl Carousel -->
-    <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-    <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
-    <!-- Fancy Box -->
-    <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-    <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <!-- CUSTOM CSS -->
-    <link href="css/style.css" rel="stylesheet">
-
-</head>
 
 <body class="body-wrapper">
     <div class="site-index">
@@ -37,57 +21,89 @@ $this->title = 'Fit Workout';
                             if (Yii::$app->user->isGuest)
                                 echo "<h2>Bem Vindo | Inicie a sessão</h2>";
                             else
-                                echo "<h2>Bem Vindo <b>" . Yii::$app->user->identity->username . "</b></h2>";
+                                echo "<h2>Bem Vindo <b>" . Yii::$app->user->identity->username . "</b></h2><br><br>";
+
                             ?>
+
                         </div>
 
-                        <div class="jumbotron text-center bg-transparent">
-                            <h1 class="display-4">😎</h1>
+                            <?php if (Yii::$app->user->isGuest) { ?>
+
+                            <?php } else { ?>
+                                <div class="body-content">
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card ">
+                                                <div class="card-header">
+                                                    <h2>Encomendas</h2>
+                                                </div>
+
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Cras justo odio
+                                                        <?=
+                                                        Html::img('@web/img/truck.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
+                                                        ?>
+                                                    </li>
+
+                                                    <li class="list-group-item">Dapibus ac facilisis in
+                                                        <?=
+                                                        Html::img('@web/img/shop.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
+                                                        ?></li>
+                                                    </li>
+                                                    <li class="list-group-item">Vestibulum at eros
+                                                        <?=
+                                                        Html::img('@web/img/shop.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
+                                                        ?></li>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h2>Plano de Treino de Hoje</h2>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h2>Notificações do Personal Trainer</h2>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <div class="card-title">Personal Trainer</div>
+                                                    <p class="cart-text">'mensagem do personal trainer'
+                                                        <?=
+                                                        Html::img('@web/img/bell-fill.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
+                                                        ?></li>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
                         </div>
+
+                        
 
                     </div>
                 </div>
             </div>
 
-            <div class="body-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <h2>Encomendas</h2>
 
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
-                                quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
-                                harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
-
-                            <a class="btn btn-outline-secondary"> AA</a>
-                        </div>
-                        <div class="col-lg-4">
-
-                            <h2>Plano de Treinos</h2>
-
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
-                                quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
-                                harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
-                            <a class="btn btn-outline-secondary"> AA</a>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-
-                        <h2>Notificacoes de Chat com PT</h2>
-
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque similique commodi
-                            quisquam consequuntur voluptate iusto totam laborum architecto? Sequi corrupti nulla
-                            harum atque blanditiis accusamus molestiae iste quaerat libero ullam.</p>
-                        <a class="btn btn-outline-secondary"> AA</a>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        </section>
     </div>
-    </section>
-
 </body>
-
-</html>
