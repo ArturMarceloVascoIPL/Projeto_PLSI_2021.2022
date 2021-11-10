@@ -2,14 +2,13 @@
 
 namespace backend\controllers;
 
-use common\models\LoginForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\helpers\Url;
-
+use common\models\LoginForm;
 
 /**
  * Site controller
@@ -31,6 +30,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
+                        #TODO ver o que fazer com o acesso aos usuários logados
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],

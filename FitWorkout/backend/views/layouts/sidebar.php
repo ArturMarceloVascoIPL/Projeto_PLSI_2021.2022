@@ -6,7 +6,7 @@ use app\assets\AppAsset;
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/site/index" class="brand-link">
         <?= Html::img('@web/img/logo.png', ['alt' => 'FitWorkout', 'class' => 'brand-image img-circle elevation-3', 'style' => 'opacity: .8']) ?>
         <span class="brand-text font-weight-light">Fit Workout</span>
     </a>
@@ -49,10 +49,10 @@ use app\assets\AppAsset;
 
                     // Dashboard Area
                     ['label' => 'DASHBOARD', 'header' => true],
-                    ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['users.php']],
-                    ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['#']],
-                    ['label' => 'Produtos',  'icon' => 'store', 'url' => ['#']],
-                    ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['#']],
+                    ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['/user/index/']],
+                    ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['']],
+                    ['label' => 'Produtos',  'icon' => 'store', 'url' => ['']],
+                    ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['']],
                     // [
                     //     'label' => 'Starter Pages',
                     //     'icon' => 'tachometer-alt',
