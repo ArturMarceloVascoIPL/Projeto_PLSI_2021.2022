@@ -27,6 +27,8 @@ $this->title = 'Fit Workout';
 
                         </div>
 
+                        <div class="jumbotron text-center bg-transparent">
+                            <h1 class="display-4">😎</h1>
                             <?php if (Yii::$app->user->isGuest) { ?>
 
                             <?php } else { ?>
@@ -101,6 +103,7 @@ $this->title = 'Fit Workout';
 
                     </div>
                 </div>
+
             </div>
 
 

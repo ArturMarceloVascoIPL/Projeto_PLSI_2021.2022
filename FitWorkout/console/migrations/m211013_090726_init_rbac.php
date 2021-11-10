@@ -26,9 +26,13 @@ class m211013_090726_init_rbac extends Migration
         $auth->add($admin);
 
         //Definicao manual dos dados do administrador
-        $adminUsername = '{adminUsernameExemplo}';
-        $adminPassword = '{adminPasswordExemplo}';
-        $adminEmail = '{admin@exemplo.com}';
+        // $adminUsername = '{adminUsername}';
+        // $adminPassword = '{adminPasswordExemplo}';
+        // $adminEmail = '{admin@exemplo.com}';
+
+        $adminUsername = 'admin';
+        $adminPassword = 'adminadmin';
+        $adminEmail = 'admin@admin.pt';
 
         $authKey = Yii::$app->getSecurity()->generateRandomString();
         $hash = Yii::$app->getSecurity()->generatePasswordHash($adminPassword);
