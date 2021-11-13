@@ -32,11 +32,9 @@ use yii\bootstrap4\Breadcrumbs;
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <div class="content">
-        <?= $content ?><!-- /.container-fluid -->
+        <?= $content ?>
     </div>
-    <!-- /.content -->
 </div>

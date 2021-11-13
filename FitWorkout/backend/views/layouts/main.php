@@ -24,36 +24,49 @@ $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/img/favicon.ico" type="image/x-icon" />
 
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/img/favicon.ico" type="image/x-icon" />
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => '@web/favicon.png', 'href' => '/favicon.png']); ?>
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <?php $this->beginBody() ?>
 
-    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => '@web/favicon.png', 'href' => '/favicon.png']); ?>
-    <div class="wrapper">
-        <!-- Navbar -->
-        <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
-        <!-- /.navbar -->
+<?php if (Yii::$app->user->can('admin')) { ?>
 
-        <!-- Main Sidebar Container -->
-        <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
+    <body class="hold-transition sidebar-mini">
+        <?php $this->beginBody() ?>
 
-        <!-- Content Wrapper. Contains page content -->
-        <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
-        <!-- /.content-wrapper -->
+        <div class="wrapper">
+            <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
 
-        <!-- Control Sidebar -->
-        <?= $this->render('control-sidebar') ?>
-        <!-- /.control-sidebar -->
+            <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
-        <!-- Main Footer -->
-        <?= $this->render('footer') ?>
-    </div>
+            <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
 
-    <?php $this->endBody() ?>
-</body>
+            <?= $this->render('control-sidebar') ?>
+
+            <?= $this->render('footer') ?>
+        </div>
+
+        <?php $this->endBody() ?>
+    </body>
+        
+<?php } else { ?>
+
+    <body class="sidebar-collapse">
+        <?php $this->beginBody() ?>
+
+        <div class="wrapper">
+
+            <?= $this->render('navbar_pt', ['assetDir' => $assetDir]) ?>
+
+            <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+
+            <?= $this->render('footer') ?>
+        </div>
+
+        <?php $this->endBody() ?>
+    </body>
+<?php } ?>
 
 </html>
 <?php $this->endPage() ?>

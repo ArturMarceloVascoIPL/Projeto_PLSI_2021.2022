@@ -85,15 +85,14 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
 
+
             foreach ($userRoles as $role) {
-                if ($role->name != 'admin') {
+                if ($role->name != 'admin' && $role->name != 'personalTrainer') {
                     Yii::$app->user->logout();
                     return $this->redirect(Url::to(['site/login']));
 
                     #TODO verificar se o usuário tem permissão para acessar o sistema
 
-                    // Yii::$app->session->setFlash('error', 'No !!!');
-                    // return $this->$this->redirect(Url::to(Yii::$app->urlManagerFrontend->createUrl('site/login')));
                 } else
                     return  $this->goHome();
             }
