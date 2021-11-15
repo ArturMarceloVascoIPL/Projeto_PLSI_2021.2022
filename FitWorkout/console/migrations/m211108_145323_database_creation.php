@@ -16,17 +16,24 @@ class m211108_145323_database_creation extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('personalTrainer', [
+        /**
+         * Tabela Personal Trainer
+         */
+
+        // Tabela
+        $this->createTable('personaltrainer', [
             'userId' => $this->primaryKey(),
             'qualificationProof' => $this->string()->notNull()
         ], $tableOptions);
 
+        // Index da Chave Estrangeira
         $this->createIndex(
             'idx_pt_userId',
             'personalTrainer',
             'userId'
         );
 
+        // Designação da Chave Estrangeira
         $this->addForeignKey(
             'fk_pt_userId',
             'personalTrainer',
@@ -35,6 +42,11 @@ class m211108_145323_database_creation extends Migration
             'id'
         );
 
+        /**
+         * Tabela Cliente
+         */
+
+        // Tabela
         $this->createTable('client', [
             'userId' => $this->primaryKey(),
             'weight' => $this->integer(),
@@ -45,12 +57,14 @@ class m211108_145323_database_creation extends Migration
             'bmi' => $this->integer()
         ], $tableOptions);
 
+        // Index da Chave Estrangeira
         $this->createIndex(
             'idx_client_userId',
             'client',
             'userId'
         );
 
+        // Designação da Chave Estrangeira
         $this->addForeignKey(
             'fk_client_userId',
             'client',
@@ -58,6 +72,24 @@ class m211108_145323_database_creation extends Migration
             'user',
             'id'
         );
+
+        // TODO: Acabar criação da tabela
+        /**
+         * Tabela Aplicação a Personal Trainer
+         */
+
+        // Tabela
+        $this->createTable('aplication', [
+            'id' => $this->primaryKey(),
+            'qualificationProof' => $this->string()->notNull(),
+            'comment' => $this->string(),
+            'status' => $this->integer(),
+            'userId' => $this->integer(),
+        ], $tableOptions);
+
+        // Index da Chave Estrangeira
+
+        // Designação da Chave Estrangeira
     }
 
     public function down()
