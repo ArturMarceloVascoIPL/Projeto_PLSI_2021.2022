@@ -73,7 +73,6 @@ class m211108_145323_database_creation extends Migration
             'id'
         );
 
-        // TODO: Acabar criação da tabela
         /**
          * Tabela Aplicação a Personal Trainer
          */
@@ -88,8 +87,20 @@ class m211108_145323_database_creation extends Migration
         ], $tableOptions);
 
         // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_aplication_userId',
+            'aplication',
+            'userId'
+        );
 
         // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_aplication_userId',
+            'aplication',
+            'userId',
+            'user',
+            'id'
+        );
     }
 
     public function down()
