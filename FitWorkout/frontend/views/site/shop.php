@@ -5,138 +5,136 @@
 use yii\helpers\Html;
 
 $this->title = 'Loja';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
+    
 
-    <body class="body-wrapper">
-        <div class="site-index">
-            <div class="col-12">
+    <body style="z-index: -5;">
+        <div class="container pt-5" >
+            <div class="row">
+                <div class="col-md-8 order-md-2 col-lg">
+                    <div class="container-fluid">
+                        <div class="row   mb-5">
+                            <div class="col-12">
+                                <div class="dropdown text-md-left text-center float-md-left mb-3 mt-3 mt-md-0 mb-md-0">
+                                    <label class="mr-2">Sort by:</label>
+                                    <a class="btn btn-lg btn-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relevance <span class="caret"></span></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" x-placement="bottom-start" style="position: absolute; transform: translate3d(71px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a class="dropdown-item" href="#">Relevance</a>
+                                        <a class="dropdown-item" href="#">Price Descending</a>
+                                        <a class="dropdown-item" href="#">Price Ascending</a>
+                                        <a class="dropdown-item" href="#">Best Selling</a>
+                                    </div>
+                                </div>
+                                <div class="btn-group float-md-right ml-3">
+                                    <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-left"></span> </button>
+                                    <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-right"></span> </button>
+                                </div>
+                                <div class="dropdown float-right">
+                                    <label class="mr-2">View:</label>
+                                    <a class="btn btn-lg btn-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">9 <span class="caret"></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" x-placement="bottom-end" style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
+                                        <a class="dropdown-item" href="#">12</a>
+                                        <a class="dropdown-item" href="#">24</a>
+                                        <a class="dropdown-item" href="#">48</a>
+                                        <a class="dropdown-item" href="#">96</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100 border-0">
+                                    <div class="card-img-top">
+                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">
+                                            <a href="product.html" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                        </h4>
+                                        <h5 class="card-price small text-warning">
+                                            <i>
+                                                <s>$199</s> $99</i>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100 border-0">
+                                    <div class="card-img-top">
+                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">
+                                            <a href="product.html" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                        </h4>
+                                        <h5 class="card-price small text-warning">
+                                            <i>
+                                                <s>$199</s> $99</i>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-laptop icon-bg-1"></i>
-                                <h4>Electronics</h4>
+                            <div class="col-6 col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100 border-0">
+                                    <div class="card-img-top">
+                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">
+                                            <a href="product.html" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                        </h4>
+                                        <h5 class="card-price small text-warning">
+                                            <i>
+                                                <s>$199</s> $99</i>
+                                        </h5>
+                                    </div>
+                                </div>
                             </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Laptops <span>93</span></a></li>
-                                <li><a href="category.html">Iphone <span>233</span></a></li>
-                                <li><a href="category.html">Microsoft <span>183</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                            </ul>
+                            <div class="col-6 col-md-6 col-lg-4 mb-3">
+                                <div class="card h-100 border-0">
+                                    <div class="card-img-top">
+                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">
+                                            <a href="product.html" class=" font-weight-bold text-dark text-uppercase small"> Product name</a>
+                                        </h4>
+                                        <h5 class="card-price small text-warning">
+                                            <i>
+                                                <s>$199</s> $99</i>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-apple icon-bg-2"></i>
-                                <h4>Restaurants</h4>
+                        <div class="row sorting mb-5 mt-5">
+                            <div class="col-12">
+                                <a class="btn btn-light">
+                                    <i class="fas fa-arrow-up mr-2"></i> Back to top</a>
+                                <div class="btn-group float-md-right ml-3">
+                                    <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-left"></span> </button>
+                                    <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-right"></span> </button>
+                                </div>
+                                <div class="dropdown float-md-right">
+                                    <label class="mr-2">View:</label>
+                                    <a class="btn btn-light btn-lg dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">12 <span class="caret"></span></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">12</a>
+                                        <a class="dropdown-item" href="#">24</a>
+                                        <a class="dropdown-item" href="#">48</a>
+                                        <a class="dropdown-item" href="#">96</a>
+                                    </div>
+                                </div>
                             </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Cafe <span>393</span></a></li>
-                                <li><a href="category.html">Fast food <span>23</span></a></li>
-                                <li><a href="category.html">Restaurants <span>13</span></a></li>
-                                <li><a href="category.html">Food Track<span>43</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-home icon-bg-3"></i>
-                                <h4>Real Estate</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Farms <span>93</span></a></li>
-                                <li><a href="category.html">Gym <span>23</span></a></li>
-                                <li><a href="category.html">Hospitals <span>83</span></a></li>
-                                <li><a href="category.html">Parolurs <span>33</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-shopping-basket icon-bg-4"></i>
-                                <h4>Shoppings</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Mens Wears <span>53</span></a></li>
-                                <li><a href="category.html">Accessories <span>212</span></a></li>
-                                <li><a href="category.html">Kids Wears <span>133</span></a></li>
-                                <li><a href="category.html">It & Software <span>143</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-briefcase icon-bg-5"></i>
-                                <h4>Jobs</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">It Jobs <span>93</span></a></li>
-                                <li><a href="category.html">Cleaning & Washing <span>233</span></a></li>
-                                <li><a href="category.html">Management <span>183</span></a></li>
-                                <li><a href="category.html">Voluntary Works <span>343</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-car icon-bg-6"></i>
-                                <h4>Vehicles</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Bus <span>193</span></a></li>
-                                <li><a href="category.html">Cars <span>23</span></a></li>
-                                <li><a href="category.html">Motobike <span>33</span></a></li>
-                                <li><a href="category.html">Rent a car <span>73</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-                            <div class="header">
-                                <i class="fa fa-paw icon-bg-7"></i>
-                                <h4>Pets</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Cats <span>65</span></a></li>
-                                <li><a href="category.html">Dogs <span>23</span></a></li>
-                                <li><a href="category.html">Birds <span>113</span></a></li>
-                                <li><a href="category.html">Others <span>43</span></a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- /Category List -->
-                    <!-- Category list -->
-                    <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                        <div class="category-block">
-
-                            <div class="header">
-                                <i class="fa fa-laptop icon-bg-8"></i>
-                                <h4>Services</h4>
-                            </div>
-                            <ul class="category-list">
-                                <li><a href="category.html">Cleaning <span>93</span></a></li>
-                                <li><a href="category.html">Car Washing <span>233</span></a></li>
-                                <li><a href="category.html">Clothing <span>183</span></a></li>
-                                <li><a href="category.html">Business <span>343</span></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+    </body>
 </div>
-</body>

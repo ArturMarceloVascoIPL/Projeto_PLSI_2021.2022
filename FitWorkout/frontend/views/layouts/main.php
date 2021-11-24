@@ -95,9 +95,9 @@ AppAsset::register($this);
                                             <span><i class="fa fa-angle-down"></i></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="">
-                                                Dados Perfil
-                                            </a>
+                                            
+                                            <?= Html::a('Dados de Perfil', ['/site/dadosperfil'], ['class' => 'dropdown-item']) ?>
+                                            
                                             <a class="dropdown-item d-none" href="">
                                                 Trocar para Personal Trainer
                                             </a>
@@ -116,7 +116,7 @@ AppAsset::register($this);
         </section>
     </nav>
 
-    <main role="main" class="flex-shrink-0" style="z-index: -1;">
+    <main role="main" class="flex-shrink-0" style="z-index: -5;">
         <div class="container">
             <div class="py-5">
                 <?= Breadcrumbs::widget([
