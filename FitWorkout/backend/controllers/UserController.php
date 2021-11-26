@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\UserSearch;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -52,18 +53,14 @@ class UserController extends Controller
             ],
             */
         ]);
-
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('index', [
+            'searchModel' => $searchModel, 
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    /**
-     * Displays a single User model.
-     * @param int $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -71,13 +68,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -91,13 +81,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -105,13 +88,28 @@ class UserController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    // public function actionPtapplications()
+    // {
+    //     $dataProvider = new ActiveDataProvider([
+
+    //         'query' => User::find(),
+    //         /*
+    //         'pagination' => [
+    //             'pageSize' => 50
+    //         ],
+    //         'sort' => [
+    //             'defaultOrder' => [
+    //                 'id' => SORT_DESC,
+    //             ]
+    //         ],
+    //         */
+    //     ]);
+
+    //     return $this->render('ptapplications', [
+    //         'dataProvider' => $dataProvider,
+    //     ]);
+    // }
+
     protected function findModel($id)
     {
         if (($model = User::findOne($id)) !== null) {

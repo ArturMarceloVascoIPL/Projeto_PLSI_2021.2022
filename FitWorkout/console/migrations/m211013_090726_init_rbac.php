@@ -340,6 +340,8 @@ class m211013_090726_init_rbac extends Migration
 
         $auth->addChild($personalTrainer, $deleteWorkoutPlans);
         $auth->addChild($personalTrainer, $deleteWorkoutsPT);
+
+        $auth->addChild($personalTrainer, $client);
     }
 
     public function down()

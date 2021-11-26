@@ -15,7 +15,7 @@ use yii\helpers\Url;
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-         
+
         <div class="container dropdown-item">
             <li class="fas fa-sign-out-alt"></li>
             <div class="">
@@ -35,3 +35,35 @@ use yii\helpers\Url;
         </li> -->
     </ul>
 </nav>
+
+<!-- 
+<script>
+    var nameOfDay = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var nameOfMonth = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember');
+    var data = new Date();
+
+    function clock() {
+        var hou = data.getHours();
+        var min = data.getMinutes();
+        var sec = data.getSeconds();
+        if (hou < 10) {
+            hou = "0" + hou;
+        }
+        if (min < 10) {
+            min = "0" + min;
+        }
+        if (sec < 10) {
+            sec = "0" + sec;
+        }
+
+        document.getElementById('clock').innerHTML = hou + ":" + min + ":" + sec;
+        data.setTime(data.getTime() + 1000)
+        setTimeout("clock();", 1000);
+
+        document.getElementById('date').innerHTML = nameOfDay[data.getDay()] + ", " + nameOfMonth[data.getMonth()] + " " + data.getDate() + ", " + data.getFullYear();
+    }
+</script>
+
+<h3>
+    <div id="date">
+</h3> -->

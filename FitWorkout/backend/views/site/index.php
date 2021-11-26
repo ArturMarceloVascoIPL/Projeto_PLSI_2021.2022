@@ -46,17 +46,6 @@ else
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
-
-                    <!-- < ? \hail812\adminlte\widgets\Callout::widget([
-                    'type' => 'danger',
-                    'head' => 'I am a danger callout!',
-                    'body' => 'There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.'
-                ]) ?> -->
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-4 col-sm-6 col-12">
                     <?= \hail812\adminlte\widgets\InfoBox::widget([
                         'text' => 'Messages',
@@ -164,7 +153,7 @@ else
 
     <?php } else { ?>
 
-        <!-- <div class="row">
+        <div class="row">
 
             <div class="card">
                 <div class="card-header">
@@ -172,16 +161,9 @@ else
                 </div>
 
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio
-
-                    </li>
-
-                    <li class="list-group-item">Dapibus ac facilisis in
-
-                    </li>
-                    <li class="list-group-item">Vestibulum at eros
-
-                    </li>
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in </li>
+                    <li class="list-group-item">Vestibulum at eros </li>
                 </ul>
             </div>
 
@@ -206,6 +188,6 @@ else
                     </p>
                 </div>
             </div>
-        </div> -->
+        </div>
     <?php } ?>
 </body>
