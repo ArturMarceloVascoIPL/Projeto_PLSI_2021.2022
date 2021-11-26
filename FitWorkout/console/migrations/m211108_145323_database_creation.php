@@ -90,7 +90,7 @@ class m211108_145323_database_creation extends Migration
         // Index da Chave Estrangeira
         $this->createIndex(
             'idx_exercisesuggestions_personalTrainerId',
-            'exercise_suggestions',
+            'exercisesuggestions',
             'personalTrainerId'
         );
 
@@ -100,7 +100,7 @@ class m211108_145323_database_creation extends Migration
             'exercisesuggestions',
             'personalTrainerId',
             'personaltrainer',
-            'id'
+            'userId'
         );
 
         /**
@@ -113,23 +113,23 @@ class m211108_145323_database_creation extends Migration
             'qualificationProof' => $this->string()->notNull(),
             'comment' => $this->string(),
             'status' => $this->integer()->notNull(),
-            'userId' => $this->integer()->notNull(),
+            'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
         $this->createIndex(
             'idx_aplication_userId',
             'aplication',
-            'userId'
+            'clientId'
         );
 
         // Designação da Chave Estrangeira
         $this->addForeignKey(
             'fk_aplication_userId',
             'aplication',
-            'userId',
-            'user',
-            'id'
+            'clientId',
+            'client',
+            'userId'
         );
 
         /**
@@ -213,7 +213,6 @@ class m211108_145323_database_creation extends Migration
             'date' => $this->date(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
             'ptId' => $this->integer()->notNull(),
-            'historyId' => $this->integer(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Personal Trainer que criou o treino) */
@@ -230,36 +229,18 @@ class m211108_145323_database_creation extends Migration
             'workout',
             'ptId',
             'personaltrainer',
-            'id'
-        );
-
-        /* Chave Estrangeira (Historico que pertence) */
-        // Index da Chave Estrangeira
-        $this->createIndex(
-            'idx_workout_historyId',
-            'workout',
-            'historyId'
-        );
-
-        // Designação da Chave Estrangeira
-        $this->addForeignKey(
-            'fk_workout_ptId',
-            'workout',
-            'historyId',
-            'workouthistory',
-            'id'
+            'userId'
         );
 
         /**
          * Tabela Plano de Treinos
          */
-        // TODO: Verificar obrigatoriadades daqui para baixo
 
         // Tabela
         $this->createTable('plan', [
             'id' => $this->primaryKey(),
-            'dateStart' => $this->date(),
-            'dateEnd' => $this->date(),
+            'dateStart' => $this->date()->notNull(),
+            'dateEnd' => $this->date()->notNull(),
             'ptId' => $this->integer()->notNull(),
             'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -278,7 +259,7 @@ class m211108_145323_database_creation extends Migration
             'plan',
             'ptId',
             'personaltrainer',
-            'id'
+            'userId'
         );
 
         /* Chave Estrangeira (Cliente que segue o plano) */
@@ -295,7 +276,7 @@ class m211108_145323_database_creation extends Migration
             'plan',
             'clientId',
             'client',
-            'id'
+            'userId'
         );
 
         /**
@@ -305,7 +286,7 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('productcategory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
+            'name' => $this->string()->notNull(),
             'description' => $this->string(),
         ], $tableOptions);
 
@@ -316,12 +297,12 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('product', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
+            'name' => $this->string()->notNull(),
             'description' => $this->string(),
-            'stock' => $this->integer(),
-            'price' => $this->integer(),
+            'stock' => $this->integer()->notNull(),
+            'price' => $this->integer()->notNull(),
             'image' => $this->string(),
-            'categoryId' => $this->integer(),
+            'categoryId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
@@ -347,11 +328,11 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('order', [
             'id' => $this->primaryKey(),
-            'date' => $this->date(),
-            'price' => $this->integer(),
-            'status' => $this->integer(),
-            'productId' => $this->integer(),
-            'clientId' => $this->integer(),
+            'date' => $this->date()->notNull(),
+            'price' => $this->integer()->notNull(),
+            'status' => $this->integer()->notNull(),
+            'productId' => $this->integer()->notNull(),
+            'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Produto da Encomenda) */
@@ -385,7 +366,7 @@ class m211108_145323_database_creation extends Migration
             'order',
             'clientId',
             'client',
-            'id'
+            'userId'
         );
 
         /**
@@ -395,12 +376,12 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('chat', [
             'id' => $this->primaryKey(),
-            'datetime' => $this->dateTime(),
-            'message' => $this->string(),
-            'sender' => $this->integer(),
-            'receiver' => $this->integer(),
-            'ptId' => $this->integer(),
-            'clientId' => $this->integer(),
+            'datetime' => $this->dateTime()->notNull(),
+            'message' => $this->string()->notNull(),
+            'sender' => $this->integer()->notNull(),
+            'receiver' => $this->integer()->notNull(),
+            'ptId' => $this->integer()->notNull(),
+            'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Personal Trainer) */
@@ -417,7 +398,7 @@ class m211108_145323_database_creation extends Migration
             'chat',
             'ptId',
             'personaltrainer',
-            'id'
+            'userId'
         );
 
         /* Chave Estrangeira (Cliente) */
@@ -434,7 +415,7 @@ class m211108_145323_database_creation extends Migration
             'chat',
             'clientId',
             'client',
-            'id'
+            'userId'
         );
 
         /**
@@ -444,10 +425,10 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('workouthistory', [
             'id' => $this->primaryKey(),
-            'duration' => $this->integer(),
-            'totalCaloriesBurned' => $this->integer(),
-            'clientId' => $this->integer(),
-            'workoutId' => $this->integer(),
+            'duration' => $this->integer()->notNull(),
+            'totalCaloriesBurned' => $this->integer()->notNull(),
+            'clientId' => $this->integer()->notNull(),
+            'workoutId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Cliente do Histórico) */
@@ -464,7 +445,7 @@ class m211108_145323_database_creation extends Migration
             'workouthistory',
             'clientId',
             'client',
-            'id'
+            'userId'
         );
 
         /* Chave Estrangeira (Treino Realizado) */
@@ -485,7 +466,6 @@ class m211108_145323_database_creation extends Migration
         );
 
 
-
         /** - - - - Tabelas de Relacionamentos - - - - **/
 
         /**
@@ -494,8 +474,8 @@ class m211108_145323_database_creation extends Migration
 
         // Tabela
         $this->createTable('exerciseworkout', [
-            'exerciseId' => $this->primaryKey(),
-            'workoutId' => $this->primaryKey(),
+            'exerciseId' => $this->integer()->notNull(),
+            'workoutId' => $this->integer()->notNull(),
             'exerciseNumber' => $this->integer()->notNull(),
             'exerciseCalories' => $this->integer()->notNull(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
@@ -511,7 +491,7 @@ class m211108_145323_database_creation extends Migration
 
         // Designação da Chave Estrangeira
         $this->addForeignKey(
-            'fk_exercise_categoryId',
+            'fk_exerciseworkout_exerciseId',
             'exerciseworkout',
             'exerciseId',
             'exercise',
@@ -535,14 +515,21 @@ class m211108_145323_database_creation extends Migration
             'id'
         );
 
+        // Definir as Chaves Primárias (Chave Composta)
+        $this->addPrimaryKey(
+            'pk_exerciseworkout',
+            'exerciseworkout',
+            ['exerciseId', 'workoutId']
+        );
+
         /**
          * Tabela de Relacionamente Treino -> Plano
          */
 
         // Tabela
         $this->createTable('workoutplan', [
-            'workoutId' => $this->primaryKey(),
-            'planId' => $this->primaryKey(),
+            'workoutId' => $this->integer()->notNull(),
+            'planId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Id do Treino) */
@@ -578,14 +565,32 @@ class m211108_145323_database_creation extends Migration
             'plan',
             'id'
         );
+
+        // Definir as Chaves Primárias (Chave Composta)
+        $this->addPrimaryKey(
+            'pk_workoutplan',
+            'workoutplan',
+            ['workoutId', 'planId']
+        );
     }
 
     public function down()
     {
         $this->dropTable('personalTrainer');
         $this->dropTable('client');
-        // TODO: Atualizar com as tabelas todas
-
-        return false;
+        $this->dropTable('exercisesuggestions');
+        $this->dropTable('aplication');
+        $this->dropTable('exercisetype');
+        $this->dropTable('exercisecategory');
+        $this->dropTable('exercise');
+        $this->dropTable('workout');
+        $this->dropTable('plan');
+        $this->dropTable('productcategory');
+        $this->dropTable('product');
+        $this->dropTable('order');
+        $this->dropTable('chat');
+        $this->dropTable('workouthistory');
+        $this->dropTable('exerciseworkout');
+        $this->dropTable('workoutplan');
     }
 }
