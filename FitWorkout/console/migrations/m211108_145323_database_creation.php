@@ -74,6 +74,36 @@ class m211108_145323_database_creation extends Migration
         );
 
         /**
+         * Tabela Sugestão de Exercícios
+         */
+
+        // Tabela
+        $this->createTable('exercisesuggestions', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull(),
+            'description' => $this->string(),
+            'caloriesBurned' => $this->integer()->notNull(),
+            'status' => $this->integer()->notNull(),
+            'personalTrainerId' => $this->integer()->notNull(),
+        ], $tableOptions);
+
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_exercisesuggestions_personalTrainerId',
+            'exercise_suggestions',
+            'personalTrainerId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_exercisesuggestions_personalTrainerId',
+            'exercisesuggestions',
+            'personalTrainerId',
+            'personaltrainer',
+            'id'
+        );
+
+        /**
          * Tabela Aplicação a Personal Trainer
          */
 
@@ -175,7 +205,6 @@ class m211108_145323_database_creation extends Migration
         /**
          * Tabela Treino
          */
-        // TODO: Completar com chaves estrangeiras
 
         // Tabela
         $this->createTable('workout', [
@@ -183,21 +212,372 @@ class m211108_145323_database_creation extends Migration
             'name' => $this->string()->notNull(),
             'date' => $this->date(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
+            'ptId' => $this->integer()->notNull(),
+            'historyId' => $this->integer(),
         ], $tableOptions);
+
+        /* Chave Estrangeira (Personal Trainer que criou o treino) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workout_ptId',
+            'workout',
+            'ptId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workout_ptId',
+            'workout',
+            'ptId',
+            'personaltrainer',
+            'id'
+        );
+
+        /* Chave Estrangeira (Historico que pertence) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workout_historyId',
+            'workout',
+            'historyId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workout_ptId',
+            'workout',
+            'historyId',
+            'workouthistory',
+            'id'
+        );
+
+        /**
+         * Tabela Plano de Treinos
+         */
+        // TODO: Verificar obrigatoriadades daqui para baixo
+
+        // Tabela
+        $this->createTable('plan', [
+            'id' => $this->primaryKey(),
+            'dateStart' => $this->date(),
+            'dateEnd' => $this->date(),
+            'ptId' => $this->integer()->notNull(),
+            'clientId' => $this->integer()->notNull(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Personal Trainer que criou o plano) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_plan_ptId',
+            'plan',
+            'ptId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_plan_ptId',
+            'plan',
+            'ptId',
+            'personaltrainer',
+            'id'
+        );
+
+        /* Chave Estrangeira (Cliente que segue o plano) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_plan_clientId',
+            'plan',
+            'clientId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_plan_clientId',
+            'plan',
+            'clientId',
+            'client',
+            'id'
+        );
+
+        /**
+         * Tabela Categoria Produto
+         */
+
+        // Tabela
+        $this->createTable('productcategory', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(),
+            'description' => $this->string(),
+        ], $tableOptions);
+
+        /**
+         * Tabela Produtos
+         */
+
+        // Tabela
+        $this->createTable('product', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(),
+            'description' => $this->string(),
+            'stock' => $this->integer(),
+            'price' => $this->integer(),
+            'image' => $this->string(),
+            'categoryId' => $this->integer(),
+        ], $tableOptions);
+
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_product_categoryId',
+            'product',
+            'categoryId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_product_categoryId',
+            'product',
+            'categoryId',
+            'productcategory',
+            'id'
+        );
+
+        /**
+         * Tabela Encomenda
+         */
+
+        // Tabela
+        $this->createTable('order', [
+            'id' => $this->primaryKey(),
+            'date' => $this->date(),
+            'price' => $this->integer(),
+            'status' => $this->integer(),
+            'productId' => $this->integer(),
+            'clientId' => $this->integer(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Produto da Encomenda) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_order_productId',
+            'order',
+            'productId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_order_productId',
+            'order',
+            'productId',
+            'product',
+            'id'
+        );
+
+        /* Chave Estrangeira (Cliente que fez Encomenda) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_order_clientId',
+            'order',
+            'clientId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_order_clientId',
+            'order',
+            'clientId',
+            'client',
+            'id'
+        );
+
+        /**
+         * Tabela Chat
+         */
+
+        // Tabela
+        $this->createTable('chat', [
+            'id' => $this->primaryKey(),
+            'datetime' => $this->dateTime(),
+            'message' => $this->string(),
+            'sender' => $this->integer(),
+            'receiver' => $this->integer(),
+            'ptId' => $this->integer(),
+            'clientId' => $this->integer(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Personal Trainer) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_chat_ptId',
+            'chat',
+            'ptId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_chat_ptId',
+            'chat',
+            'ptId',
+            'personaltrainer',
+            'id'
+        );
+
+        /* Chave Estrangeira (Cliente) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_chat_clientId',
+            'chat',
+            'clientId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_chat_clientId',
+            'chat',
+            'clientId',
+            'client',
+            'id'
+        );
+
+        /**
+         * Tabela Histórico de Exercícios
+         */
+
+        // Tabela
+        $this->createTable('workouthistory', [
+            'id' => $this->primaryKey(),
+            'duration' => $this->integer(),
+            'totalCaloriesBurned' => $this->integer(),
+            'clientId' => $this->integer(),
+            'workoutId' => $this->integer(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Cliente do Histórico) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workouthistory_clientId',
+            'workouthistory',
+            'clientId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workouthistory_clientId',
+            'workouthistory',
+            'clientId',
+            'client',
+            'id'
+        );
+
+        /* Chave Estrangeira (Treino Realizado) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workouthistory_workoutId',
+            'workouthistory',
+            'workoutId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workouthistory_workoutId',
+            'workouthistory',
+            'workoutId',
+            'workout',
+            'id'
+        );
+
+
+
+        /** - - - - Tabelas de Relacionamentos - - - - **/
 
         /**
          * Tabela de Relacionamente Exercicio -> Treino
          */
-        // TODO: Completar as chaves estrangeiras
 
         // Tabela
-        $this->createTable('exercise_workout', [
+        $this->createTable('exerciseworkout', [
             'exerciseId' => $this->primaryKey(),
             'workoutId' => $this->primaryKey(),
             'exerciseNumber' => $this->integer()->notNull(),
             'exerciseCalories' => $this->integer()->notNull(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        /* Chave Estrangeira (Id do Exercício) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_exercise_workout_exerciseId',
+            'exerciseworkout',
+            'exerciseId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_exercise_categoryId',
+            'exerciseworkout',
+            'exerciseId',
+            'exercise',
+            'id'
+        );
+
+        /* Chave Estrangeira (Id do Treino) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_exerciseworkout_workoutId',
+            'exerciseworkout',
+            'workoutId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_exerciseworkout_workoutId',
+            'exerciseworkout',
+            'workoutId',
+            'workout',
+            'id'
+        );
+
+        /**
+         * Tabela de Relacionamente Treino -> Plano
+         */
+
+        // Tabela
+        $this->createTable('workoutplan', [
+            'workoutId' => $this->primaryKey(),
+            'planId' => $this->primaryKey(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Id do Treino) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workoutplan_workoutId',
+            'workoutplan',
+            'workoutId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workoutplan_workoutId',
+            'workoutplan',
+            'workoutId',
+            'workout',
+            'id'
+        );
+
+        /* Chave Estrangeira (Id do Plano) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_workoutplan_planId',
+            'workoutplan',
+            'planId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_workoutplan_planId',
+            'workoutplan',
+            'planId',
+            'plan',
+            'id'
+        );
     }
 
     public function down()
