@@ -132,6 +132,11 @@ class SiteController extends Controller
         return $this->render('orders');
     }
 
+    public function actionDadosperfil()
+    {
+        return $this->render('dadosperfil');
+    }
+
 
     /**
      * Requests password reset.

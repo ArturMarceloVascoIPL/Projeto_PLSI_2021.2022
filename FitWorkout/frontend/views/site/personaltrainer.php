@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 
 $this->title = 'Personal Trainer';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>

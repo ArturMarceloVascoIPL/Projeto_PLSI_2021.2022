@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 
 $this->title = 'Encomendas';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="site-about" style="z-index: -5;">
