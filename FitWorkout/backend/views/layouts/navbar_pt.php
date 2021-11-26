@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
@@ -17,13 +18,13 @@ use yii\helpers\Url;
     </a>
     <ul class="navbar-nav">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Planos de Treino</a>
+            <a href="<?php echo Url::toRoute('workout/index') ?>" class="nav-link">Planos de Treino</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Clientes</a>
+            <a href="<?php echo Url::toRoute('clientchat/index') ?>" class="nav-link">Clientes</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Exercicios</a>
+            <a href="<?php echo Url::toRoute('exercicios/index') ?>" class="nav-link">Exercicios</a>
         </li>
     </ul>
 
@@ -34,17 +35,16 @@ use yii\helpers\Url;
         </a>
         <li class="nav-item dropdown">
             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-cog"> </i> Definições
+                <a href="<?php echo Url::toRoute('settings/index') ?>" class="dropdown-item">
+                    <i class="fas fa-cog"></i> Definições
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="far fa-user"></i> Trocar para User
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" data-method="post" href="index.php?r=site/logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout</a>
-                <div class="dropdown-divider"></div>
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
             </div>
         </li>
 

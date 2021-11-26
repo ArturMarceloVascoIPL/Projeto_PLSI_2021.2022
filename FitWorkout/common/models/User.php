@@ -29,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 10;
     const STATUS_ACTIVE = 10;
 
-
+    // public $roleAsText;
     /**
      * {@inheritdoc}
      */
@@ -210,5 +210,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getAuthAssignment()
+    {
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
     }
 }

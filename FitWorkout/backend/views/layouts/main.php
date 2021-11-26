@@ -29,6 +29,7 @@ $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
     <?php $this->registerLinkTag(['rel' => 'icon', 'type' => '@web/favicon.png', 'href' => '/favicon.png']); ?>
 </head>
 
+<!-- Adminstradtor -->
 
 <?php if (Yii::$app->user->can('admin')) { ?>
 
@@ -49,7 +50,8 @@ $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
 
         <?php $this->endBody() ?>
     </body>
-        
+
+<!-- Personal Trainer -->
 <?php } else { ?>
 
     <body class="sidebar-collapse">
