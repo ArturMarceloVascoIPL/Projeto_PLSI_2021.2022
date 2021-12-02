@@ -17,8 +17,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'roleAsText', 'verification_token'], 'safe'],
-            [['authAssignment'], 'safe'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'role.item_name', 'verification_token'], 'safe'],
         ];
     }
 
@@ -39,9 +38,9 @@ class UserSearch extends User
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['authAssignment'] = [
-            'asc' => ['auth_assignment.item_name' => SORT_ASC],
-            'desc' => ['auth_assignment.item_name' => SORT_DESC],
+        $dataProvider->sort->attributes['role'] = [
+            'asc' => ['role.item_name' => SORT_ASC],
+            'desc' => ['role.item_name' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -57,12 +56,12 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
-            'auth_assignment.item_name' => $this->authAssignment,
+            'status' => $this->status
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'role ', $this->role]);
 
         return $dataProvider;
     }

@@ -12,14 +12,14 @@ use yii\widgets\Pjax;
 ?>
 <div class="user-index">
 
-    <!-- <div class="row">
+    <div class="row">
         <div class="col">
             <div class="float-right">
                 <?php $this->title = 'Users' ?>
-                <a href="<?php echo Url::toRoute('ptapplications') ?>" class="float-right btn btn-primary btn-lg">Ver Pedidos PT</a>
+                <!-- <a href="<?php echo Url::toRoute('ptapplications') ?>" class="float-right btn btn-primary btn-lg">Ver Pedidos PT</a> -->
             </div>
         </div>
-    </div> -->
+    </div>
 
 
     <?= GridView::widget([
@@ -36,25 +36,9 @@ use yii\widgets\Pjax;
             'email',
             [
                 'label' => 'Role',
-                // 'attribute' => 'roleAsText',
-                'attribute' => 'authAssignment',
+                'attribute' => 'role',
                 'contentOptions' => ['style' => 'width: 10%;'],
-                'value' => 'authAssignment.item_name',
-                // 'value' => function ($model) {
-                //     // var_dump($model->authAssignment->item_name);
-                //     // die();
-                //     $xpo = $model->authAssignment;
-                //     // var_dump($xpo->item_name);
-                //     // die();
-                //     if (strval($xpo->item_name) == 'admin') {
-                //         return 'Administrador';
-                //     }
-                //     return 'ABC';
-                // },
-                // 'value' => function ($model) {
-                //     return $model->authAssignment->item_name == 'Admin' ? 'Admin' : 'ABC';
-                // },
-             
+                'value' => 'role.item_name',
                 'filter' => [
                     'admin' => 'Admin',
                     'personalTrainer' => 'Personal Trainer',
@@ -62,11 +46,15 @@ use yii\widgets\Pjax;
                 ],
             ],
             [
+                'label' => 'Status',
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return $model->status == 10 ? 'Ativo' : 'Inativo';
+                    return $model->status == 10 ? 'Ativo' : 'Suspenso';
                 },
-                'filter' => [10 => 'Ativo', 0 => 'Inativo'],
+                'contentOptions' => function ($model) {
+                    return $model->status == 10 ? ['style' => 'color: green;'] : ['style' => 'color: red;'];
+                },
+                'filter' => [10 => 'Ativo', 0 => 'Suspenso'],
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

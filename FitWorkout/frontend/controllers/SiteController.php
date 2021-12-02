@@ -100,8 +100,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Obrigado pelo registo.');
             return $this->goHome();
-        } else
-            Yii::$app->session->setFlash('error', 'Error no registo.');
+        } // else   Yii::$app->session->setFlash('error', 'Error no registo.');
 
         return $this->render('signup', [
             'model' => $model,

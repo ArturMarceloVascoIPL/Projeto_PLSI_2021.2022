@@ -3,27 +3,28 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+$auth = \Yii::$app->authManager;
+$userRole = array_keys($auth->getRolesByUser($model->id))[0];
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Ver Utilizador: ' . $model->username;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="user-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        #todo Implementar func update disabled account 
+        //(ter q mandar func diretamente para o controller)
+        //  Html::a('Disable', ['update', 'id' => $model->id], [
+        //     'class' => 'btn btn-danger',
+        //     'data' => [
+        //         'confirm' => 'Are you sure you want to delete this item?',
+        //         'method' => 'post',
+        //     ],
+        // ]) 
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,11 +36,35 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_hash',
             // 'password_reset_token',
             'email:email',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    return $model->status == 10 ? 'Ativo' : 'Suspenso';
+                },
+                'filter' => [10 => 'Ativo', 0 => 'Suspenso'],
+                // 'contentOptions' => ['style' => 'color: green; font-weight: bold;'],
+                'contentOptions' => function ($model) {
+                    $status  = $model->status;
+                    if ($status == 10) {
+                        return ['style' => 'color: green; font-weight: bold;'];
+                    } else {
+                        return ['style' => 'color: red; font-weight: bold;'];
+                    }
+                },
+            ],
             // 'created_at',
             // 'updated_at',
             // 'verification_token',
-
+            [
+                'label' => 'Role',
+                'attribute' => 'role',
+                'value' => $userRole,
+                'filter' => [
+                    'admin' => 'Admin',
+                    'client' => 'Client',
+                    'personalTrainer' => 'Personal Trainer',
+                ],
+            ],
         ],
     ]) ?>
 

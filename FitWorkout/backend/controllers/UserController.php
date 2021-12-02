@@ -56,7 +56,7 @@ class UserController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('index', [
-            'searchModel' => $searchModel, 
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -71,8 +71,17 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $auth = \Yii::$app->authManager;
+        $userRoles = $auth->getRolesByUser($id);
+        $model->authAssignment = array_keys($userRoles)[0];
+
+        #TODO: caso de nao ter role, colocar o role default
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            // var_dump($model);
+            // die();
+            $auth->revokeAll($id);
+            $auth->assign($auth->getRole($model->authAssignment), $id);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
