@@ -11,8 +11,6 @@
 	<h5>Vasco Silva - 2200426</h5>
 </p>
 
-
-
 ---
 
 Informação de como instalar o nosso projeto:
@@ -23,13 +21,13 @@ Informação de como instalar o nosso projeto:
 >
 > Verificar se o Composer está instalado.
 >
-> > *Na linha de comandos:*
+> > _Na linha de comandos:_
 > >
 > > 1.1 Executar o comando `composer`;
 
 > **2º Passo** - Preparar o projeto Yii
 >
-> > *Na linha de comandos:*
+> > _Na linha de comandos:_
 > >
 > > 2.1 Verificar se está colocado na pasta "FitWorkout";
 > >
@@ -37,7 +35,7 @@ Informação de como instalar o nosso projeto:
 
 > **3º Passo** - Instalar as dependências do Composer
 >
-> > *Na linha de comandos:*
+> > _Na linha de comandos:_
 > >
 > > 3.1 Verificar se está colocado na pasta "Projeto_PLSI_2021.2022\FitWorkout";
 > >
@@ -49,11 +47,15 @@ Informação de como instalar o nosso projeto:
 > >
 > > 4.2 Configurar a ligação através do ficheiro "common\config\main_local.php".
 > >
-> > *Na linha de comandos:*
+> > _Na linha de comandos:_
 > >
 > > 4.3 Verificar se está colocado na pasta "FitWorkout";
 > >
-> > 4.4 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations `;
+> > 4.4 Executar o comando `php yii migrate`;
+> > 4.5 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations`;
+> > 4.6 Voltar a executar o comando `php yii migrate`;
 > >
-> > 4.5 Executar o comando `php yii migrate`;
-
+> > > **4bº Passo** - Em caso de atualizacao de base dados
+> > > 4b.1 Executar o comando `php yii migrate/fresh`;
+> > > 4b.2 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations /fresh`;
+> > > 4b.3 Executar o comando `php yii migrate /fresh`;

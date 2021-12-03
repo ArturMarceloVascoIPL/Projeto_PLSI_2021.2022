@@ -108,7 +108,7 @@ class m211108_145323_database_creation extends Migration
          */
 
         // Tabela
-        $this->createTable('aplication', [
+        $this->createTable('application', [
             'id' => $this->primaryKey(),
             'qualificationProof' => $this->string()->notNull(),
             'comment' => $this->string(),
@@ -118,15 +118,15 @@ class m211108_145323_database_creation extends Migration
 
         // Index da Chave Estrangeira
         $this->createIndex(
-            'idx_aplication_userId',
-            'aplication',
+            'idx_application_userId',
+            'application',
             'clientId'
         );
 
         // Designação da Chave Estrangeira
         $this->addForeignKey(
-            'fk_aplication_userId',
-            'aplication',
+            'fk_application_userId',
+            'application',
             'clientId',
             'client',
             'userId'
@@ -139,7 +139,7 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('exercisetype', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
 
@@ -150,7 +150,7 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('exercisecategory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
 
@@ -286,7 +286,7 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('productcategory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
 
@@ -297,7 +297,7 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('product', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
+            'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
             'stock' => $this->integer()->notNull(),
             'price' => $this->integer()->notNull(),
@@ -579,7 +579,7 @@ class m211108_145323_database_creation extends Migration
         $this->dropTable('personalTrainer');
         $this->dropTable('client');
         $this->dropTable('exercisesuggestions');
-        $this->dropTable('aplication');
+        $this->dropTable('application');
         $this->dropTable('exercisetype');
         $this->dropTable('exercisecategory');
         $this->dropTable('exercise');
