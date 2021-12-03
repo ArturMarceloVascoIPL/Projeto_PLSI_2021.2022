@@ -15,7 +15,12 @@ use Yii;
  * @property int|null $heaviestWeight
  * @property int|null $bmi
  *
+ * @property Application[] $applications
+ * @property Chat[] $chats
+ * @property Order[] $orders
+ * @property Plan[] $plans
  * @property User $user
+ * @property Workouthistory[] $workouthistories
  */
 class Client extends \yii\db\ActiveRecord
 {
@@ -55,6 +60,46 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Applications]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Application::className(), ['clientId' => 'userId']);
+    }
+
+    /**
+     * Gets query for [[Chats]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChats()
+    {
+        return $this->hasMany(Chat::className(), ['clientId' => 'userId']);
+    }
+
+    /**
+     * Gets query for [[Orders]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['clientId' => 'userId']);
+    }
+
+    /**
+     * Gets query for [[Plans]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlans()
+    {
+        return $this->hasMany(Plan::className(), ['clientId' => 'userId']);
+    }
+
+    /**
      * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
@@ -62,5 +107,15 @@ class Client extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+
+    /**
+     * Gets query for [[Workouthistories]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkouthistories()
+    {
+        return $this->hasMany(Workouthistory::className(), ['clientId' => 'userId']);
     }
 }
