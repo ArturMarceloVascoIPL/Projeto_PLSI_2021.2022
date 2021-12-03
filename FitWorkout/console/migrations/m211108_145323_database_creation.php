@@ -376,12 +376,9 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('chat', [
             'id' => $this->primaryKey(),
-            'datetime' => $this->dateTime()->notNull(),
-            'message' => $this->string()->notNull(),
-            'sender' => $this->integer()->notNull(),
-            'receiver' => $this->integer()->notNull(),
-            'ptId' => $this->integer()->notNull(),
+            'isActive' => $this->boolean()->notNull(),
             'clientId' => $this->integer()->notNull(),
+            'ptId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Personal Trainer) */
@@ -416,6 +413,35 @@ class m211108_145323_database_creation extends Migration
             'clientId',
             'client',
             'userId'
+        );
+
+        /**
+         * Tabela Mensagem do Chat
+         */
+
+        // Tabela
+        $this->createTable('chatmessage', [
+            'id' => $this->primaryKey(),
+            'message' => $this->string()->notNull(),
+            'datetime' => $this->dateTime()->notNull(),
+            'chatId' => $this->integer()->notNull(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Chat) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_chat_message_chatId',
+            'chatmessage',
+            'chatId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_chat_message_chatId',
+            'chatmessage',
+            'chatId',
+            'chat',
+            'id'
         );
 
         /**
@@ -589,6 +615,7 @@ class m211108_145323_database_creation extends Migration
         $this->dropTable('product');
         $this->dropTable('order');
         $this->dropTable('chat');
+        $this->dropTable('chatmessage');
         $this->dropTable('workouthistory');
         $this->dropTable('exerciseworkout');
         $this->dropTable('workoutplan');
