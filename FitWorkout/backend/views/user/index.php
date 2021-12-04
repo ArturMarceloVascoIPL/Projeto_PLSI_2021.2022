@@ -63,7 +63,7 @@ use yii\widgets\Pjax;
                 'template' => '{view} {update}',
                 'buttons' => [
                     'view' => function ($url) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">Ver</span>', $url, [
+                        return Html::a('<span>Ver</span>', $url, [
                             'title' => Yii::t('app', 'View'),
                             'class' => 'btn bg-gradient-success',
                         ]);

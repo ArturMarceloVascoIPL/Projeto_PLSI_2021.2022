@@ -60,7 +60,7 @@ class ExercisecategoryController extends Controller
     */ 
    public function actionView($id) 
    { 
-       return $this->render('view', [ 
+       return $this->render('/exercise/exercisecategory/view', [ 
            'model' => $this->findModel($id), 
        ]); 
    } 
@@ -76,7 +76,7 @@ class ExercisecategoryController extends Controller
  
        if ($this->request->isPost) { 
            if ($model->load($this->request->post()) && $model->save()) { 
-               return $this->redirect(['view', 'id' => $model->id]); 
+               return $this->redirect(['/exercise/exercisecategory/view', 'id' => $model->id]); 
            } 
        } else { 
            $model->loadDefaultValues(); 
@@ -121,6 +121,11 @@ class ExercisecategoryController extends Controller
        return $this->redirect(['/exercise/exercisecategory/index']); 
    } 
  
+   public function actionMainindex()
+   {
+       return $this->redirect(['@app\views\exercise\index']);
+   }
+   
    /** 
     * Finds the Exercisecategory model based on its primary key value. 
     * If the model is not found, a 404 HTTP exception will be thrown. 

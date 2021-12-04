@@ -8,6 +8,7 @@ $this->title = 'Gestão de Tipos de Exercícios';
 
 <div class="exercisetype-index">
 
+    # TODO : Routing para pagina pai (exercises)
     <?= Html::a('Voltar', ['mainindex'], ['class' => 'btn btn-info']) ?>
 
     <?= GridView::widget([
@@ -23,10 +24,10 @@ $this->title = 'Gestão de Tipos de Exercícios';
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
                 'contentOptions' => ['style' => 'width: 15%'],
-                'template' => '{view} {update}',
+                'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">Ver</span>', $url, [
+                        return Html::a('<span>Ver</span>', $url, [
                             'title' => Yii::t('app', 'View'),
                             'class' => 'btn bg-gradient-success',
                         ]);
@@ -35,6 +36,16 @@ $this->title = 'Gestão de Tipos de Exercícios';
                         return Html::a('<span>Editar</span>', $url, [
                             'title' => Yii::t('app', 'Update'),
                             'class' => 'btn btn-info',
+                        ]);
+                    },
+                    'delete' => function ($url) {
+                        return Html::a('<span>Apagar</span>', $url, [
+                            'title' => Yii::t('app', 'Delete'),
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => 'Tem a certeza que pretende apagar este item?',
+                                'method' => 'post',
+                            ],
                         ]);
                     },
                 ],
