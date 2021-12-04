@@ -22,14 +22,24 @@ $this->title = 'Gestão de Exercicios';
             // 'id',
             'name',
             'description',
-            'caloriesBurned',
-            'typeId',
-            'categoryId',
-
+            [
+                'attribute' => 'caloriesBurned',
+                'label' => 'Calorias',
+                'options' => ['style' => 'width: 10%'],
+            ],
+            [
+                'attribute' => 'Tipo',
+                'value' => 'type.name',
+            ],
+            #TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
+            [
+                'attribute' => 'Categoria',
+                'value' => 'category.name',
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
-                'contentOptions' => ['style' => 'width: 15%'],
+                'contentOptions' => ['style' => 'width: 20%'],
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url) {

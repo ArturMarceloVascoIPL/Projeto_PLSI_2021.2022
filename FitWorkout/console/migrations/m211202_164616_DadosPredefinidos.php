@@ -33,7 +33,7 @@ class m211202_164616_DadosPredefinidos extends Migration
             'name' => 'Sem Equipamento',
         ]);
 
-        #TODO : Criar exercicios
+        #TODO : Associar exercicios a categorias e tipos
         //Exercicios
         $this->insert('exercise', [
             'name' =>  'Agachamentos',

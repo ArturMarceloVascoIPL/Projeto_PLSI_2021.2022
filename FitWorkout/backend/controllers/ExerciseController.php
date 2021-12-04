@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Exercise;
-use common\models\ExerciseSearch;
+use backend\models\ExerciseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
