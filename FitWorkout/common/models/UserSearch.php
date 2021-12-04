@@ -43,6 +43,8 @@ class UserSearch extends User
             'desc' => ['role.item_name' => SORT_DESC],
         ];
 
+        # TODO : User Role nao esta funcionando
+
         $this->load($params);
         // var_dump($params);
         // die();

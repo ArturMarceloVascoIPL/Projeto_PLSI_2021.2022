@@ -30,7 +30,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        #TODO ver o que fazer com o acesso aos usuários logados
+                        #TODO ver o que fazer com o acesso aos usuários logados (permissoess e vistas)
                         'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],

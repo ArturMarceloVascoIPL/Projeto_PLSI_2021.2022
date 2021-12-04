@@ -33,7 +33,7 @@ use app\assets\AppAsset;
                     // Dashboard Area
                     ['label' => 'DASHBOARD', 'header' => true],
                     ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['/user/index/']],
-                    ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['']],
+                    ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['/exercise/index/']],
                     ['label' => 'Produtos',  'icon' => 'store', 'url' => ['']],
                     ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['']],
 
