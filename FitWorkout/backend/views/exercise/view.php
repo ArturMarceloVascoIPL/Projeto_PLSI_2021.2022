@@ -29,16 +29,31 @@ $this->title = $model->name;
             </div>
         </div>
     </div>
- 
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'description',
-            'caloriesBurned',
-            'typeId',
-            'categoryId',
+            [
+                'label' => 'Nome',
+                'value' =>  'name',
+            ],
+            [
+                'label' => 'Descrição',
+                'value' =>  'description',
+            ],
+            [
+                'label' => 'Calorias (Kcal)',
+                'value' => 'caloriesBurned',
+            ],
+            [
+                'label' => 'Tipo',
+                'attribute' => 'type.name',
+            ],
+            [
+                'label' => 'Categoria',
+                'attribute' => 'category.name',
+            ],
         ],
     ]) ?>
 

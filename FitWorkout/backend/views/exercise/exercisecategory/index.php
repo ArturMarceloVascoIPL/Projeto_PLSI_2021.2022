@@ -25,10 +25,20 @@ $this->title = 'Gestão de Categorias de Exercícios';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'description',
-
+            [
+                'label' => 'ID',
+                'attribute' => 'id',
+                'options' => ['width' => '5%'],
+            ],
+            [
+                'label' => 'Nome',
+                'attribute' => 'name',
+                'options' => ['width' => '15%'],
+            ],
+            [
+                'label' => 'Descrição',
+                'attribute' => 'description',
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',

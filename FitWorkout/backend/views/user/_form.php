@@ -42,7 +42,16 @@ use common\models\User;
     ); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(
+            '<i class="fas fa-save"></i> Salvar',
+            [
+                'class' => 'btn btn-app bg-success',  'data' => [
+                    'confirm' => 'Tem certeza de que deseja salvar este item?',
+                    'method' => 'post',
+                ]
+            ]
+        )
+        ?>
     </div>
 
     <?php ActiveForm::end(); ?>

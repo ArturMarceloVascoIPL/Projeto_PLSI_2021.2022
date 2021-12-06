@@ -34,8 +34,14 @@ $this->title = $model->name;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'description',
+            [
+                'label' => 'Nome',
+                'attribute' => 'name',
+            ],
+            [
+                'label' => 'Descrição',
+                'attribute' => 'description',
+            ],
         ],
     ]) ?>
 

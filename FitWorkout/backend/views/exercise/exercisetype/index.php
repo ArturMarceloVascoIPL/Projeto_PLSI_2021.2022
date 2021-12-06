@@ -30,7 +30,7 @@ $this->title = 'Gestão de Tipos de Exercícios';
                 'options' => ['width' => '5%'],
             ],
             [
-                'label' => 'Tipo de Exercício',
+                'label' => 'Nome',
                 'attribute' => 'name',
                 'options' => ['width' => '15%'],
             ],
