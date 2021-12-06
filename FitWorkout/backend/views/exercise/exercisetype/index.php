@@ -8,22 +8,40 @@ $this->title = 'Gestão de Tipos de Exercícios';
 
 <div class="exercisetype-index">
 
-    # TODO : Routing para pagina pai (exercises)
-    <?= Html::a('Voltar', ['mainindex'], ['class' => 'btn btn-info']) ?>
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['mainindex'], ['class' => 'btn.block btn btn-info']) ?>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <?= Html::a('Adicionar Tipo', ['create'], ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'description',
-
+            [
+                'label' => 'ID',
+                'attribute' => 'id',
+                'options' => ['width' => '5%'],
+            ],
+            [
+                'label' => 'Tipo de Exercício',
+                'attribute' => 'name',
+                'options' => ['width' => '15%'],
+            ],
+            [
+                'label' => 'Descrição',
+                'attribute' => 'description',
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
-                'contentOptions' => ['style' => 'width: 15%'],
+                'contentOptions' => ['style' => 'width: 20%'],
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url) {
@@ -52,9 +70,5 @@ $this->title = 'Gestão de Tipos de Exercícios';
             ],
         ],
     ]); ?>
-
-    <p>
-        <?= Html::a('Adicionar Tipo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
 </div>

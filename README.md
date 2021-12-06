@@ -45,17 +45,28 @@ Informação de como instalar o nosso projeto:
 >
 > > 4.1 Criar a base dados.
 > >
-> > 4.2 Configurar a ligação através do ficheiro "common\config\main_local.php".
+> > 4.2 Configurar a ligação através do ficheiro "common\config\main_local.php"
 > >
 > > _Na linha de comandos:_
 > >
-> > 4.3 Verificar se está colocado na pasta "FitWorkout";
+> > 4.3 Verificar se está colocado na pasta "FitWorkout"
 > >
-> > 4.4 Executar o comando `php yii migrate`;
-> > 4.5 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations`;
-> > 4.6 Voltar a executar o comando `php yii migrate`;
+> > 4.4 Executar o comando `php yii migrate`
+> > 4.5 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations`
+> > 4.6 Voltar a executar o comando `php yii migrate`
 > >
 > > > **4bº Passo** - Em caso de atualizacao de base dados
-> > > 4b.1 Executar o comando `php yii migrate/fresh`;
-> > > 4b.2 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations /fresh`;
-> > > 4b.3 Executar o comando `php yii migrate /fresh`;
+> > > 4b.1 Executar o comando `php yii migrate/fresh`
+> > > 4b.2 Executar o comando `php yii migrate --migrationPath=@yii/rbac/migrations /fresh`
+> > > 4b.3 Executar o comando `php yii migrate /fresh`
+
+> **5º Passo** - Correr a aplicação em Servidor
+> Não colocar na mesma porta cada aplicação
+>
+> > **Frontend** - Para a aplicao frontend
+> >
+> > > `php yii serve --docroot="frontend/web/" --port=8080`
+> >
+> > **Backend** - Em caso de atualizacao de base dados
+> >
+> > > `php yii serve --docroot="backend/web/" --port=9090`

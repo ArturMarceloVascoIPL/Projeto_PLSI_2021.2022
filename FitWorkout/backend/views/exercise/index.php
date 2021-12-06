@@ -11,8 +11,20 @@ $this->title = 'Gestão de Exercicios';
 ?>
 <div class="exercise-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?= Html::a('Adicionar Exercicio', ['create'], ['class' => 'btn btn-info']) ?>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <?= Html::a('Ver Tipos', ['/exercisetype'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Ver Categorias', ['/exercisecategory'], ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- <?php // echo $this->render('_search', ['model' => $searchModel]);     ?> -->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -31,7 +43,7 @@ $this->title = 'Gestão de Exercicios';
                 'attribute' => 'Tipo',
                 'value' => 'type.name',
             ],
-            #TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
+            // # TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
             [
                 'attribute' => 'Categoria',
                 'value' => 'category.name',
@@ -69,16 +81,5 @@ $this->title = 'Gestão de Exercicios';
         ],
     ]); ?>
 
-    <!-- Buttons Funcionalidades -->
-    <div class="row">
-        <div class="col">
-            <?= Html::a('Adicionar Exercicio', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-        <div class="col">
-            <div class="float-right">
-                <?= Html::a('Ver Tipos', ['/exercisetype'], ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Ver Categorias', ['/exercisecategory'], ['class' => 'btn btn-success']) ?>
-            </div>
-        </div>
-    </div>
+
 </div>

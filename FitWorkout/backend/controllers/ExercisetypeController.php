@@ -13,9 +13,6 @@ use yii\filters\VerbFilter;
  */
 class ExercisetypeController extends Controller
 {
-    /** 
-     * @inheritDoc 
-     */
     public function behaviors()
     {
         return array_merge(
@@ -31,10 +28,6 @@ class ExercisetypeController extends Controller
         );
     }
 
-    /** 
-     * Lists all Exercisetype models. 
-     * @return mixed 
-     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -54,12 +47,7 @@ class ExercisetypeController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    /** 
-     * Displays a single Exercisetype model. 
-     * @param int $id ID 
-     * @return mixed 
-     * @throws NotFoundHttpException if the model cannot be found 
-     */
+
     public function actionView($id)
     {
         return $this->render('/exercise/exercisetype/view', [
@@ -67,11 +55,6 @@ class ExercisetypeController extends Controller
         ]);
     }
 
-    /** 
-     * Creates a new Exercisetype model. 
-     * If creation is successful, the browser will be redirected to the 'view' page. 
-     * @return mixed 
-     */
     public function actionCreate()
     {
         $model = new Exercisetype();
@@ -89,13 +72,6 @@ class ExercisetypeController extends Controller
         ]);
     }
 
-    /** 
-     * Updates an existing Exercisetype model. 
-     * If update is successful, the browser will be redirected to the 'view' page. 
-     * @param int $id ID 
-     * @return mixed 
-     * @throws NotFoundHttpException if the model cannot be found 
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -109,13 +85,6 @@ class ExercisetypeController extends Controller
         ]);
     }
 
-    /** 
-     * Deletes an existing Exercisetype model. 
-     * If deletion is successful, the browser will be redirected to the 'index' page. 
-     * @param int $id ID 
-     * @return mixed 
-     * @throws NotFoundHttpException if the model cannot be found 
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -125,15 +94,9 @@ class ExercisetypeController extends Controller
 
     public function actionMainindex()
     {
-        return $this->redirect(['@app\views\exercise\index']);
+        return $this->redirect(['exercise/index']);
     }
-    /** 
-     * Finds the Exercisetype model based on its primary key value. 
-     * If the model is not found, a 404 HTTP exception will be thrown. 
-     * @param int $id ID 
-     * @return Exercisetype the loaded model 
-     * @throws NotFoundHttpException if the model cannot be found 
-     */
+ 
     protected function findModel($id)
     {
         if (($model = Exercisetype::findOne($id)) !== null) {

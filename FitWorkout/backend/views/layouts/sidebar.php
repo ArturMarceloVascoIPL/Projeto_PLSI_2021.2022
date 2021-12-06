@@ -37,7 +37,7 @@ use app\assets\AppAsset;
                     ['label' => 'Produtos',  'icon' => 'store', 'url' => ['']],
                     ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['']],
 
-
+                    //Dev Section
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],

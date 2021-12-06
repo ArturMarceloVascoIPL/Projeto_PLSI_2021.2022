@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="exercise-form">
+    <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index'], ['class' => 'btn.block btn btn-info mb-4']) ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -23,7 +24,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'categoryId')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('<i class="fas fa-save"></i> Salvar', ['class' => 'btn btn-app bg-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

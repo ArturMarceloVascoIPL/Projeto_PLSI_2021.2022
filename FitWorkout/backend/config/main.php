@@ -47,11 +47,11 @@ return [
         ],
 
         'urlManager' => [
-            'enablePrettyUrl' => false,
+            'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [],
         ],
-
+        /*
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => '/frontend/web',
@@ -59,6 +59,7 @@ return [
             'showScriptName' => false,
             'rules' => [],
         ],
+        */
     ],
     'params' => $params,
 ];

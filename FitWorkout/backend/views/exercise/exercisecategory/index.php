@@ -8,8 +8,17 @@ $this->title = 'Gestão de Categorias de Exercícios';
 ?>
 <div class="exercisecategory-index">
 
-    # TODO : Routing para pagina pai (exercises)
-    <?= Html::a('Voltar', Yii::$app->request->referrer) ?>
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['mainindex'], ['class' => 'btn.block btn btn-info']) ?>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <?= Html::a('Adicionar Categoria', ['create'], ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -53,7 +62,4 @@ $this->title = 'Gestão de Categorias de Exercícios';
         ],
     ]); ?>
 
-    <p>
-        <?= Html::a('Adicionar Categoria', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 </div>
