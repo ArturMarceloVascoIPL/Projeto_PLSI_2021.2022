@@ -32,9 +32,6 @@ $this->title = 'Ver Utilizador: ' . $model->username;
         'attributes' => [
             'id',
             'username',
-            // 'auth_key',
-            // 'password_hash',
-            // 'password_reset_token',
             'email:email',
             [
                 'attribute' => 'status',
@@ -52,9 +49,6 @@ $this->title = 'Ver Utilizador: ' . $model->username;
                     }
                 },
             ],
-            // 'created_at',
-            // 'updated_at',
-            // 'verification_token',
             [
                 'label' => 'Role',
                 'attribute' => 'role',

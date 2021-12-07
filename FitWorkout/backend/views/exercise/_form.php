@@ -3,10 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use common\models\Exercisetype;
+use common\models\Exercisecategory;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Exercise */
-/* @var $form yii\widgets\ActiveForm */
+$tipos = ArrayHelper::map(Exercisetype::find()->all(), 'id', 'name');
+$categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
 ?>
 
 <div class="exercise-form">
@@ -25,14 +26,14 @@ use yii\helpers\ArrayHelper;
 
     <!-- Tipo de Exercicio -->
     <?= $form->field($model, 'type')->dropDownList(
-        ArrayHelper::map($model->type::find()->all(), 'id', 'name'),
+        $tipos,
         ['options' => ['type' => ['selected' => true]]]
     )->label('Tipo de Exercício') ?>
 
     <!-- Categoria do Exercicio -->
     <?= $form->field($model, 'categoryId')->dropDownList(
-        ArrayHelper::map($model->category::find()->all(), 'id', 'name'),
-        ['options' => ['categoryId' => ['selected' => true]],]
+        $categorias,
+        ['options' => ['categoryId' => ['selected' => true]]]
     )->label('Categoria de Exercicio'); ?>
 
     <div class="form-group">

@@ -24,7 +24,7 @@ $this->title = 'Gestão de Exercicios';
         </div>
     </div>
 
-    <!-- <?php // echo $this->render('_search', ['model' => $searchModel]);     ?> -->
+    <?php  // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,12 +40,14 @@ $this->title = 'Gestão de Exercicios';
                 'options' => ['style' => 'width: 10%'],
             ],
             [
-                'attribute' => 'Tipo',
+                'label' => 'Tipo',
+                'attribute' => 'type',
                 'value' => 'type.name',
             ],
             // # TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
             [
-                'attribute' => 'Categoria',
+                'label' => 'Categoria',
+                'attribute' => 'category',
                 'value' => 'category.name',
             ],
             [

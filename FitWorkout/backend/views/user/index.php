@@ -15,7 +15,7 @@ use yii\widgets\Pjax;
     <div class="row">
         <div class="col">
             <div class="float-right">
-                <?php $this->title = 'Users' ?>
+                <?php $this->title = 'Gestão de Utilizadores' ?>
                 <!-- <a href="<?php echo Url::toRoute('ptapplications') ?>" class="float-right btn btn-primary btn-lg">Ver Pedidos PT</a> -->
             </div>
         </div>
@@ -76,13 +76,6 @@ use yii\widgets\Pjax;
                     },
                 ],
             ],
-            // 'auth_key',
-            // 'password_hash',
-            // 'password_reset_token',
-
-            // 'created_at',
-            // 'updated_at',
-            // 'verification_token',
         ],
     ]);
     ?>

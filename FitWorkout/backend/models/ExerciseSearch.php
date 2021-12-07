@@ -11,36 +11,32 @@ use common\models\Exercise;
  */
 class ExerciseSearch extends Exercise
 {
+    # TODO : A PESQUIASN NAO FUNCIONA
+    
+    // public $category = null;
+    // public $type;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'caloriesBurned', 'typeId', 'categoryId'], 'integer'],
+            [['id', 'caloriesBurned'], 'integer'],
             [['name', 'description'], 'safe'],
+            [['type', 'category'], 'string'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
     public function search($params)
     {
         $query = Exercise::find();
+        $query->joinWith(['type', 'category']);
 
         // add conditions that should always apply here
 
@@ -48,9 +44,19 @@ class ExerciseSearch extends Exercise
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $dataProvider->sort->attributes['type'] = [
+            'asc' => ['type.name' => SORT_ASC],
+            'desc' => ['type.name' => SORT_DESC],
+        ];
 
-        if (!$this->validate()) {
+        $dataProvider->sort->attributes['category'] = [
+            'asc' => ['category.name' => SORT_ASC],
+            'desc' => ['category.name' => SORT_DESC],
+        ];
+
+        // $this->load($params);
+
+        if (!($this->load($params) && $this->validate())) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -60,12 +66,12 @@ class ExerciseSearch extends Exercise
         $query->andFilterWhere([
             'id' => $this->id,
             'caloriesBurned' => $this->caloriesBurned,
-            'typeId' => $this->typeId,
-            'categoryId' => $this->categoryId,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'type.name', $this->typeId])
+            ->andFilterWhere(['like', 'category.name', $this->categoryId]);
 
         return $dataProvider;
     }
