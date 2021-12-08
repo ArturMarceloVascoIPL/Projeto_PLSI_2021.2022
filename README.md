@@ -62,11 +62,17 @@ Informação de como instalar o nosso projeto:
 
 > **5º Passo** - Correr a aplicação em Servidor
 > Não colocar na mesma porta cada aplicação
->
+> >
+> Se Pretender pode executar o ficheiro `ServerStart.bat` para correr automaticamente (executar na pasta acima do projeto)
 > > **Frontend** - Para a aplicao frontend
 > >
-> > > `php yii serve --docroot="frontend/web/" --port=8080`
+> > > `php yii serve --docroot="frontend/web/" --port=7070`
 > >
-> > **Backend** - Em caso de atualizacao de base dados
+> > **Backend** - Para a aplicação frontend
 > >
 > > > `php yii serve --docroot="backend/web/" --port=9090`
+> >
+> > **REST API** - Para a aplicação REST API
+> >
+> > > `php yii serve --docroot="backend/web/" --port=8080`
+> >
