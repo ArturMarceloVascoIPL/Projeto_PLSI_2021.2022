@@ -83,6 +83,8 @@ class m211108_145323_database_creation extends Migration
             'name' => $this->string()->notNull(),
             'description' => $this->string(),
             'caloriesBurned' => $this->integer()->notNull(),
+            'type' => $this->integer()->notNull(),
+            'category' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull(),
             'personalTrainerId' => $this->integer()->notNull(),
         ], $tableOptions);
