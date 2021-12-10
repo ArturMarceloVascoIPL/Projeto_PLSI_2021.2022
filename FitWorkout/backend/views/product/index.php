@@ -2,50 +2,55 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
- 
-$this->title = 'Gestão de Exercicios';
+
+$this->title = 'Gestão de Produtos';
 ?>
-<div class="exercise-index">
+<div class="product-index">
 
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
         <div class="col">
-            <?= Html::a('Adicionar Exercicio', ['create'], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('Adicionar Produto', ['create'], ['class' => 'btn btn-info']) ?>
         </div>
         <div class="col">
             <div class="float-right">
-                <?= Html::a('Ver Tipos', ['/exercisetype'], ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Ver Categorias', ['/exercisecategory'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Ver Categorias', ['/productcategory'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>
 
-    <?php  // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);     
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            // 'id',
-            'name',
-            'description',
             [
-                'attribute' => 'caloriesBurned',
-                'label' => 'Calorias',
-                'options' => ['style' => 'width: 10%'],
+                'label' => 'ID',
+                'attribute' => 'id',
+                'options' => ['style' => 'width: 50px;'],
             ],
             [
-                'label' => 'Tipo',
-                'attribute' => 'type',
-                'value' => 'type.name',
+                'label' => 'Nome',
+                'attribute' => 'name',
             ],
-            // # TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
+            [
+                'label' => 'Descrição',
+                'attribute' => 'description',
+            ],
+            'stock',
+            [
+                'label' => 'Preço',
+                'attribute' => 'price',
+            ],
             [
                 'label' => 'Categoria',
-                'attribute' => 'category',
+                'attribute' => 'category.name',
                 'value' => 'category.name',
             ],
+            // 'image',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',

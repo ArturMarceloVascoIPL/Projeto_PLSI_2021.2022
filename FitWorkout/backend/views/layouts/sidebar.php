@@ -34,7 +34,7 @@ use app\assets\AppAsset;
                     ['label' => 'DASHBOARD', 'header' => true],
                     ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['/user/index/']],
                     ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['/exercise/index/']],
-                    ['label' => 'Produtos',  'icon' => 'store', 'url' => ['']],
+                    ['label' => 'Produtos',  'icon' => 'store', 'url' => ['/product/index']],
                     ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['']],
 
                     //Dev Section

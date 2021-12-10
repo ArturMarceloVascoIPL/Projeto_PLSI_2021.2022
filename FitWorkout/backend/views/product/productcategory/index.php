@@ -2,49 +2,37 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
- 
-$this->title = 'Gestão de Exercicios';
+
+$this->title = 'Gestão de Categorias de Produtos';
 ?>
-<div class="exercise-index">
+
+<div class="productcategory-index">
 
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
         <div class="col">
-            <?= Html::a('Adicionar Exercicio', ['create'], ['class' => 'btn btn-info']) ?>
+            <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['mainindex'], ['class' => 'btn.block btn btn-info']) ?>
         </div>
         <div class="col">
             <div class="float-right">
-                <?= Html::a('Ver Tipos', ['/exercisetype'], ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Ver Categorias', ['/exercisecategory'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Adicionar Categoria', ['create'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>
 
-    <?php  // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            // 'id',
-            'name',
-            'description',
+
+            'id',
             [
-                'attribute' => 'caloriesBurned',
-                'label' => 'Calorias',
-                'options' => ['style' => 'width: 10%'],
+                'label' => 'Nome',
+                'attribute' => 'name',
             ],
             [
-                'label' => 'Tipo',
-                'attribute' => 'type',
-                'value' => 'type.name',
-            ],
-            // # TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
-            [
-                'label' => 'Categoria',
-                'attribute' => 'category',
-                'value' => 'category.name',
+                'label' => 'Descrição',
+                'attribute' => 'description',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
