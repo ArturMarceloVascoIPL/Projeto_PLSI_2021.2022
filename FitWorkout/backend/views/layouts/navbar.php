@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use yii\web\View;
 ?>
 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -11,6 +11,13 @@ use yii\helpers\Url;
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+    </ul>
+
+    <!-- Middle navbar | Clock -->
+    <ul class="navbar-nav ml-auto">
+        <div id="date" class="font-weight-bold">
+            <?= date('d/m/Y | H:i:s') ?>
+        </div>
     </ul>
 
     <!-- Right navbar links -->
@@ -28,42 +35,28 @@ use yii\helpers\Url;
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-            </a>
-        </li> -->
     </ul>
 </nav>
 
-<!-- 
-<script>
-    var nameOfDay = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    var nameOfMonth = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember');
-    var data = new Date();
+<?php
+$script = <<< JS
+    $(document).ready(function() {
+        setInterval(function() {
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+        
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        var strTime = day + '/' + month + '/' + year + ' | ' + hours + ':' + minutes + ':' + seconds;
+        $('#date').html(strTime);
+        }, 1000);
+    });
+ JS;
+$this->registerJs($script, View::POS_END);
 
-    function clock() {
-        var hou = data.getHours();
-        var min = data.getMinutes();
-        var sec = data.getSeconds();
-        if (hou < 10) {
-            hou = "0" + hou;
-        }
-        if (min < 10) {
-            min = "0" + min;
-        }
-        if (sec < 10) {
-            sec = "0" + sec;
-        }
-
-        document.getElementById('clock').innerHTML = hou + ":" + min + ":" + sec;
-        data.setTime(data.getTime() + 1000)
-        setTimeout("clock();", 1000);
-
-        document.getElementById('date').innerHTML = nameOfDay[data.getDay()] + ", " + nameOfMonth[data.getMonth()] + " " + data.getDate() + ", " + data.getFullYear();
-    }
-</script>
-
-<h3>
-    <div id="date">
-</h3> -->
+?>

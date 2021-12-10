@@ -16,13 +16,6 @@ $this->title = $model->name;
         <div class="col">
             <div class="float-right">
                 <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => 'Tem certeza de que deseja excluir este item?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
             </div>
         </div>
     </div>

@@ -41,6 +41,7 @@ use common\models\User;
         ]
     ); ?>
 
+    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton(
             '<i class="fas fa-save"></i> Salvar',

@@ -40,9 +40,12 @@ $this->title = 'Gestão de Produtos';
                 'label' => 'Descrição',
                 'attribute' => 'description',
             ],
-            'stock',
             [
-                'label' => 'Preço',
+                'label' => 'Stock (Nº unidades)',
+                'attribute' => 'stock',
+            ],
+            [
+                'label' => 'Preço (€)',
                 'attribute' => 'price',
             ],
             [
@@ -54,8 +57,8 @@ $this->title = 'Gestão de Produtos';
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
-                'contentOptions' => ['style' => 'width: 20%'],
-                'template' => '{view} {update} {delete}',
+                'contentOptions' => ['style' => 'width: 15%'],
+                'template' => '{view} {update}',
                 'buttons' => [
                     'view' => function ($url) {
                         return Html::a('<span>Ver</span>', $url, [

@@ -14,6 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
+    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton(
             '<i class="fas fa-save"></i> Salvar',

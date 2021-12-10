@@ -36,6 +36,7 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
         ['options' => ['categoryId' => ['selected' => true]]]
     )->label('Categoria de Exercicio'); ?>
 
+    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton(
             '<i class="fas fa-save"></i> Salvar',

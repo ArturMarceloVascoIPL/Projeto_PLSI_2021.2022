@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Productcategory;
 
+$categorias = ArrayHelper::map(Productcategory::find()->all(), 'id', 'name');
 ?>
 
 <div class="product-form">
@@ -20,8 +23,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'categoryId')->textInput() ?>
+    <!-- Categoria do Produto -->
+    <?= $form->field($model, 'categoryId')->dropDownList(
+        $categorias,
+        ['options' => ['categoryId' => ['selected' => true]]]
+    )->label('Categoria de Exercicio'); ?>
 
+    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton(
             '<i class="fas fa-save"></i> Salvar',

@@ -36,15 +36,15 @@ $this->title = $model->name;
             'id',
             [
                 'label' => 'Nome',
-                'value' =>  'name',
+                'attribute' =>  'name',
             ],
             [
                 'label' => 'Descrição',
-                'value' =>  'description',
+                'attribute' =>  'description',
             ],
             [
                 'label' => 'Calorias (Kcal)',
-                'value' => 'caloriesBurned',
+                'attribute' => 'caloriesBurned',
             ],
             [
                 'label' => 'Tipo',

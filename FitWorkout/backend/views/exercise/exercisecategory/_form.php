@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => '3', 'maxlength' => true, 'style' => ' resize: none'])->label('Descrição') ?>
 
+    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton(
             '<i class="fas fa-save"></i> Salvar',

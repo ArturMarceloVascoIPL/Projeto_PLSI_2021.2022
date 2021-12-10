@@ -9,7 +9,8 @@ use yii\helpers\Html;
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
-$assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+// $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+$assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/hail812/adminlte/dist');
 $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
 ?>
 <?php $this->beginPage() ?>
@@ -41,9 +42,9 @@ $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
 
             <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
-            <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
-
             <?= $this->render('control-sidebar') ?>
+            
+            <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
 
             <?= $this->render('footer') ?>
         </div>
@@ -51,7 +52,7 @@ $assetApp = Yii::$app->assetManager->getPublishedUrl('@app');
         <?php $this->endBody() ?>
     </body>
 
-<!-- Personal Trainer -->
+    <!-- Personal Trainer -->
 <?php } else { ?>
 
     <body class="sidebar-collapse">
