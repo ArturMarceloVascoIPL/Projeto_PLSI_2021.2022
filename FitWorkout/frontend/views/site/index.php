@@ -10,6 +10,8 @@ $this->title = 'Fit Workout';
 
 
 <body class="body-wrapper">
+  <!-- //Html::a('Editar', ['editarperfil', 'id' => $model->id], ['class' => 'dropdown-item'])   -->
+
 <div class="site-index">
     <div class="container">
         <div class="row">
