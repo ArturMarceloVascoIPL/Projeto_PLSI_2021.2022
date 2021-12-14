@@ -12,7 +12,8 @@ $this->title = 'Dados de Perfil';
 <div class="site-login container-fluid">
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'modelclient' => $modelclient,
+        'modeluser' => $modeluser,
     ]) ?> 
     
     <div class="row">

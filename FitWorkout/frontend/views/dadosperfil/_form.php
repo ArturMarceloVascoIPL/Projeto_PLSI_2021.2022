@@ -11,9 +11,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'weight') ?>
-        <?= $form->field($model, 'height') ?>
-        //TODO: resolver erro
+        <?= $form->field($modelclient, 'weight') ?>
+        <?= $form->field($modelclient, 'height') ?>
+
+        <?= $form->field($modeluser, 'email') ?>
+        <?= $form->field($modeluser, 'username') ?>
+
+
+        <!-- //TODO: Acrescentar nome e apelido à base de dados -->
         
     
         <div class="form-group">

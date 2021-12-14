@@ -7,19 +7,34 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Client;
 use common\models\User;
+use yii;
+use yii\base\Model;
 
 class DadosperfilController extends \yii\web\Controller
 {
     public function actionIndex($id)
     {
-        $model = Client::findOne($id);
+        $modelclient = Client::findOne($id);
+        $modeluser = User::findOne($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect('/site/index');
+        
+
+
+        if ($modelclient->load(Yii::$app->request->post()) && $modeluser->load(Yii::$app->request->post()) && Model::validateMultiple([$modelclient, $modeluser])) {
+
+            $modelclient->save(false);
+            $modeluser->save(false);
+            return $this->redirect(['/dadosperfil','id' => $id]);
         }
 
+    
+        
+        
+        
+
         return $this->render('index', [
-            'model' => $model,
+            'modelclient' => $modelclient,
+            'modeluser' => $modeluser,
         ]);
 
         // return $this->render('index');
