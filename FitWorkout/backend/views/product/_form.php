@@ -11,7 +11,7 @@ $categorias = ArrayHelper::map(Productcategory::find()->all(), 'id', 'name');
 <div class="product-form">
     <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index'], ['class' => 'btn.block btn btn-info mb-4']) ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -21,7 +21,7 @@ $categorias = ArrayHelper::map(Productcategory::find()->all(), 'id', 'name');
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file')->fileInput()->label('Upload Image') ?>
 
     <!-- Categoria do Produto -->
     <?= $form->field($model, 'categoryId')->dropDownList(

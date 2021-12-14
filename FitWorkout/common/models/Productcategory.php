@@ -42,8 +42,8 @@ class Productcategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Nome',
+            'description' => 'Descrição',
         ];
     }
 

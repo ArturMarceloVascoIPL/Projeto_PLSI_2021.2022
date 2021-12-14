@@ -26,14 +26,8 @@ $this->title = 'Gestão de Categorias de Produtos';
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            [
-                'label' => 'Nome',
-                'attribute' => 'name',
-            ],
-            [
-                'label' => 'Descrição',
-                'attribute' => 'description',
-            ],
+            'name',
+            'description',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',

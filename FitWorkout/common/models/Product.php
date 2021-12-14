@@ -23,14 +23,14 @@ class Product extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $file;
+
     public static function tableName()
     {
         return 'product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -39,6 +39,7 @@ class Product extends \yii\db\ActiveRecord
             [['stock'], 'integer', 'min' => 0],
             [['name', 'description', 'image'], 'string', 'max' => 255],
             [['name'], 'unique'],
+            [['file'],'file'],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Productcategory::className(), 'targetAttribute' => ['categoryId' => 'id']],
         ];
     }
@@ -50,12 +51,14 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Nome',
+            'description' => 'Descrição',
             'stock' => 'Stock',
-            'price' => 'Price',
-            'image' => 'Image',
-            'categoryId' => 'Category ID',
+            'price' => 'Preço ($)',
+            'image' => 'Imagem',
+            'categoryId' => 'Categoria ID',
+            'category.name' => 'Categoria',
+            'file' => 'Imagem Ficheiro',
         ];
     }
 

@@ -28,35 +28,18 @@ $this->title = 'Gestão de Produtos';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'label' => 'ID',
                 'attribute' => 'id',
                 'options' => ['style' => 'width: 50px;'],
             ],
-            [
-                'label' => 'Nome',
-                'attribute' => 'name',
-            ],
-            [
-                'label' => 'Descrição',
-                'attribute' => 'description',
-            ],
-            [
-                'label' => 'Stock (Nº unidades)',
-                'attribute' => 'stock',
-            ],
-            [
-                'label' => 'Preço (€)',
-                'attribute' => 'price',
-            ],
-            [
-                'label' => 'Categoria',
-                'attribute' => 'category.name',
-                'value' => 'category.name',
-            ],
+            'name',
+            'description',
+            'stock',
+            'price',
+            'category.name',
             // 'image',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header' => 'Actions',
+                'header' => 'Ações',
                 'contentOptions' => ['style' => 'width: 15%'],
                 'template' => '{view} {update}',
                 'buttons' => [

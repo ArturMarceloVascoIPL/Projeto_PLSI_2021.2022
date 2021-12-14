@@ -20,29 +20,32 @@ $this->title = $model->name;
         </div>
     </div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            [
-                'label' => 'Nome',
-                'attribute' =>  'name',
-            ],
-            [
-                'label' => 'Descrição',
-                'attribute' =>  'description',
-            ],
-            'stock',
-            [
-                'label' => 'Preço',
-                'attribute' =>  'price',
-            ],
-            [
-                'label' => 'Categoria',
-                'attribute' =>  'category.name',
-            ],
-            // 'image',
-        ],
-    ]) ?>
+
+    <div class="row mb-2">
+        <div class="col">
+            <?= DetailView::widget([
+               
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'name',
+                    'description',
+                    'stock',
+                    'price',
+                    'category.name',
+                    'image'
+                ],
+            ]) ?>
+
+        </div>
+        <div class="col">
+            <div class="float-right">
+
+                <?= Html::img('@web/' . $model->image . '', ['alt' => 'some', 'style' => 'width: 50%']); ?>
+            </div>
+        </div>
+    </div>
+
+
 
 </div>

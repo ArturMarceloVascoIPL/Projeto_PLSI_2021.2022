@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
- 
+
 ?>
 
 <div class="productcategory-form">
@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
             '<i class="fas fa-save"></i> Salvar',
             [
                 'class' => 'btn btn-app bg-success',
-                'class' => 'btn btn-app bg-success',  'data' => [
+                'data' => [
                     'confirm' => 'Tem certeza de que deseja salvar este item?',
                     'method' => 'post',
                 ]
@@ -28,7 +28,5 @@ use yii\widgets\ActiveForm;
         )
         ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
