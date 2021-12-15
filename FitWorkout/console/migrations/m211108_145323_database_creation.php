@@ -16,45 +16,81 @@ class m211108_145323_database_creation extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        /**
-         * Tabela Cliente
-         */
+        //TODO: Verificar Tabelas no fim de Validadas
 
+        /**
+         * Tabela Perfil de Utilizador
+         */
+        //region Perfil de Utilizador
         // Tabela
-        $this->createTable('client', [
+        $this->createTable('userProfile', [
             'userId' => $this->primaryKey(),
-            'weight' => $this->integer(),
-            'height' => $this->integer(),
-            'weightLost' => $this->integer(),
-            'lightestWeight' => $this->integer(),
-            'heaviestWeight' => $this->integer(),
-            'bmi' => $this->integer(),
+            'morada' => $this->string(),
+            'contribuinte' => $this->integer(9),
+            'codPostal' => $this->string(),
+            'localidade' => $this->string(),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
         $this->createIndex(
-            'idx_client_userId',
-            'client',
+            'idx_userProfile_userId',
+            'userProfile',
             'userId'
         );
 
         // Designação da Chave Estrangeira
         $this->addForeignKey(
-            'fk_client_userId',
-            'client',
+            'fk_userProfile_userId',
+            'userProfile',
             'userId',
             'user',
             'id'
         );
+        //endregion
+
+        /**
+         * Tabela Dados de Utilizador
+         */
+        //region Dados de Utilizador
+        // Tabela
+        $this->createTable('userData', [
+            'id' => $this->primaryKey(),
+            'timeStamp' => $this->timestamp(),
+            'weight' => $this->integer(),
+            'weightLost' => $this->integer(),
+            'lightestWeight' => $this->integer(),
+            'heaviestWeight' => $this->integer(),
+            'bmi' => $this->integer(),
+            'userProfileId' => $this->integer(),
+        ], $tableOptions);
+
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_userData_userProfileId',
+            'userData',
+            'userProfileId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_userData_userProfileId',
+            'userData',
+            'userProfileId',
+            'userProfile',
+            'userId'
+        );
+        //endregion
 
         /**
          * Tabela Personal Trainer
          */
-
+        //region Personal Trainer
         // Tabela
         $this->createTable('personaltrainer', [
             'userId' => $this->primaryKey(),
-            'qualificationProof' => $this->string()->notNull()
+            'cvFilename' => $this->string()->notNull(),
+            'vocationalTrainingFilename' => $this->string()->notNull(),
+            'jobTime' => $this->integer(),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
@@ -72,11 +108,12 @@ class m211108_145323_database_creation extends Migration
             'user',
             'id'
         );
+        //endregion
 
         /**
          * Tabela Sugestão de Exercícios
          */
-
+        // region Sugestão de Exercícios
         // Tabela
         $this->createTable('exercisesuggestions', [
             'id' => $this->primaryKey(),
@@ -104,15 +141,18 @@ class m211108_145323_database_creation extends Migration
             'personaltrainer',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Aplicação a Personal Trainer
          */
-
+        //region Aplicação a Personal Trainer
         // Tabela
         $this->createTable('application', [
             'id' => $this->primaryKey(),
-            'qualificationProof' => $this->string()->notNull(),
+            'cvFilename' => $this->string()->notNull(),
+            'vocationalTrainingFilename' => $this->string(),
+            'jobTime' => $this->integer(),
             'comment' => $this->string(),
             'status' => $this->integer()->notNull(),
             'clientId' => $this->integer()->notNull(),
@@ -133,33 +173,36 @@ class m211108_145323_database_creation extends Migration
             'client',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Tipo de Exercício
          */
-
+        //region Tipo de Exercício
         // Tabela
         $this->createTable('exercisetype', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
+        //endregion
 
         /**
          * Tabela Categoria de Exercício
          */
-
+        //region Categoria de Exercício
         // Tabela
         $this->createTable('exercisecategory', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
+        //endregion
 
         /**
          * Tabela Exercício
          */
-
+        //region Exercício
         // Tabela
         $this->createTable('exercise', [
             'id' => $this->primaryKey(),
@@ -203,11 +246,12 @@ class m211108_145323_database_creation extends Migration
             'exercisecategory',
             'id'
         );
+        //endregion
 
         /**
          * Tabela Treino
          */
-
+        //region Treino
         // Tabela
         $this->createTable('workout', [
             'id' => $this->primaryKey(),
@@ -233,16 +277,18 @@ class m211108_145323_database_creation extends Migration
             'personaltrainer',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Plano de Treinos
          */
-
+        //region Plano de Treinos
         // Tabela
         $this->createTable('plan', [
             'id' => $this->primaryKey(),
             'dateStart' => $this->date()->notNull(),
             'dateEnd' => $this->date()->notNull(),
+            'description' => $this->string()->notNull(),
             'ptId' => $this->integer()->notNull(),
             'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -280,22 +326,24 @@ class m211108_145323_database_creation extends Migration
             'client',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Categoria Produto
          */
-
+        //region Categoria Produto
         // Tabela
         $this->createTable('productcategory', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
             'description' => $this->string(),
         ], $tableOptions);
+        //endregion
 
         /**
          * Tabela Produtos
          */
-
+        //region Produtos
         // Tabela
         $this->createTable('product', [
             'id' => $this->primaryKey(),
@@ -322,11 +370,12 @@ class m211108_145323_database_creation extends Migration
             'productcategory',
             'id'
         );
+        //endregion
 
         /**
          * Tabela Encomenda
          */
-
+        //region Encomenda
         // Tabela
         $this->createTable('order', [
             'id' => $this->primaryKey(),
@@ -370,11 +419,12 @@ class m211108_145323_database_creation extends Migration
             'client',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Chat
          */
-
+        //region Chat
         // Tabela
         $this->createTable('chat', [
             'id' => $this->primaryKey(),
@@ -413,14 +463,15 @@ class m211108_145323_database_creation extends Migration
             'fk_chat_clientId',
             'chat',
             'clientId',
-            'client',
+            'userProfile',
             'userId'
         );
+        //endregion
 
         /**
          * Tabela Mensagem do Chat
          */
-
+        //region Mensagem do Chat
         // Tabela
         $this->createTable('chatmessage', [
             'id' => $this->primaryKey(),
@@ -445,16 +496,18 @@ class m211108_145323_database_creation extends Migration
             'chat',
             'id'
         );
+        //endregion
 
         /**
          * Tabela Histórico de Exercícios
          */
-
+        //region Histórico de Exercícios
         // Tabela
         $this->createTable('workouthistory', [
             'id' => $this->primaryKey(),
             'duration' => $this->integer()->notNull(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
+            'timeStamp' => $this->timestamp()->notNull(),
             'clientId' => $this->integer()->notNull(),
             'workoutId' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -492,21 +545,24 @@ class m211108_145323_database_creation extends Migration
             'workout',
             'id'
         );
-
+        //endregion
 
         /** - - - - Tabelas de Relacionamentos - - - - **/
-
+        //region Tabelas de Relacionamentos
         /**
          * Tabela de Relacionamente Exercicio -> Treino
          */
-
+        //region Exercicio -> Treino
         // Tabela
         $this->createTable('exerciseworkout', [
             'exerciseId' => $this->integer()->notNull(),
             'workoutId' => $this->integer()->notNull(),
-            'exerciseNumber' => $this->integer()->notNull(),
             'exerciseCalories' => $this->integer()->notNull(),
             'totalCaloriesBurned' => $this->integer()->notNull(),
+            'repetitions' => $this->integer()->notNull(),
+            'numSeries' => $this->integer(),
+            'equipmentWeight' => $this->integer(),
+            'restTime' => $this->integer(),
         ], $tableOptions);
 
         /* Chave Estrangeira (Id do Exercício) */
@@ -549,11 +605,12 @@ class m211108_145323_database_creation extends Migration
             'exerciseworkout',
             ['exerciseId', 'workoutId']
         );
+        //endregion
 
         /**
          * Tabela de Relacionamente Treino -> Plano
          */
-
+        //region Treino -> Plano
         // Tabela
         $this->createTable('workoutplan', [
             'workoutId' => $this->integer()->notNull(),
@@ -600,6 +657,8 @@ class m211108_145323_database_creation extends Migration
             'workoutplan',
             ['workoutId', 'planId']
         );
+        //endregion
+        //endregion
     }
 
     public function down()
