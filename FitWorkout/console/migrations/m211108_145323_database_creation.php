@@ -170,7 +170,7 @@ class m211108_145323_database_creation extends Migration
             'fk_application_userId',
             'application',
             'clientId',
-            'client',
+            'userProfile',
             'userId'
         );
         //endregion
@@ -323,7 +323,7 @@ class m211108_145323_database_creation extends Migration
             'fk_plan_clientId',
             'plan',
             'clientId',
-            'client',
+            'userProfile',
             'userId'
         );
         //endregion
@@ -416,7 +416,7 @@ class m211108_145323_database_creation extends Migration
             'fk_order_clientId',
             'order',
             'clientId',
-            'client',
+            'userProfile',
             'userId'
         );
         //endregion
@@ -525,7 +525,7 @@ class m211108_145323_database_creation extends Migration
             'fk_workouthistory_clientId',
             'workouthistory',
             'clientId',
-            'client',
+            'userProfile',
             'userId'
         );
 
