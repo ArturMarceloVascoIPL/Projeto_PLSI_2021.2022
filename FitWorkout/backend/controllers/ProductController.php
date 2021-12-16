@@ -74,6 +74,7 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        #TODO : FAZER UPLOAD E EDITAR IMAGEM
         if ($this->request->isPost && $model->load($this->request->post())) {
 
             if ($this->IsNullOrEmptyString($model->file)) {

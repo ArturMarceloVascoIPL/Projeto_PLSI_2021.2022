@@ -73,9 +73,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
+        return static::findOne(['auth_key' => $token, 'status' => self::ACC_ACTIVE]);
+     }
+    
     /**
      * Finds user by username
      *
@@ -187,8 +187,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
-    }
-
+    } 
     /**
      * Generates new password reset token
      */

@@ -21,6 +21,7 @@ $categorias = ArrayHelper::map(Productcategory::find()->all(), 'id', 'name');
 
     <?= $form->field($model, 'price')->textInput() ?>
 
+    <?= Html::img('@web/' . $model->image, ['class' => 'img-thumbnail', 'style' => 'width: 200px;']) ?>
     <?= $form->field($model, 'file')->fileInput()->label('Upload Image') ?>
 
     <!-- Categoria do Produto -->
