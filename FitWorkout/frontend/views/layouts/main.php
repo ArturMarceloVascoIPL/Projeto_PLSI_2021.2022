@@ -72,7 +72,7 @@ AppAsset::register($this);
                                 </li>
 
                                 <li class="nav-item active">
-                                    <?= Html::a('Loja', ['/site/shop'], ['class' => 'nav-link']) ?>
+                                    <?= Html::a('Loja', ['/shop'], ['class' => 'nav-link']) ?>
                                 </li>
 
                                 <li class="nav-item">

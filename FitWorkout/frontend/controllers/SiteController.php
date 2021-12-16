@@ -137,29 +137,6 @@ class SiteController extends Controller
         return $this->render('/applications/index');
     }
 
-    public function actionEditarperfil($id)
-    {
-        $model = $this->findModel($id);
-        $auth = \Yii::$app->authManager;
-        $userRoles = $auth->getRolesByUser($id);
-        $model->authAssignment = array_keys($userRoles)[0];
-
-        #TODO: caso de nao ter role, colocar o role default
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            // var_dump($model);
-            // die();
-            $auth->revokeAll($id);
-            $auth->assign($auth->getRole($model->authAssignment), $id);
-            return $this->redirect('index');
-        }
-
-        return $this->render('editarperfil', [
-            'model' => $model,
-        ]);
-
-
-    }
 
 
     /**

@@ -21,7 +21,6 @@ class DadosperfilController extends \yii\web\Controller
 
 
         if ($modelclient->load(Yii::$app->request->post()) && $modeluser->load(Yii::$app->request->post()) && Model::validateMultiple([$modelclient, $modeluser])) {
-
             $modelclient->save(false);
             $modeluser->save(false);
             return $this->redirect(['/dadosperfil','id' => $id]);

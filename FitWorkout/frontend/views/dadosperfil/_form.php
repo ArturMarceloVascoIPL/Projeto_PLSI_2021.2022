@@ -6,8 +6,11 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Client */
 /* @var $form ActiveForm */
+
+
 ?>
 <div class="dadosperfil-index">
+    <?php ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -15,7 +18,6 @@ use yii\widgets\ActiveForm;
         <?= $form->field($modelclient, 'height') ?>
 
         <?= $form->field($modeluser, 'email') ?>
-        <?= $form->field($modeluser, 'username') ?>
 
 
         <!-- //TODO: Acrescentar nome e apelido à base de dados -->
