@@ -18,6 +18,7 @@ class m211108_145323_database_creation extends Migration
 
         //TODO: Verificar Tabelas no fim de Validadas
 
+        //TODO
         /**
          * Tabela Perfil de Utilizador
          */
@@ -48,6 +49,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Dados de Utilizador
          */
@@ -81,6 +83,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Personal Trainer
          */
@@ -110,6 +113,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Sugestão de Exercícios
          */
@@ -143,6 +147,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Aplicação a Personal Trainer
          */
@@ -175,6 +180,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Tipo de Exercício
          */
@@ -187,6 +193,7 @@ class m211108_145323_database_creation extends Migration
         ], $tableOptions);
         //endregion
 
+        //TODO
         /**
          * Tabela Categoria de Exercício
          */
@@ -199,6 +206,7 @@ class m211108_145323_database_creation extends Migration
         ], $tableOptions);
         //endregion
 
+        //TODO
         /**
          * Tabela Exercício
          */
@@ -248,6 +256,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Treino
          */
@@ -279,6 +288,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Plano de Treinos
          */
@@ -335,8 +345,8 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('productcategory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull()->unique(),
-            'description' => $this->string(),
+            'name' => $this->string(45)->notNull()->unique(),
+            'description' => $this->string(255),
         ], $tableOptions);
         //endregion
 
@@ -347,11 +357,11 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('product', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull()->unique(),
-            'description' => $this->string(),
+            'name' => $this->string(45)->notNull()->unique(),
+            'description' => $this->string(255),
             'stock' => $this->integer()->notNull(),
             'price' => $this->integer()->notNull(),
-            'image' => $this->string(),
+            'imageFileName' => $this->string(255),
             'categoryId' => $this->integer()->notNull(),
         ], $tableOptions);
 
@@ -380,30 +390,11 @@ class m211108_145323_database_creation extends Migration
         $this->createTable('order', [
             'id' => $this->primaryKey(),
             'date' => $this->date()->notNull(),
-            'price' => $this->integer()->notNull(),
+            'priceTotal' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull(),
-            'productId' => $this->integer()->notNull(),
             'clientId' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        /* Chave Estrangeira (Produto da Encomenda) */
-        // Index da Chave Estrangeira
-        $this->createIndex(
-            'idx_order_productId',
-            'order',
-            'productId'
-        );
-
-        // Designação da Chave Estrangeira
-        $this->addForeignKey(
-            'fk_order_productId',
-            'order',
-            'productId',
-            'product',
-            'id'
-        );
-
-        /* Chave Estrangeira (Cliente que fez Encomenda) */
         // Index da Chave Estrangeira
         $this->createIndex(
             'idx_order_clientId',
@@ -421,6 +412,54 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        /**
+         * Tabela Produtos da Encomenda
+         */
+        //region Produtos da Encomenda
+        // Tabela
+        $this->createTable('orderItems', [
+            'id' => $this->primaryKey(),
+            'price' => $this->integer()->notNull(),
+            'productId' => $this->integer()->notNull(),
+            'orderId' => $this->integer()->notNull(),
+        ], $tableOptions);
+
+        /* Chave Estrangeira (Produto da Encomenda) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_orderItems_productId',
+            'orderItems',
+            'productId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_orderItems_productId',
+            'orderItems',
+            'productId',
+            'product',
+            'id'
+        );
+
+        /* Chave Estrangeira (Encomenda do Produto) */
+        // Index da Chave Estrangeira
+        $this->createIndex(
+            'idx_orderItems_orderId',
+            'orderItems',
+            'orderId'
+        );
+
+        // Designação da Chave Estrangeira
+        $this->addForeignKey(
+            'fk_orderItems_orderId',
+            'orderItems',
+            'orderId',
+            'order',
+            'id'
+        );
+        //endregion
+
+        //TODO
         /**
          * Tabela Chat
          */
@@ -468,6 +507,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Mensagem do Chat
          */
@@ -498,6 +538,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela Histórico de Exercícios
          */
@@ -549,6 +590,7 @@ class m211108_145323_database_creation extends Migration
 
         /** - - - - Tabelas de Relacionamentos - - - - **/
         //region Tabelas de Relacionamentos
+        //TODO
         /**
          * Tabela de Relacionamente Exercicio -> Treino
          */
@@ -607,6 +649,7 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
+        //TODO
         /**
          * Tabela de Relacionamente Treino -> Plano
          */
