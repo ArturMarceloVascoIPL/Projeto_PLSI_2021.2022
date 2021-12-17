@@ -180,33 +180,30 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
-        //TODO
         /**
          * Tabela Tipo de Exercício
          */
         //region Tipo de Exercício
         // Tabela
-        $this->createTable('exercisetype', [
+        $this->createTable('exerciseType', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull()->unique(),
-            'description' => $this->string(),
+            'name' => $this->string(45)->notNull()->unique(),
+            'description' => $this->string(255),
         ], $tableOptions);
         //endregion
 
-        //TODO
         /**
          * Tabela Categoria de Exercício
          */
         //region Categoria de Exercício
         // Tabela
-        $this->createTable('exercisecategory', [
+        $this->createTable('exerciseCategory', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull()->unique(),
-            'description' => $this->string(),
+            'name' => $this->string(45)->notNull()->unique(),
+            'description' => $this->string(255),
         ], $tableOptions);
         //endregion
 
-        //TODO
         /**
          * Tabela Exercício
          */
@@ -214,9 +211,8 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('exercise', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
-            'description' => $this->string(),
-            'caloriesBurned' => $this->integer()->notNull(),
+            'name' => $this->string(45)->notNull(),
+            'description' => $this->string(255),
             'typeId' => $this->integer()->notNull(),
             'categoryId' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -234,7 +230,7 @@ class m211108_145323_database_creation extends Migration
             'fk_exercise_typeId',
             'exercise',
             'typeId',
-            'exercisetype',
+            'exerciseType',
             'id'
         );
 
@@ -251,7 +247,7 @@ class m211108_145323_database_creation extends Migration
             'fk_exercise_categoryId',
             'exercise',
             'categoryId',
-            'exercisecategory',
+            'exerciseCategory',
             'id'
         );
         //endregion
@@ -343,7 +339,7 @@ class m211108_145323_database_creation extends Migration
          */
         //region Categoria Produto
         // Tabela
-        $this->createTable('productcategory', [
+        $this->createTable('productCategory', [
             'id' => $this->primaryKey(),
             'name' => $this->string(45)->notNull()->unique(),
             'description' => $this->string(255),
@@ -377,7 +373,7 @@ class m211108_145323_database_creation extends Migration
             'fk_product_categoryId',
             'product',
             'categoryId',
-            'productcategory',
+            'productCategory',
             'id'
         );
         //endregion
