@@ -33,12 +33,10 @@ class m211202_164616_DadosPredefinidos extends Migration
             'name' => 'Sem Equipamento',
         ]);
 
-        #TODO : Associar exercicios a categorias e tipos
         //Exercicios
         $this->insert('exercise', [
             'name' =>  'Agachamentos',
             'description' => 'Ficar forte e agachar',
-            'caloriesBurned' => 5,
             'typeId' => 2, //Pernas
             'categoryId' => 2, //Sem Equipamento
         ]);
@@ -46,7 +44,6 @@ class m211202_164616_DadosPredefinidos extends Migration
         $this->insert('exercise', [
             'name' =>  'Bench Press',
             'description' => ' Fazer um bench press com o peso do peito para baixo e ficar forte',
-            'caloriesBurned' => 25,
             'typeId' => 1, //Peito
             'categoryId' => 1, //Com Equipamento
         ]);

@@ -16,8 +16,6 @@ class m211108_145323_database_creation extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        //TODO: Verificar Tabelas no fim de Validadas
-
         /**
          * Tabela Perfil de Utilizador
          */
