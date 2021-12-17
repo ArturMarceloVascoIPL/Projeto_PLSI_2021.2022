@@ -26,15 +26,6 @@ class AuthController extends Controller
         return $behaviors;
     }
 
-    // //Actions List
-    // public function actionIndex()
-    // {
-    //     $response = [
-    //         'POST /login' => ['username','password'],
-    //     ];
-    //     return $response;
-    // }
-
     public function actionLogin()
     {
         if ($post = \Yii::$app->request->post()) {
@@ -45,14 +36,11 @@ class AuthController extends Controller
                     return [
                         "id" => $user->id,
                         "username" => $user->username,
-                        "token" => $user->getAuthKey(),
+                        "auth_key" => $user->getAuthKey(),
+                        "success" => true,
                     ];
                 }
-            } else {
-                throw new HttpException('406', 'O username ou a password está em falta');
             }
-
-            throw new HttpException('401', 'O username ou a password está incorreta');
         }
 
         $response = [
