@@ -26,10 +26,10 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('userProfile', [
             'userId' => $this->primaryKey(),
-            'morada' => $this->string(),
+            'morada' => $this->string(255),
             'contribuinte' => $this->integer(9),
-            'codPostal' => $this->string(),
-            'localidade' => $this->string(),
+            'codPostal' => $this->string(45),
+            'localidade' => $this->string(45),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
@@ -49,7 +49,6 @@ class m211108_145323_database_creation extends Migration
         );
         //endregion
 
-        //TODO
         /**
          * Tabela Dados de Utilizador
          */
@@ -59,10 +58,8 @@ class m211108_145323_database_creation extends Migration
             'id' => $this->primaryKey(),
             'timeStamp' => $this->timestamp(),
             'weight' => $this->integer(),
-            'weightLost' => $this->integer(),
-            'lightestWeight' => $this->integer(),
-            'heaviestWeight' => $this->integer(),
-            'bmi' => $this->integer(),
+            'bmi' => $this->decimal(2,2),
+            'imc' => $this->decimal(2,2),
             'userProfileId' => $this->integer(),
         ], $tableOptions);
 
