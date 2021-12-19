@@ -36,7 +36,6 @@ $this->title = 'Gestão de Produtos';
             'stock',
             'price',
             'category.name',
-            // 'image',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Ações',

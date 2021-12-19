@@ -39,7 +39,8 @@ class Product extends \yii\db\ActiveRecord
             [['stock'], 'integer', 'min' => 0],
             [['name', 'description', 'image'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['file'],'file'],
+            [['file'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['name','stock','price','categoryId'] ,'required', 'on' => 'update'],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Productcategory::className(), 'targetAttribute' => ['categoryId' => 'id']],
         ];
     }
