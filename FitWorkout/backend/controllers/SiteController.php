@@ -85,7 +85,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
 
-
             foreach ($userRoles as $role) {
                 if ($role->name != 'admin' && $role->name != 'personalTrainer') {
                     Yii::$app->user->logout();

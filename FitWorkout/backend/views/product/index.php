@@ -40,7 +40,7 @@ $this->title = 'Gestão de Produtos';
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Ações',
                 'contentOptions' => ['style' => 'width: 15%'],
-                'template' => '{view} {update}',
+                'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url) {
                         return Html::a('<span>Ver</span>', $url, [

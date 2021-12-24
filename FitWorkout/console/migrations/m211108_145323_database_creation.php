@@ -23,10 +23,10 @@ class m211108_145323_database_creation extends Migration
         // Tabela
         $this->createTable('userProfile', [
             'userId' => $this->primaryKey(),
-            'morada' => $this->string(255),
-            'contribuinte' => $this->integer(9),
-            'codPostal' => $this->string(45),
-            'localidade' => $this->string(45),
+            'address' => $this->string(255),
+            'nif' => $this->integer(9),
+            'postalCode' => $this->string(45),
+            'city' => $this->string(45),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
@@ -239,7 +239,6 @@ class m211108_145323_database_creation extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(45)->notNull(),
             'date' => $this->date(),
-            'totalCaloriesBurned' => $this->integer()->notNull(),
             'ptId' => $this->integer()->notNull(),
         ], $tableOptions);
 
@@ -270,7 +269,6 @@ class m211108_145323_database_creation extends Migration
             'exerciseId' => $this->integer()->notNull(),
             'workoutId' => $this->integer()->notNull(),
             'exerciseCalories' => $this->integer()->notNull(),
-            'totalCaloriesBurned' => $this->integer()->notNull(),
             'equipmentWeight' => $this->integer(),
             'seriesSize' => $this->integer()->notNull(),
             'seriesNum' => $this->integer()->notNull(),
@@ -328,7 +326,6 @@ class m211108_145323_database_creation extends Migration
             'id' => $this->primaryKey(),
             'timeStamp' => $this->timestamp()->notNull(),
             'duration' => $this->integer()->notNull(),
-            'totalCaloriesBurned' => $this->integer()->notNull(),
             'equipmentWeight' => $this->integer(),
             'seriesSize' => $this->integer()->notNull(),
             'seriesNum' => $this->integer()->notNull(),
@@ -543,21 +540,21 @@ class m211108_145323_database_creation extends Migration
             'date' => $this->date()->notNull(),
             'priceTotal' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull(),
-            'clientId' => $this->integer()->notNull(),
+            'userId' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // Index da Chave Estrangeira
         $this->createIndex(
-            'idx_order_clientId',
+            'idx_order_userId',
             'order',
-            'clientId'
+            'userId'
         );
 
         // Designação da Chave Estrangeira
         $this->addForeignKey(
-            'fk_order_clientId',
+            'fk_order_userId',
             'order',
-            'clientId',
+            'userId',
             'userProfile',
             'userId'
         );

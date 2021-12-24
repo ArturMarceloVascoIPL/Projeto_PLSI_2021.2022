@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ProductSearch */
+/* @var $model common\models\ProductSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -25,11 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price') ?>
 
-    <?php // echo $form->field($model, 'image') ?>
+    <?php // echo $form->field($model, 'imageFileName') ?>
 
     <?php // echo $form->field($model, 'categoryId') ?>
 
-    <!-- Submeter -->
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

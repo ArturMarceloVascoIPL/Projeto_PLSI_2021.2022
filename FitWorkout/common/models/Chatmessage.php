@@ -10,9 +10,11 @@ use Yii;
  * @property int $id
  * @property string $message
  * @property string $datetime
- * @property int $chatId
+ * @property int $from
+ * @property int $to
  *
- * @property Chat $chat
+ * @property Userprofile $from0
+ * @property Userprofile $to0
  */
 class Chatmessage extends \yii\db\ActiveRecord
 {
@@ -30,11 +32,12 @@ class Chatmessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['message', 'datetime', 'chatId'], 'required'],
+            [['message', 'datetime', 'from', 'to'], 'required'],
             [['datetime'], 'safe'],
-            [['chatId'], 'integer'],
+            [['from', 'to'], 'integer'],
             [['message'], 'string', 'max' => 255],
-            [['chatId'], 'exist', 'skipOnError' => true, 'targetClass' => Chat::className(), 'targetAttribute' => ['chatId' => 'id']],
+            [['from'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['from' => 'userId']],
+            [['to'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['to' => 'userId']],
         ];
     }
 
@@ -45,19 +48,30 @@ class Chatmessage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'message' => 'Message',
-            'datetime' => 'Datetime',
-            'chatId' => 'Chat ID',
+            'message' => 'Mensagem',
+            'datetime' => 'Data/Hora',
+            'from' => 'Remetente',
+            'to' => 'Destinatário',
         ];
     }
 
     /**
-     * Gets query for [[Chat]].
+     * Gets query for [[From0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getChat()
+    public function getFrom0()
     {
-        return $this->hasOne(Chat::className(), ['id' => 'chatId']);
+        return $this->hasOne(Userprofile::className(), ['userId' => 'from']);
+    }
+
+    /**
+     * Gets query for [[To0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTo0()
+    {
+        return $this->hasOne(Userprofile::className(), ['userId' => 'to']);
     }
 }

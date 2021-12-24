@@ -21,9 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'caloriesBurned') ?>
-
     <?= $form->field($model, 'typeId') ?>
+
+    <?= $form->field($model, 'approved')->textInput() ?>
 
     <?php // echo $form->field($model, 'categoryId') ?>
 

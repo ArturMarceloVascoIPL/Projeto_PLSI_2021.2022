@@ -17,12 +17,19 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
         'options' => ['class' => 'form-horizontal', 'style' => 'width:300px;'],
     ]); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Nome') ?>
+    <!-- Nome do Exercício -->
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <!-- https://stackoverflow.com/questions/27945401/yii2-how-to-add-textarea-in-yii2 -->
+    <!-- Descrição do Exercício -->
     <?= $form->field($model, 'description')->textarea(['rows' => '3', 'maxlength' => true, 'style' => ' resize: none'])->label('Descrição') ?>
 
-    <?= $form->field($model, 'caloriesBurned')->textInput()->label('Calorias (Kcal)') ?>
+    <!-- Definir Aprovação -->
+    <?php if ((Yii::$app->user->can('admin'))) { ?>
+        <?= $form->field($model, 'approved')->dropDownList(
+            [0 => 'Não Aprovado', 1 => 'Aprovado'],
+            ['options' => ['approved' => ['selected' => true]]]
+        )->label('Tipo de Exercício') ?>
+    <?php } ?>
 
     <!-- Tipo de Exercicio -->
     <?= $form->field($model, 'type')->dropDownList(
@@ -52,5 +59,4 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

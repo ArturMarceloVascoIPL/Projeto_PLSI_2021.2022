@@ -10,15 +10,13 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string|null $date
- * @property int $totalCaloriesBurned
  * @property int $ptId
  *
  * @property Exercise[] $exercises
- * @property Exerciseworkout[] $exerciseworkouts
  * @property Plan[] $plans
- * @property Personaltrainer $pt
- * @property Workouthistory[] $workouthistories
- * @property Workoutplan[] $workoutplans
+ * @property Planworkout[] $planworkouts
+ * @property Userprofile $pt
+ * @property Workoutexercise[] $workoutexercises
  */
 class Workout extends \yii\db\ActiveRecord
 {
@@ -36,11 +34,11 @@ class Workout extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'totalCaloriesBurned', 'ptId'], 'required'],
+            [['name', 'ptId'], 'required'],
             [['date'], 'safe'],
-            [['totalCaloriesBurned', 'ptId'], 'integer'],
-            [['name'], 'string', 'max' => 255],
-            [['ptId'], 'exist', 'skipOnError' => true, 'targetClass' => Personaltrainer::className(), 'targetAttribute' => ['ptId' => 'userId']],
+            [['ptId'], 'integer'],
+            [['name'], 'string', 'max' => 45],
+            [['ptId'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['ptId' => 'userId']],
         ];
     }
 
@@ -51,10 +49,9 @@ class Workout extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'date' => 'Date',
-            'totalCaloriesBurned' => 'Total Calories Burned',
-            'ptId' => 'Pt ID',
+            'name' => 'Nome',
+            'date' => 'Data',
+            'ptId' => 'ID do Personal Trainer',
         ];
     }
 
@@ -65,17 +62,7 @@ class Workout extends \yii\db\ActiveRecord
      */
     public function getExercises()
     {
-        return $this->hasMany(Exercise::className(), ['id' => 'exerciseId'])->viaTable('exerciseworkout', ['workoutId' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Exerciseworkouts]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getExerciseworkouts()
-    {
-        return $this->hasMany(Exerciseworkout::className(), ['workoutId' => 'id']);
+        return $this->hasMany(Exercise::className(), ['id' => 'exerciseId'])->viaTable('workoutexercise', ['workoutId' => 'id']);
     }
 
     /**
@@ -85,7 +72,17 @@ class Workout extends \yii\db\ActiveRecord
      */
     public function getPlans()
     {
-        return $this->hasMany(Plan::className(), ['id' => 'planId'])->viaTable('workoutplan', ['workoutId' => 'id']);
+        return $this->hasMany(Plan::className(), ['id' => 'planId'])->viaTable('planworkout', ['workoutId' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Planworkouts]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlanworkouts()
+    {
+        return $this->hasMany(Planworkout::className(), ['workoutId' => 'id']);
     }
 
     /**
@@ -95,26 +92,16 @@ class Workout extends \yii\db\ActiveRecord
      */
     public function getPt()
     {
-        return $this->hasOne(Personaltrainer::className(), ['userId' => 'ptId']);
+        return $this->hasOne(Userprofile::className(), ['userId' => 'ptId']);
     }
 
     /**
-     * Gets query for [[Workouthistories]].
+     * Gets query for [[Workoutexercises]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getWorkouthistories()
+    public function getWorkoutexercises()
     {
-        return $this->hasMany(Workouthistory::className(), ['workoutId' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Workoutplans]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getWorkoutplans()
-    {
-        return $this->hasMany(Workoutplan::className(), ['workoutId' => 'id']);
+        return $this->hasMany(Workoutexercise::className(), ['workoutId' => 'id']);
     }
 }

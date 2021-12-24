@@ -31,25 +31,25 @@ $this->title = 'Gestão de Exercicios';
             'name',
             'description',
             [
-                'attribute' => 'caloriesBurned',
-                'label' => 'Calorias',
-                'options' => ['style' => 'width: 10%'],
-            ],
-            [
                 'label' => 'Tipo',
                 'attribute' => 'type',
                 'value' => 'type.name',
             ],
-            // # TODO : Filtro dos tipos e dos exercicios, a fazer no ExerciceSearch
             [
                 'label' => 'Categoria',
                 'attribute' => 'category',
                 'value' => 'category.name',
             ],
             [
+                'attribute' => 'approved',
+                'value' => function ($model) {
+                    return $model->approved ? 'Aprovado' : 'Não Aprovado';
+                },
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',
-                'contentOptions' => ['style' => 'width: 20%'],
+                'contentOptions' => ['style' => 'width: 25%'],
                 'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url) {

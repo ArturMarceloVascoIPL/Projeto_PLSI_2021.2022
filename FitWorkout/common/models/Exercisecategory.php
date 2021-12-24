@@ -30,7 +30,8 @@ class Exercisecategory extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name', 'description'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 45],
+            [['description'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -42,8 +43,8 @@ class Exercisecategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Nome da Categoria',
+            'description' => 'Descrição',
         ];
     }
 

@@ -21,7 +21,7 @@ class ExerciseSearch extends Exercise
     public function rules()
     {
         return [
-            [['id', 'caloriesBurned'], 'integer'],
+            [['id'], 'integer'],
             [['name', 'description'], 'safe'],
             [['type', 'category'], 'string'],
         ];
@@ -65,7 +65,6 @@ class ExerciseSearch extends Exercise
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'caloriesBurned' => $this->caloriesBurned,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

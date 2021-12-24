@@ -10,12 +10,13 @@ use Yii;
  * @property int $id
  * @property string $dateStart
  * @property string $dateEnd
- * @property int $ptId
- * @property int $clientId
+ * @property string $description
+ * @property int $ptPlan
+ * @property int $userId
  *
- * @property Client $client
- * @property Personaltrainer $pt
- * @property Workoutplan[] $workoutplans
+ * @property Planworkout[] $planworkouts
+ * @property Userprofile $ptPlan0
+ * @property Userprofile $user
  * @property Workout[] $workouts
  */
 class Plan extends \yii\db\ActiveRecord
@@ -34,11 +35,12 @@ class Plan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dateStart', 'dateEnd', 'ptId', 'clientId'], 'required'],
+            [['dateStart', 'dateEnd', 'description', 'ptPlan', 'userId'], 'required'],
             [['dateStart', 'dateEnd'], 'safe'],
-            [['ptId', 'clientId'], 'integer'],
-            [['clientId'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['clientId' => 'userId']],
-            [['ptId'], 'exist', 'skipOnError' => true, 'targetClass' => Personaltrainer::className(), 'targetAttribute' => ['ptId' => 'userId']],
+            [['ptPlan', 'userId'], 'integer'],
+            [['description'], 'string', 'max' => 45],
+            [['ptPlan'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['ptPlan' => 'userId']],
+            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['userId' => 'userId']],
         ];
     }
 
@@ -49,41 +51,42 @@ class Plan extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'dateStart' => 'Date Start',
-            'dateEnd' => 'Date End',
-            'ptId' => 'Pt ID',
-            'clientId' => 'Client ID',
+            'dateStart' => 'Data de Início',
+            'dateEnd' => 'Data de Fim',
+            'description' => 'Descrição',
+            'ptPlan' => 'ID do Personal Trainer',
+            'userId' => 'ID do Utilizador',
         ];
     }
 
     /**
-     * Gets query for [[Client]].
+     * Gets query for [[Planworkouts]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getClient()
+    public function getPlanworkouts()
     {
-        return $this->hasOne(Client::className(), ['userId' => 'clientId']);
+        return $this->hasMany(Planworkout::className(), ['planId' => 'id']);
     }
 
     /**
-     * Gets query for [[Pt]].
+     * Gets query for [[PtPlan0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPt()
+    public function getPtPlan0()
     {
-        return $this->hasOne(Personaltrainer::className(), ['userId' => 'ptId']);
+        return $this->hasOne(Userprofile::className(), ['userId' => 'ptPlan']);
     }
 
     /**
-     * Gets query for [[Workoutplans]].
+     * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getWorkoutplans()
+    public function getUser()
     {
-        return $this->hasMany(Workoutplan::className(), ['planId' => 'id']);
+        return $this->hasOne(Userprofile::className(), ['userId' => 'userId']);
     }
 
     /**
@@ -93,6 +96,6 @@ class Plan extends \yii\db\ActiveRecord
      */
     public function getWorkouts()
     {
-        return $this->hasMany(Workout::className(), ['id' => 'workoutId'])->viaTable('workoutplan', ['planId' => 'id']);
+        return $this->hasMany(Workout::className(), ['id' => 'workoutId'])->viaTable('planworkout', ['planId' => 'id']);
     }
 }

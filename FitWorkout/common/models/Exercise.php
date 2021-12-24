@@ -10,13 +10,13 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string|null $description
- * @property int $caloriesBurned
+ * @property int|null $approved
  * @property int $typeId
  * @property int $categoryId
  *
  * @property Exercisecategory $category
- * @property Exerciseworkout[] $exerciseworkouts
  * @property Exercisetype $type
+ * @property Workoutexercise[] $workoutexercises
  * @property Workout[] $workouts
  */
 class Exercise extends \yii\db\ActiveRecord
@@ -35,9 +35,10 @@ class Exercise extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'caloriesBurned', 'typeId', 'categoryId'], 'required'],
-            [['caloriesBurned', 'typeId', 'categoryId'], 'integer'],
-            [['name', 'description'], 'string', 'max' => 255],
+            [['name', 'typeId', 'categoryId'], 'required'],
+            [['approved', 'typeId', 'categoryId'], 'integer'],
+            [['name'], 'string', 'max' => 45],
+            [['description'], 'string', 'max' => 255],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Exercisecategory::className(), 'targetAttribute' => ['categoryId' => 'id']],
             [['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => Exercisetype::className(), 'targetAttribute' => ['typeId' => 'id']],
         ];
@@ -50,11 +51,11 @@ class Exercise extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'caloriesBurned' => 'Calories Burned',
-            'typeId' => 'Type ID',
-            'categoryId' => 'Category ID',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'approved' => 'Aprovado',
+            'typeId' => 'ID do Tipo',
+            'categoryId' => 'ID da Categoria',
         ];
     }
 
@@ -69,16 +70,6 @@ class Exercise extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Exerciseworkouts]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getExerciseworkouts()
-    {
-        return $this->hasMany(Exerciseworkout::className(), ['exerciseId' => 'id']);
-    }
-
-    /**
      * Gets query for [[Type]].
      *
      * @return \yii\db\ActiveQuery
@@ -89,12 +80,22 @@ class Exercise extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Workoutexercises]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkoutexercises()
+    {
+        return $this->hasMany(Workoutexercise::className(), ['exerciseId' => 'id']);
+    }
+
+    /**
      * Gets query for [[Workouts]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getWorkouts()
     {
-        return $this->hasMany(Workout::className(), ['id' => 'workoutId'])->viaTable('exerciseworkout', ['exerciseId' => 'id']);
+        return $this->hasMany(Workout::className(), ['id' => 'workoutId'])->viaTable('workoutexercise', ['exerciseId' => 'id']);
     }
 }

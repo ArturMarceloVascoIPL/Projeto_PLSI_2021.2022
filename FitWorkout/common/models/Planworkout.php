@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "workoutplan".
+ * This is the model class for table "planworkout".
  *
  * @property int $workoutId
  * @property int $planId
@@ -13,14 +13,14 @@ use Yii;
  * @property Plan $plan
  * @property Workout $workout
  */
-class Workoutplan extends \yii\db\ActiveRecord
+class Planworkout extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'workoutplan';
+        return 'planworkout';
     }
 
     /**
@@ -43,8 +43,8 @@ class Workoutplan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'workoutId' => 'Workout ID',
-            'planId' => 'Plan ID',
+            'workoutId' => 'ID do Treino',
+            'planId' => 'ID do Plano de Treinos',
         ];
     }
 

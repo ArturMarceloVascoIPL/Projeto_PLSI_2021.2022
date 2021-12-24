@@ -34,26 +34,11 @@ $this->title = $model->name;
         'model' => $model,
         'attributes' => [
             'id',
-            [
-                'label' => 'Nome',
-                'attribute' =>  'name',
-            ],
-            [
-                'label' => 'Descrição',
-                'attribute' =>  'description',
-            ],
-            [
-                'label' => 'Calorias (Kcal)',
-                'attribute' => 'caloriesBurned',
-            ],
-            [
-                'label' => 'Tipo',
-                'attribute' => 'type.name',
-            ],
-            [
-                'label' => 'Categoria',
-                'attribute' => 'category.name',
-            ],
+            'name',
+            'description', 
+            'approved',
+            'type.name',
+            'category.name',
         ],
     ]) ?>
 

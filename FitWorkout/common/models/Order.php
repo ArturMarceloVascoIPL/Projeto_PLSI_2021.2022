@@ -9,13 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string $date
- * @property int $price
+ * @property int $priceTotal
  * @property int $status
- * @property int $productId
- * @property int $clientId
+ * @property int $userId
  *
- * @property Client $client
- * @property Product $product
+ * @property Userprofile $client
+ * @property Orderitems[] $orderitems
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -33,11 +32,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'price', 'status', 'productId', 'clientId'], 'required'],
+            [['date', 'priceTotal', 'status', 'userId'], 'required'],
             [['date'], 'safe'],
-            [['price', 'status', 'productId', 'clientId'], 'integer'],
-            [['clientId'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['clientId' => 'userId']],
-            [['productId'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['productId' => 'id']],
+            [['priceTotal', 'status', 'userId'], 'integer'],
+            [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['userId' => 'userId']],
         ];
     }
 
@@ -48,11 +46,10 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date' => 'Date',
-            'price' => 'Price',
-            'status' => 'Status',
-            'productId' => 'Product ID',
-            'clientId' => 'Client ID',
+            'date' => 'Data',
+            'priceTotal' => 'Preço Total',
+            'status' => 'Estado',
+            'userId' => 'ID de Utilizador',
         ];
     }
 
@@ -63,16 +60,16 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getClient()
     {
-        return $this->hasOne(Client::className(), ['userId' => 'clientId']);
+        return $this->hasOne(Userprofile::className(), ['userId' => 'userId']);
     }
 
     /**
-     * Gets query for [[Product]].
+     * Gets query for [[Orderitems]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
+    public function getOrderitems()
     {
-        return $this->hasOne(Product::className(), ['id' => 'productId']);
+        return $this->hasMany(Orderitems::className(), ['orderId' => 'id']);
     }
 }

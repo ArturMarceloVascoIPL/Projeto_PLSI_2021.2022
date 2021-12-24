@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,7 +18,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'stock', 'price', 'categoryId'], 'integer'],
-            [['name', 'description', 'image'], 'safe'],
+            [['name', 'description', 'imageFileName'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class ProductSearch extends Product
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'imageFileName', $this->imageFileName]);
             // ->andFilterWhere(['like', 'file', $this->image]);
 
         return $dataProvider;

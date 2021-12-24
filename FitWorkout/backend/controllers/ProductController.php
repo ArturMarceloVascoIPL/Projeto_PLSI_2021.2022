@@ -9,7 +9,7 @@ use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use common\models\Product;
 use common\models\UploadForm;
-use app\models\ProductSearch;
+use common\models\ProductSearch;
 
 class ProductController extends Controller
 {
@@ -57,7 +57,7 @@ class ProductController extends Controller
 
 			$model->file = UploadedFile::getInstance($model, 'file');
 			$model->file->saveAS('uploads/products/' . $model->name . '.' . $model->file->name);
-			$model->image = 'uploads/products/' . $model->name . '.' . $model->file->name;
+			$model->imageFileName = 'uploads/products/' . $model->name . '.' . $model->file->name;
 
 			if ($model->load($this->request->post()) && $model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
@@ -81,10 +81,10 @@ class ProductController extends Controller
 
 			$model->file = UploadedFile::getInstance($model, 'file');
 			if ($model->file == "" || $model->file == null)
-				$model->image = "NoFile";
+				$model->imageFileName = "NoFile";
 			else {
 				$model->file->saveAs($imgName . '.' . $model->file->extension);
-				$model->image = $imgName . '.' . $model->file->extension;
+				$model->imageFileName = $imgName . '.' . $model->file->extension;
 			}
 			$model->save(false);
 			return $this->redirect(['view', 'id' => $model->id]);

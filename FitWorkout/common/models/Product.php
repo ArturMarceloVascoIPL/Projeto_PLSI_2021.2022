@@ -12,35 +12,37 @@ use Yii;
  * @property string|null $description
  * @property int $stock
  * @property int $price
- * @property string|null $image
+ * @property string|null $imageFileName
  * @property int $categoryId
  *
  * @property Productcategory $category
- * @property Order[] $orders
+ * @property Orderitems[] $orderitems
  */
 class Product extends \yii\db\ActiveRecord
 {
+    public $file;
+
     /**
      * {@inheritdoc}
      */
-
-    public $file;
-
     public static function tableName()
     {
         return 'product';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
             [['name', 'stock', 'price', 'categoryId'], 'required'],
             [['stock', 'price', 'categoryId'], 'integer'],
-            [['stock'], 'integer', 'min' => 0],
-            [['name', 'description', 'image'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['name'], 'string', 'max' => 45],
+            [['description', 'imageFileName'], 'string', 'max' => 255],
             [['file'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            [['name','stock','price','categoryId'] ,'required', 'on' => 'update'],
+            // [['name','stock','price','categoryId'] ,'required', 'on' => 'update'],
+            [['name'], 'unique'],
             [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Productcategory::className(), 'targetAttribute' => ['categoryId' => 'id']],
         ];
     }
@@ -55,11 +57,10 @@ class Product extends \yii\db\ActiveRecord
             'name' => 'Nome',
             'description' => 'Descrição',
             'stock' => 'Stock',
-            'price' => 'Preço ($)',
-            'image' => 'Imagem',
-            'categoryId' => 'Categoria ID',
-            'category.name' => 'Categoria',
-            'file' => 'Imagem Ficheiro',
+            'price' => 'Preço',
+            'imageFileName' => 'Nome de Ficheiro da Imagem',
+            'file' => 'Ficheiro',
+            'categoryId' => 'ID da Categoria',
         ];
     }
 
@@ -74,12 +75,12 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Orders]].
+     * Gets query for [[Orderitems]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrders()
+    public function getOrderitems()
     {
-        return $this->hasMany(Order::className(), ['productId' => 'id']);
+        return $this->hasMany(Orderitems::className(), ['productId' => 'id']);
     }
 }

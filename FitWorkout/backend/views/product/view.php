@@ -33,7 +33,7 @@ $this->title = $model->name;
                     'stock',
                     'price',
                     'category.name',
-                    'image'
+                    'imageFileName'
                 ],
             ]) ?>
 
@@ -41,7 +41,7 @@ $this->title = $model->name;
         <div class="col">
             <div class="float-right">
 
-                <?= Html::img('@web/' . $model->image . '', ['alt' => 'some', 'style' => 'width: 50%']); ?>
+                <?= Html::img('@web/' . $model->imageFileName . '', ['alt' => 'some', 'style' => 'width: 50%']); ?>
             </div>
         </div>
     </div>
