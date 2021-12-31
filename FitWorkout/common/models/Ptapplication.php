@@ -26,6 +26,8 @@ class Ptapplication extends \yii\db\ActiveRecord
     {
         return 'ptapplication';
     }
+    public $file_qualificationFilename;
+    public $file_cvFilename;
 
     /**
      * {@inheritdoc}
@@ -38,6 +40,9 @@ class Ptapplication extends \yii\db\ActiveRecord
             [['cvFilename', 'qualificationFilename'], 'string', 'max' => 45],
             [['comment'], 'string', 'max' => 255],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => Userprofile::className(), 'targetAttribute' => ['userId' => 'userId']],
+            [['file_cvFilename'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf'],
+            [['file_qualificationFilename'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf'],
+
         ];
     }
 
@@ -54,6 +59,9 @@ class Ptapplication extends \yii\db\ActiveRecord
             'comment' => 'Comentário',
             'approved' => 'Aprovado',
             'userId' => 'ID de Utilizador',
+
+            'file_cvFilename' => 'Ficherio de Currículo Vitae',
+            'file_qualificationFilename' => 'Ficherio de Certificado de Qualificações',
         ];
     }
 

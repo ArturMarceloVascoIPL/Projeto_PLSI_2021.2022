@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use common\models\User;
-use common\models\Client;
+use common\models\Userprofile;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -96,28 +96,6 @@ class UserController extends Controller
 
         return $this->redirect(['index']);
     }
-
-    // public function actionPtapplications()
-    // {
-    //     $dataProvider = new ActiveDataProvider([
-
-    //         'query' => User::find(),
-    //         /*
-    //         'pagination' => [
-    //             'pageSize' => 50
-    //         ],
-    //         'sort' => [
-    //             'defaultOrder' => [
-    //                 'id' => SORT_DESC,
-    //             ]
-    //         ],
-    //         */
-    //     ]);
-
-    //     return $this->render('ptapplications', [
-    //         'dataProvider' => $dataProvider,
-    //     ]);
-    // }
 
     protected function findModel($id)
     {
