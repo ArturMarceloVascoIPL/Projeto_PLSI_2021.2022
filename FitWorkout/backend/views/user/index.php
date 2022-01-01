@@ -12,15 +12,17 @@ use yii\widgets\Pjax;
 ?>
 <div class="user-index">
 
-    <div class="row">
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?php $this->title = 'Gestão de Utilizadores' ?>
+        </div>
         <div class="col">
             <div class="float-right">
-                <?php $this->title = 'Gestão de Utilizadores' ?>
-                <!-- <a href="<?php echo Url::toRoute('ptapplications') ?>" class="float-right btn btn-primary btn-lg">Ver Pedidos PT</a> -->
+                <?= Html::a('Ver Pedidos de PT', ['/ptapplications'], ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

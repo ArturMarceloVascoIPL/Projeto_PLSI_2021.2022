@@ -5,9 +5,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\User;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\User */
-/* @var $form yii\widgets\ActiveForm */
+$auth = \Yii::$app->authManager;
+$userRole = array_keys($auth->getRolesByUser($model->id))[0];
 ?>
 
 <div class="user-form">
@@ -15,7 +14,7 @@ use common\models\User;
     <?php $form = ActiveForm::begin(
         ['options' => ['enctype' => 'multipart/form-data']]
     ); ?>
-
+  
     <!-- Status -->
     <?= $form->field($model, 'status')->dropDownList(
         [
@@ -28,15 +27,16 @@ use common\models\User;
         ]
     ); ?>
 
+
     <!-- Roles -->
-    <?= $form->field($model, 'authAssignment')->dropDownList(
+    <?= $form->field($model, 'role')->dropDownList(
         [
             'admin' => 'Admin',
             'client' => 'Cliente',
-            // 'personalTrainer' => 'Personal Trainer',
+            'personalTrainer' => 'Personal Trainer',
         ],
         [
-            'options' => [$model->authAssignment => ['selected' => true]],
+            'options' => [$userRole => ['selected' => true]],
             'style' => 'width:200px;',
         ]
     ); ?>

@@ -107,7 +107,7 @@ AppAsset::register($this);
                                         <div class="dropdown-divider"></div>
                                         <i class="fas fa-user-shield"></i>
                                         <?php
-                                        echo '<a class="dropdown-item" data-method="post" href="index.php?r=site/logout">Logout</a>';
+                                        echo '<a class="dropdown-item" data-method="post" href="site/logout">Logout</a>';
                                         ?>
                                 </li>
                             </ul>

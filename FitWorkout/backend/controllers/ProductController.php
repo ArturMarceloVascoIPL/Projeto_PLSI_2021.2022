@@ -89,7 +89,6 @@ class ProductController extends Controller
 			$model->save(false);
 			return $this->redirect(['view', 'id' => $model->id]);
 		}
-		// #TODO : FAZER UPLOAD E EDITAR IMAGEM
 
 		return $this->render('update', [
 			'model' => $model,

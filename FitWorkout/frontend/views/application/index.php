@@ -14,10 +14,16 @@ $model = new \common\models\Ptapplication();
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php $model_temp = Ptapplication::findOne(['userId' => \Yii::$app->user->id]);
-  
+
     if (!$model_temp) {  ?>
         <?= $this->render('application', [
             'model' => $model,
         ]) ?>
+
+    <?php } else { ?>
+
+        <h2><?= $model_temp->approved  == 1 ? 'Aprovado' : 'Não aprovado';  ?></h2>
+        
     <?php } ?>
+
 </div>

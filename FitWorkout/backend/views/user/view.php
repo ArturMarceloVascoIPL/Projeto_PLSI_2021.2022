@@ -12,9 +12,16 @@ $this->title = 'Ver Utilizador: ' . $model->username;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="user-view">
-    <p>
-        <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php
+
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index'], ['class' => 'btn.block btn btn-info']) ?>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            </div><?php
         #todo Implementar func update disabled account 
         //(ter q mandar func diretamente para o controller)
         //  Html::a('Disable', ['update', 'id' => $model->id], [
@@ -25,14 +32,15 @@ $this->title = 'Ver Utilizador: ' . $model->username;
         //     ],
         // ]) 
         ?>
-    </p>
+        </div>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'username',
-            'email:email',
+            'email',
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
@@ -40,14 +48,14 @@ $this->title = 'Ver Utilizador: ' . $model->username;
                 },
                 'filter' => [10 => 'Ativo', 0 => 'Suspenso'],
                 // 'contentOptions' => ['style' => 'color: green; font-weight: bold;'],
-                'contentOptions' => function ($model) {
-                    $status  = $model->status;
-                    if ($status == 10) {
-                        return ['style' => 'color: green; font-weight: bold;'];
-                    } else {
-                        return ['style' => 'color: red; font-weight: bold;'];
-                    }
-                },
+                // 'contentOptions' => function ($model) {
+                //     $status  = $model->status;
+                //     if ($status == 10) {
+                //         return ['style' => 'color: green; font-weight: bold;'];
+                //     } else {
+                //         return ['style' => 'color: red; font-weight: bold;'];
+                //     }
+                // },
             ],
             [
                 'label' => 'Role',

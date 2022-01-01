@@ -2,10 +2,10 @@
 
 namespace frontend\models;
 
-use common\models\Client;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use common\models\Userprofile;
 
 /**
  * Signup form
@@ -57,15 +57,15 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->save();
 
-        $userClient = new Client();
-        $userClient->userId = $user->getId();
-        $userClient->save();
+        $userProfile = new Userprofile();
+        $userProfile->userId = $user->getId();
+        $userProfile->save();
 
         $auth = \Yii::$app->authManager;
         $client = $auth->getRole('client');
         $auth->assign($client, $user->getId());
 
-        return $userClient;
+        return $userProfile;
     }
     // /**
     //  * Sends confirmation email to user

@@ -28,7 +28,7 @@ class User extends ActiveRecord implements IdentityInterface
     const ACC_ACTIVE = 10;
     const ACC_DISABLED = 0;
 
-    public $authAssignment; // = 'client';
+    // public $authAssignment; // = 'client';
     // public $role;
 
     /**
@@ -57,6 +57,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'in', 'range' => [self::ACC_ACTIVE, self::ACC_DISABLED]],
             ['role.item_name', 'safe'],
+            ['role ', 'safe'],
+
         ];
     }
 

@@ -42,7 +42,7 @@ use yii\helpers\Url;
                     <i class="far fa-user"></i> Trocar para User
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" data-method="post" href="index.php?r=site/logout">
+                <a class="dropdown-item" data-method="post" href="/site/logout">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </div>

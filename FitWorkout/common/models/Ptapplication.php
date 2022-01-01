@@ -60,6 +60,8 @@ class Ptapplication extends \yii\db\ActiveRecord
             'approved' => 'Aprovado',
             'userId' => 'ID de Utilizador',
 
+            'username.username' => 'Username',
+
             'file_cvFilename' => 'Ficherio de Currículo Vitae',
             'file_qualificationFilename' => 'Ficherio de Certificado de Qualificações',
         ];
@@ -73,5 +75,10 @@ class Ptapplication extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(Userprofile::className(), ['userId' => 'userId']);
+    }
+
+    public function getUsername()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 }

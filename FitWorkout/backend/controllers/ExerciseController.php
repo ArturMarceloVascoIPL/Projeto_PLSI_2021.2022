@@ -7,6 +7,7 @@ use backend\models\ExerciseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ExerciseController implements the CRUD actions for Exercise model.
