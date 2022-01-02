@@ -21,7 +21,6 @@ class ExerciseModelTest extends \Codeception\Test\Unit
     // Despoletar todas as regras de validação;
     public function testValidations()
     {
-
     }
 
     /** Teste de CRUD no modelo */
