@@ -12,9 +12,7 @@ use app\assets\AppAsset;
     </a>
 
     <div class="sidebar">
-
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
@@ -22,14 +20,12 @@ use app\assets\AppAsset;
                 ]
             ]);
             ?>
-
         </div>
 
         <nav class="mt-2">
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-
                     // Dashboard Area
                     ['label' => 'DASHBOARD', 'header' => true],
                     ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['/user/index/']],
@@ -41,41 +37,9 @@ use app\assets\AppAsset;
                     ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['/exercise/index/']],
                     ['label' => 'Treinos',  'icon' => 'walking', 'url' => ['/exercise/index/']],
                     
-
                     //Dev Section
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-
-                    //Toolbox Section
-                    ['label' => 'Toolbox', 'header' => true],
-                    [
-                        'label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['/exercise/index/'],
-                        'items' => [
-                            ['label' => 'Listar', 'icon' => 'list', 'url' => ['/exercise/index/']],
-                            ['label' => 'Criar', 'icon' => 'plus', 'url' => ['/exercise/create/']],
-                            [
-                                'label' => 'Level2',
-                                'iconStyle' => 'far',
-                                'items' => [
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                                ]
-                            ],
-                            ['label' => 'Level2', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                            ['label' => 'Level2', 'iconStyle' => 'far']
-                        ],
-                    ],
-                    [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
-                        'items' => [
-                            ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                        ]
-                    ],
-                    ['label' => 'Level1'],
                 ],
             ]);
             ?>

@@ -18,7 +18,7 @@ class ShopSearch extends Product
     {
         return [
             [['id', 'stock', 'price', 'categoryId'], 'integer'],
-            [['name', 'description', 'image'], 'safe'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -65,8 +65,7 @@ class ShopSearch extends Product
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

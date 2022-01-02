@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\UserSearch;
+use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -72,16 +73,22 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
         $auth = \Yii::$app->authManager;
-        $userRoles = $auth->getRolesByUser($id);
-        $model->authAssignment = array_keys($userRoles)[0];
 
-        #TODO: caso de nao ter role, colocar o role default
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            // $userRoles = $auth->getRolesByUser($id);	
+            $role = $model->role;
+            #Change the user role
+            // $auth->revokeAll($id);
+            // $auth->assign($auth->getRole($role), $id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            // var_dump($model);
+            // var_dump($model->status);
             // die();
+
             $auth->revokeAll($id);
-            $auth->assign($auth->getRole($model->authAssignment), $id);
+            $user = $auth->getRole($role);
+            $auth->assign($user, $id);
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,12 +97,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // } 
 
     protected function findModel($id)
     {

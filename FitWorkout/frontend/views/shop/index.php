@@ -5,35 +5,14 @@ use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $searchModel frontend\models\ShopSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Products';
-$this->params['breadcrumbs'][] = $this->title;
+<?php $this->title = 'Loja'; ?>
 ?>
 <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
-
-    <?php
-
-    /* @var $this yii\web\View */
-
-    $this->title = 'Loja';
-
-    ?>
     <div class="site-about">
         <h1><?= Html::encode($this->title) ?></h1>
-
-
         <body style="z-index: -5;">
             <div class="container pt-5">
                 <div class="row">

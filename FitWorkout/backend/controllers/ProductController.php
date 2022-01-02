@@ -52,12 +52,15 @@ class ProductController extends Controller
 	public function actionCreate()
 	{
 		$model = new Product();
-
-		if ($this->request->isPost) {
+		\Yii::getAlias('@common') .
+			$path = '/uploads/products/';
+		// var_dump($path);
+		// die();
+		if ($model->load(\Yii::$app->request->post())) {
 
 			$model->file = UploadedFile::getInstance($model, 'file');
-			$model->file->saveAS('uploads/products/' . $model->name . '.' . $model->file->name);
-			$model->imageFileName = 'uploads/products/' . $model->name . '.' . $model->file->name;
+			$model->file->saveAS('@common' . $path . $model->name . '.' . $model->file->extension);
+			$model->imageFileName = $model->name . '.' . $model->file->extension;
 
 			if ($model->load($this->request->post()) && $model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +78,7 @@ class ProductController extends Controller
 	{
 		$model = $this->findModel($id);
 		$model->scenario = 'update';
-		$imgName = 'uploads/products/' . $model->name;
+		$imgName = '@common/uploads/products/' . $model->name;
 
 		if ($model->load(\Yii::$app->request->post())) {
 

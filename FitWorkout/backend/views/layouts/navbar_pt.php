@@ -23,8 +23,10 @@ use yii\helpers\Url;
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('clientchat/index') ?>" class="nav-link">Clientes</a>
         </li>
+        <?= Html::a('Exercicios', ['/ptViews/exercicios/index'], ['class' => 'nav-link']) ?>
+        
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('exercicios/index') ?>" class="nav-link">Exercicios</a>
+            <a href="<?php echo Url::toRoute('/ptViews/exercicios/index') ?>" class="nav-link">Exercicios</a>
         </li>
     </ul>
 

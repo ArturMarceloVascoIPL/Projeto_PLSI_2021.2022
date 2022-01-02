@@ -5,7 +5,8 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-
+use common\assets\CommonAsset; 
+CommonAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

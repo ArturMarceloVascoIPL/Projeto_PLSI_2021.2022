@@ -32,7 +32,12 @@ $this->title = 'Aplicações para Personal Trainer';
         'qualificationFilename',
         'jobTime',
         'comment',
-        'approved',
+        [
+            'attribute' => 'approved',
+            'value' => function ($model) {
+                return $model->approved ? 'Aprovado' : 'Não Aprovado';
+            },
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             'header' => 'Actions',

@@ -4,8 +4,6 @@
 
 /* @var $content string */
 
-use common\widgets\Alert;
-use frontend\assets\AppAsset;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
@@ -13,7 +11,11 @@ use yii\bootstrap4\NavBar;
 use yii\web\Link;
 use yii\web\View;
 use yii\helpers\Url;
+use frontend\assets\AppAsset;
+use common\widgets\Alert;
+use common\assets\CommonAsset;
 
+CommonAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

@@ -2,12 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\assets\CommonAsset;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Ptapplication */
 
 $this->title = $model->id;
 \yii\web\YiiAsset::register($this);
+CommonAsset::register($this);
 ?>
 <div class="ptapplication-view">
 
@@ -22,7 +24,7 @@ $this->title = $model->id;
             </div>
         </div>
     </div>
-    
+
     <div class="row mb-2">
         <div class="col">
 
@@ -34,7 +36,12 @@ $this->title = $model->id;
                     'qualificationFilename',
                     'jobTime:datetime',
                     'comment',
-                    'approved',
+                    [
+                        'attribute' => 'approved',
+                        'value' => function ($model) {
+                            return $model->approved ? 'Aprovado' : 'Não Aprovado';
+                        },
+                    ],
                     'userId',
                     'username.username',
                 ],
@@ -44,12 +51,12 @@ $this->title = $model->id;
             <div class="float-right">
                 <div class="row">
                     CV Ficheiro:
-                    <?= Html::img($model->cvFilename, ['alt' => 'some', 'style' => 'width: 50%']); ?>
+                    <?= Html::img('@common/' . $model->cvFilename, ['alt' => 'some', 'style' => 'width: 50%']); ?>
                 </div>
 
                 <div class="row">
                     Qualificacoes Ficheiro:
-                    <?= Html::img($model->qualificationFilename, ['alt' => 'some', 'style' => 'width: 50%']); ?>
+                    <?= Html::img('@common/' . $model->qualificationFilename, ['alt' => 'some', 'style' => 'width: 50%']); ?>
                 </div>
 
             </div>

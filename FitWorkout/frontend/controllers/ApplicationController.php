@@ -24,11 +24,11 @@ class ApplicationController extends \yii\web\Controller
 
 				$model->file_qualificationFilename = UploadedFile::getInstance($model, 'file_qualificationFilename');
 				$model->file_qualificationFilename->saveAS('@common/uploads/ptApp/' . $model->userId . '-qualificacoes.' . $model->file_qualificationFilename->extension);
-				$model->qualificationFilename = '@common/uploads/ptApp/' . $model->userId . '-qualificacoes.' . $model->file_qualificationFilename->extension;
+				$model->qualificationFilename = 'uploads/ptApp/' . $model->userId . '-qualificacoes.' . $model->file_qualificationFilename->extension;
 
 				$model->file_cvFilename = UploadedFile::getInstance($model, 'file_cvFilename');
 				$model->file_cvFilename->saveAS('@common/uploads/ptCv/' . $model->userId . '-curriculo.' . $model->file_cvFilename->extension);
-				$model->cvFilename = '@common/uploads/ptCv/' . $model->userId . '-curriculo.' . $model->file_cvFilename->extension;
+				$model->cvFilename = 'uploads/ptCv/' . $model->userId . '-curriculo.' . $model->file_cvFilename->extension;
 
 				$model->save(false);
 			}
