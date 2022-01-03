@@ -115,23 +115,6 @@ class ProductModelTest extends \Codeception\Test\Unit
         $this->assertTrue($product->validate(['imageFileName'])); // VALID (String)
         //endregion
 
-        // region file
-        $product->file = null;
-        $this->assertTrue($product->validate(['file'])); // VALID (Null)
-
-        $product->file = 1234;
-        $this->assertTrue($product->validate(['file'])); // VALID (Integer)
-
-        $product->file = 12.34;
-        $this->assertTrue($product->validate(['file'])); // VALID (Decimal)
-
-        $product->file = '';
-        $this->assertTrue($product->validate(['file'])); // VALID (Empty String)
-
-        $product->file = 'image';
-        $this->assertTrue($product->validate(['file'])); // VALID (String)
-        //endregion
-
         // region categoryId
         $product->categoryId = null;
         $this->assertFalse($product->validate(['categoryId'])); // Null
@@ -159,6 +142,28 @@ class ProductModelTest extends \Codeception\Test\Unit
     // Ver se o registo válido se encontra na BD
     public function testCreate()
     {
+        $product = new Product();
+
+        $product->name = 'Product Name 1';
+        $product->description = 'Very Descriptive Description';
+        $product->stock = 20;
+        $product->price = 5;
+        $product->imageFileName = null;
+        $product->categoryId = 1;
+
+        $product->save();
+
+        $this->tester->seeInDatabase(
+            'product',
+            [
+                'name' => 'Product Name 1',
+                'description' => 'Very Descriptive Description',
+                'stock' => 20,
+                'price' => 5,
+                'imageFileName' => null,
+                'categoryId' => 1
+            ]
+        );
     }
 
     // Ler o registo anterior e aplicar um update
