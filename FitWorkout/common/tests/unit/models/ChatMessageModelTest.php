@@ -65,7 +65,7 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $this->assertFalse($message->validate(['from'])); // String
 
         $message->from = 1;
-        $this->assertFalse($message->validate(['from'])); // VALID
+        $this->assertTrue($message->validate(['from'])); // VALID
         //endregion
 
         // region to
@@ -78,8 +78,8 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $message->to = "Invalid";
         $this->assertFalse($message->validate(['to'])); // String
 
-        $message->to = 2;
-        $this->assertFalse($message->validate(['to'])); // VALID
+        $message->to = 1;
+        $this->assertTrue($message->validate(['to'])); // VALID
         //endregion
     }
 

@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "userprofile".
  *
  * @property int $userId
- * @property string|null $morada
- * @property int|null $contribuinte
- * @property string|null $codPostal
- * @property string|null $localidade
+ * @property string|null $address
+ * @property int|null $nif
+ * @property string|null $postalCode
+ * @property string|null $city
  *
  * @property Chatmessage[] $chatmessages
  * @property Chatmessage[] $chatmessages0
@@ -40,9 +40,11 @@ class Userprofile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contribuinte'], 'integer'],
-            [['morada'], 'string', 'max' => 255],
-            [['codPostal', 'localidade'], 'string', 'max' => 45],
+            [['userId'], 'required'],
+            [['userId'], 'integer'],
+            [['nif'], 'integer', 'min' => 111111111, 'max' => 999999999],
+            [['address'], 'string', 'max' => 255],
+            [['postalCode', 'city'], 'string', 'max' => 45],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
     }
@@ -54,10 +56,10 @@ class Userprofile extends \yii\db\ActiveRecord
     {
         return [
             'userId' => 'User ID',
-            'morada' => 'Morada',
-            'contribuinte' => 'Contribuinte',
-            'codPostal' => 'Cod Postal',
-            'localidade' => 'Localidade',
+            'address' => 'Morada',
+            'nif' => 'NIF',
+            'postalCode' => 'Codigo Postal',
+            'city' => 'Localidade',
         ];
     }
 
@@ -98,7 +100,7 @@ class Userprofile extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::className(), ['clientId' => 'userId']);
+        return $this->hasMany(Order::className(), ['userId' => 'userId']);
     }
 
     /**
