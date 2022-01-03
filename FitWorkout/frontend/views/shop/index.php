@@ -5,7 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 
-<?php $this->title = 'Loja'; ?>
+$this->title = 'Loja';
+
 ?>
 <div class="product-index">
 
@@ -13,6 +14,7 @@ use yii\helpers\Url;
 
     <div class="site-about">
         <h1><?= Html::encode($this->title) ?></h1>
+
         <body style="z-index: -5;">
             <div class="container pt-5">
                 <div class="row">
