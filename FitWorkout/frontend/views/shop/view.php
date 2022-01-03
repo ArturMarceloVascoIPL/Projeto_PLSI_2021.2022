@@ -14,29 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class="col-6">
+            <?= Html::img('@web/' . $model->image . '', ['alt' => 'some', 'style' => 'width: 50%', 'class' => 'img-thumbnail m-5 d-block float-left']); ?>
+        </div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+        <div class="col-6">
+            <h3 class=""><?= $model->description?></h3>
+            <br><br>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'description',
-            'stock',
-            'price',
-            'image',
-            'categoryId',
-        ],
-    ]) ?>
+            <?= Html::a('Comprar por '. $model->price . '€', ['/controller/action'], ['class'=>'btn btn-primary']) ?>
+        </div>
+    </div>
 
 </div>

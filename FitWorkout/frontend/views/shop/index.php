@@ -54,14 +54,15 @@ $this->title = 'Loja';
                                     <div class="col-6 col-md-6 col-lg-4 mb-3">
                                         <div class="card h-100 border-0">
                                             <div class="card-img-top">
-                                                <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap">
+                                                <?= Html::img('@common/' . $data->image . '', ['alt' => 'some', 'style' => 'width: 50%', 'class' => 'img-fluid mx-auto d-block']); ?>
+                                                //TODO: MOSTRAR IMAGENS
                                             </div>
                                             <div class="card-body text-center">
                                                 <h4 class="card-title">
-                                                    <?= $data->name ?>
+                                                <?= Html::a($data->name, ['view', 'id' => $data->id], ['class' => 'nav-link']) ?>
                                                 </h4>
                                                 <h5 class="card-price small text-warning">
-                                                    <?= $data->price ?>
+                                                    <?= $data->price?> €
                                                 </h5>
                                             </div>
                                         </div>
