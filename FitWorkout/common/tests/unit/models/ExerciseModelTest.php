@@ -121,6 +121,26 @@ class ExerciseModelTest extends \Codeception\Test\Unit
     // Ver se o registo válido se encontra na BD
     public function testCreate()
     {
+        $exercise = new Exercise();
+
+        $exercise->name = 'Exercise 1';
+        $exercise->description = 'Description 1';
+        $exercise->approved = null;
+        $exercise->categoryId = 1;
+        $exercise->typeId = 1;
+
+        $exercise->save();
+
+        $this->tester->seeInDatabase(
+            'exercise',
+            [
+                'name' => 'Exercise 1',
+                'description' => 'Description 1',
+                'approved' => null,
+                'categoryId' => 1,
+                'typeId' => 1
+            ]
+        );
     }
 
     // Ler o registo anterior e aplicar um update

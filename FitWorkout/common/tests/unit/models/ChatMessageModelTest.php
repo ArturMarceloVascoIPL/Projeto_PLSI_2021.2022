@@ -89,6 +89,24 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
     // Ver se o registo válido se encontra na BD
     public function testCreate()
     {
+        $chatmessage = new Chatmessage();
+
+        $chatmessage->message = 'Hello There';
+        $chatmessage->datetime = '2022-01-01 09:00:00';
+        $chatmessage->from = 1;
+        $chatmessage->to = 1;
+
+        $chatmessage->save();
+
+        $this->tester->seeInDatabase(
+            'chatmessage',
+            [
+                'message' => 'Hello There',
+                'datetime' => '2022-01-01 09:00:00',
+                'from' => 1,
+                'to' => 1
+            ]
+        );
     }
 
     // Ler o registo anterior e aplicar um update

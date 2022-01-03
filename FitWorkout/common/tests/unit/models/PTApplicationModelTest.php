@@ -142,6 +142,28 @@ class PTApplicationModelTest extends \Codeception\Test\Unit
     // Ver se o registo válido se encontra na BD
     public function testCreate()
     {
+        $application = new Ptapplication();
+
+        $application->cvFilename = 'cv.png';
+        $application->qualificationFilename = 'qualification.png';
+        $application->jobTime = null;
+        $application->comment = null;
+        $application->approved = 0;
+        $application->userId = 1;
+
+        $application->save();
+
+        $this->tester->seeInDatabase(
+            'ptapplication',
+            [
+                'cvFilename' => 'cv.png',
+                'qualificationFilename' => 'qualification.png',
+                'jobTime' => null,
+                'comment' => null,
+                'approved' => 0,
+                'userId' => 1
+            ]
+        );
     }
 
     // Ler o registo anterior e aplicar um update

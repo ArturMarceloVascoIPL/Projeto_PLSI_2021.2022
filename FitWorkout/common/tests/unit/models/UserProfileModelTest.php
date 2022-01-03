@@ -113,7 +113,7 @@ class UserProfileModelTest extends \Codeception\Test\Unit
         $profile->city = '';
         $this->assertTrue($profile->validate(['city'])); // VALID (Empty String)
 
-        $profile->city = 'Valid Postal Code';
+        $profile->city = 'Valid City';
         $this->assertTrue($profile->validate(['city'])); // VALID (String)
         //endregion
     }
@@ -124,6 +124,26 @@ class UserProfileModelTest extends \Codeception\Test\Unit
     // Ver se o registo válido se encontra na BD
     public function testCreate()
     {
+        $profile = new Userprofile();
+
+        $profile->userId = 1;
+        $profile->address = 'Address 1, city';
+        $profile->nif = 123456789;
+        $profile->postalCode = '1234-567';
+        $profile->city = 'City';
+
+        $profile->save();
+
+        $this->tester->seeInDatabase(
+            'userprofile',
+            [
+                'userId' => 1,
+                'address' => 'Address 1, city',
+                'nif' => 123456789,
+                'postalCode' => '1234-567',
+                'city' => 0
+            ]
+        );
     }
 
     // Ler o registo anterior e aplicar um update
