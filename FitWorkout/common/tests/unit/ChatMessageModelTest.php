@@ -27,6 +27,12 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $message->message = null;
         $this->assertFalse($message->validate(['message'])); // Null
 
+        $message->message = 1234;
+        $this->assertFalse($message->validate(['message'])); // Integer
+
+        $message->message = 12.34;
+        $this->assertFalse($message->validate(['message'])); // Decimal
+
         $message->message = "";
         $this->assertFalse($message->validate(['message'])); // Empty String
 
@@ -44,7 +50,7 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $message->datetime = "";
         $this->assertFalse($message->validate(['datetime'])); // Empty String
 
-        $message->datetime = "01/01/2022";
+        $message->datetime = "2022-01-01 09:00:00";
         $this->assertTrue($message->validate(['datetime'])); // VALID
         //endregion
 
