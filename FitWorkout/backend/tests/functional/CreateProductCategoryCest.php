@@ -1,6 +1,9 @@
 <?php
+
 namespace backend\tests\functional;
+
 use backend\tests\FunctionalTester;
+
 class CreateProductCategoryCest
 {
     public function _before(FunctionalTester $I)
@@ -26,6 +29,8 @@ class CreateProductCategoryCest
 
         $I->fillField('#productcategory-name', 'Categoria1');
         $I->fillField('#productcategory-description', 'Descricao Categoria1');
+
+        $I->see('Salvar', '.btn');
         $I->click('Salvar', '.btn');
 
         $I->see('Categoria1');
