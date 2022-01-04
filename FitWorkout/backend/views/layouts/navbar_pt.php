@@ -15,7 +15,9 @@ use yii\helpers\Url;
     <a href="<?= \yii\helpers\Url::home() ?>" class="brand-link">
         <?= Html::img('@web/img/logo.png', ['alt' => 'FitWorkout', 'class' => 'brand-image img-circle elevation-3', 'style' => 'opacity: .8']) ?>
         <span class="brand-text font-weight-light">Fit Workout</span>
+        | Personal Trainer
     </a>
+    
     <ul class="navbar-nav">
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('workout/index') ?>" class="nav-link">Planos de Treino</a>
@@ -23,13 +25,13 @@ use yii\helpers\Url;
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('clientchat/index') ?>" class="nav-link">Clientes</a>
         </li>
-        
+
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('/exercise/index') ?>" class="nav-link">Exercicios</a>
         </li>
-        <!-- <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('/ptViews/exercicios/index') ?>" class="nav-link">Exercicios</a>
-        </li> -->
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="<?php echo Url::toRoute('index') ?>" class="nav-link">Treinos</a>
+        </li>
     </ul>
 
     <ul class="navbar-nav ml-auto dropdown-slide">
@@ -42,7 +44,7 @@ use yii\helpers\Url;
                 <a href="<?php echo Url::toRoute('settings/index') ?>" class="dropdown-item">
                     <i class="fas fa-cog"></i> Definições
                 </a>
-                <a href="#" class="dropdown-item">
+                <a href="http://localhost:7070/" class="dropdown-item">
                     <i class="far fa-user"></i> Trocar para User
                 </a>
                 <div class="dropdown-divider"></div>
