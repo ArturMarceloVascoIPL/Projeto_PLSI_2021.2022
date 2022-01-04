@@ -23,6 +23,8 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
     {
         $message = new Chatmessage();
 
+        /** Despoletar todas as regras de validação; */
+
         // region message
         $message->message = null;
         $this->assertFalse($message->validate(['message'])); // Null
@@ -39,7 +41,7 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $message->message = "InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage InvalidMessage";
         $this->assertFalse($message->validate(['message'])); // Too many characters
 
-        $message->message = "Valid Message";
+        $message->message = "Hello There";
         $this->assertTrue($message->validate(['message'])); // VALID
         //endregion
 
@@ -81,43 +83,31 @@ class ChatMessageModelTest extends \Codeception\Test\Unit
         $message->to = 1;
         $this->assertTrue($message->validate(['to'])); // VALID
         //endregion
-    }
 
-    /** Teste de CRUD no modelo */
+        /** Teste de CRUD no modelo */
 
-    // Criar um registo válido e guardar na BD
-    // Ver se o registo válido se encontra na BD
-    public function testCreate()
-    {
-        $chatmessage = new Chatmessage();
+        // Criar um registo válido e guardar na BD
+        $message->save();
 
-        $chatmessage->message = 'Hello There';
-        $chatmessage->datetime = '2022-01-01 09:00:00';
-        $chatmessage->from = 1;
-        $chatmessage->to = 1;
+        // Ver se o registo válido se encontra na BD
+        $readMessage = Chatmessage::findOne($message->id);
+        $this->assertNotNull($readMessage);
+        $this->assertIsObject($readMessage);
 
-        $chatmessage->save();
+        // Ler o registo anterior e aplicar um update
+        $readMessage->message = 'General Kenobi'; // message='Hello There' -> message='General Kenobi'
+        $readMessage->save();
 
-        $this->tester->seeInDatabase(
-            'chatmessage',
-            [
-                'message' => 'Hello There',
-                'datetime' => '2022-01-01 09:00:00',
-                'from' => 1,
-                'to' => 1
-            ]
-        );
-    }
+        // Ver se o registo atualizado se encontra na BD
+        $updateMessage = Chatmessage::find()->where(['id' => $message->id, 'message' => 'General Kenobi'])->one();
+        $this->assertNotNull($updateMessage);
+        $this->assertIsObject($updateMessage);
 
-    // Ler o registo anterior e aplicar um update
-    // Ver se o registo atualizado se encontra na BD
-    public function testUpdate()
-    {
-    }
+        // Apagar o registo
+        $updateMessage->delete();
 
-    // Apagar o registo
-    // Verificar que o registo não se encontra na BD
-    public function testDelete()
-    {
+        // Verificar que o registo não se encontra na BD
+        $deletedMessage = Chatmessage::find()->where(['id' => $message->id])->one();
+        $this->assertNull($deletedMessage);
     }
 }
