@@ -29,8 +29,8 @@ class CreateExerciseCest
         $I->selectOption('#exercise-approved', 'Aprovado');
         $I->seeOptionIsSelected('#exercise-approved', 'Aprovado');
 
-        $I->selectOption('#exercise-type', 'Pernas');
-        $I->seeOptionIsSelected('#exercise-type', 'Pernas');
+        $I->selectOption('#exercise-typeid', 'Pernas');
+        $I->seeOptionIsSelected('#exercise-typeid', 'Pernas');
 
         $I->selectOption('#exercise-categoryid', 'Sem Equipamento');
         $I->seeOptionIsSelected('#exercise-categoryid', 'Sem Equipamento');
