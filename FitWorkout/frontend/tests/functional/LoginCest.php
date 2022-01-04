@@ -1,66 +1,31 @@
 <?php
-
 namespace frontend\tests\functional;
-
 use frontend\tests\FunctionalTester;
-use common\fixtures\UserFixture;
-
 class LoginCest
 {
-    /**
-     * Load fixtures before db transaction begin
-     * Called in _before()
-     * @see \Codeception\Module\Yii2::_before()
-     * @see \Codeception\Module\Yii2::loadFixtures()
-     * @return array
-     */
-    public function _fixtures()
-    {
-        return [
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'login_data.php',
-            ],
-        ];
-    }
-
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('site/login');
     }
 
-    protected function formParams($login, $password)
+    public function tryLogin(FunctionalTester $I)
     {
-        return [
-            'LoginForm[username]' => $login,
-            'LoginForm[password]' => $password,
-        ];
-    }
+        $I->amOnPage('/');
 
-    public function checkEmpty(FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', $this->formParams('', ''));
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
-    }
+        $I->see('Bem Vindo | Inicie a sessão');
 
-    public function checkWrongPassword(FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
-        $I->seeValidationError('Incorrect username or password.');
-    }
+        $I->see('Login', '.nav-link');
+        $I->click('Login', '.nav-link');
 
-    public function checkInactiveAccount(FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', $this->formParams('test.test', 'Test1234'));
-        $I->seeValidationError('Incorrect username or password');
-    }
+        $I->see('Please fill out the following fields to login:');
 
-    public function checkValidLogin(FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->fillField('#loginform-username', 'admin');
+        $I->fillField('#loginform-password', 'adminadmin');
+
+        $I->see('Login', '.btn');
+        $I->click('Login', '.btn');
+
+        $I->dontSeeElement('.invalid-feedback');
+
+        $I->see('Bem Vindo admin');
     }
 }
