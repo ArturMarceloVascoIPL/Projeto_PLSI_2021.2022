@@ -28,6 +28,31 @@ class ExerciseController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'actions' => ['login', 'error'],
+                            'allow' => true,
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'actions' => ['index', 'logout', 'error'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                        [
+                            'actions' => ['create', 'view', 'update', 'delete'],
+                            'allow' => true,
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view', 'create'],
+                            'roles' => ['personalTrainer']
+                        ],
+                    ],
+                ],
             ]
         );
     }
@@ -54,12 +79,22 @@ class ExerciseController extends Controller
         ]);
     }
 
+
     public function actionCreate()
     {
         $model = new Exercise();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                if (\Yii::$app->user->can('personalTrainer')) {
+                    $model->approved = 0;
+                }
+                $model->save();
+                 
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [

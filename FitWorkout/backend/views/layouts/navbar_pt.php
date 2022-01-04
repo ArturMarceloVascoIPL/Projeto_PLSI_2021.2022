@@ -23,11 +23,13 @@ use yii\helpers\Url;
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('clientchat/index') ?>" class="nav-link">Clientes</a>
         </li>
-        <?= Html::a('Exercicios', ['/ptViews/exercicios/index'], ['class' => 'nav-link']) ?>
         
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('/ptViews/exercicios/index') ?>" class="nav-link">Exercicios</a>
+            <a href="<?php echo Url::toRoute('/exercise/index') ?>" class="nav-link">Exercicios</a>
         </li>
+        <!-- <li class="nav-item d-none d-sm-inline-block">
+            <a href="<?php echo Url::toRoute('/ptViews/exercicios/index') ?>" class="nav-link">Exercicios</a>
+        </li> -->
     </ul>
 
     <ul class="navbar-nav ml-auto dropdown-slide">

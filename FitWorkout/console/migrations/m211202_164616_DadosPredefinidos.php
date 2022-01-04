@@ -39,6 +39,7 @@ class m211202_164616_DadosPredefinidos extends Migration
             'description' => 'Ficar forte e agachar',
             'typeId' => 2, //Pernas
             'categoryId' => 2, //Sem Equipamento
+            'approved' => 1,
         ]);
 
         $this->insert('exercise', [
@@ -46,6 +47,7 @@ class m211202_164616_DadosPredefinidos extends Migration
             'description' => ' Fazer um bench press com o peso do peito para baixo e ficar forte',
             'typeId' => 1, //Peito
             'categoryId' => 1, //Com Equipamento
+            'approved' => 1,
         ]);
 
         //Criação do UserProfile do Admin

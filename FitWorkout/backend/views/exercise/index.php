@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
- 
+
 $this->title = 'Gestão de Exercicios';
 ?>
 <div class="exercise-index">
@@ -20,7 +20,8 @@ $this->title = 'Gestão de Exercicios';
         </div>
     </div>
 
-    <?php  // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -28,13 +28,14 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
         <?= $form->field($model, 'approved')->dropDownList(
             [0 => 'Não Aprovado', 1 => 'Aprovado'],
             ['options' => ['approved' => ['selected' => true]]]
-        )->label('Tipo de Exercício') ?>
+        )->label('Aprovação de Exercício') ?>
+
     <?php } ?>
 
     <!-- Tipo de Exercicio -->
-    <?= $form->field($model, 'type')->dropDownList(
+    <?= $form->field($model, 'typeId')->dropDownList(
         $tipos,
-        ['options' => ['type' => ['selected' => true]]]
+        ['options' => ['typeId' => ['selected' => true]]]
     )->label('Tipo de Exercício') ?>
 
     <!-- Categoria do Exercicio -->

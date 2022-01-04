@@ -35,10 +35,14 @@ $this->title = $model->name;
         'attributes' => [
             'id',
             'name',
-            'description', 
-            'approved',
             'type.name',
             'category.name',
+            'description', [
+                'attribute' => 'approved',
+                'value' => function ($model) {
+                    return $model->approved ? 'Aprovado' : 'Não Aprovado';
+                },
+            ],
         ],
     ]) ?>
 

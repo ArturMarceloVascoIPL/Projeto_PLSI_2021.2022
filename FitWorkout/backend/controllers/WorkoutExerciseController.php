@@ -3,12 +3,15 @@
 namespace backend\controllers;
 
 use common\models\WorkoutExercise;
-use yii\data\ActiveDataProvider;
+use common\models\WorkoutExerciseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+/**
+ * WorkoutExerciseController implements the CRUD actions for WorkoutExercise model.
+ */
 class WorkoutExerciseController extends Controller
 {
     /**
@@ -29,8 +32,14 @@ class WorkoutExerciseController extends Controller
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
+                            'actions' => ['login', 'error'],
                             'allow' => true,
-                            'roles' => ['@'],
+                            'roles' => ['?'],
+                        ],
+                        [
+                            'actions' => ['index', 'logout', 'error'],
+                            'allow' => true,
+                            'roles' => ['admin'],
                         ],
                     ],
                 ],
@@ -44,22 +53,11 @@ class WorkoutExerciseController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => WorkoutExercise::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'exerciseId' => SORT_DESC,
-                    'workoutId' => SORT_DESC,
-                ]
-            ],
-            */
-        ]);
+        $searchModel = new WorkoutExerciseSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('/workout/workoutexercise/index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
