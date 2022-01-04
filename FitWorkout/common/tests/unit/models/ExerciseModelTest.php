@@ -18,10 +18,11 @@ class ExerciseModelTest extends \Codeception\Test\Unit
     {
     }
 
-    // Despoletar todas as regras de validação;
-    public function testValidations()
+    public function testModelCrud()
     {
         $exercise = new Exercise();
+
+        /** Despoletar todas as regras de validação; */
 
         // region name
         $exercise->name = null;
@@ -113,45 +114,31 @@ class ExerciseModelTest extends \Codeception\Test\Unit
         $exercise->typeId = 1;
         $this->assertTrue($exercise->validate(['typeId'])); // VALID (Integer)
         //endregion
-    }
 
-    /** Teste de CRUD no modelo */
+        /** Teste de CRUD no modelo */
 
-    // Criar um registo válido e guardar na BD
-    // Ver se o registo válido se encontra na BD
-    public function testCreate()
-    {
-        $exercise = new Exercise();
-
-        $exercise->name = 'Exercise 1';
-        $exercise->description = 'Description 1';
-        $exercise->approved = null;
-        $exercise->categoryId = 1;
-        $exercise->typeId = 1;
-
+        // Criar um registo válido e guardar na BD
         $exercise->save();
 
-        $this->tester->seeInDatabase(
-            'exercise',
-            [
-                'name' => 'Exercise 1',
-                'description' => 'Description 1',
-                'approved' => null,
-                'categoryId' => 1,
-                'typeId' => 1
-            ]
-        );
-    }
+        // Ver se o registo válido se encontra na BD
+        $readExercise = Exercise::findOne($exercise->id);
+        $this->assertNotNull($readExercise);
+        $this->assertIsObject($readExercise);
 
-    // Ler o registo anterior e aplicar um update
-    // Ver se o registo atualizado se encontra na BD
-    public function testUpdate()
-    {
-    }
+        // Ler o registo anterior e aplicar um update
+        $readExercise->name = 'Exercise1'; // name='Valid Name' -> name='Exercise1'
+        $readExercise->save();
 
-    // Apagar o registo
-    // Verificar que o registo não se encontra na BD
-    public function testDelete()
-    {
+        // Ver se o registo atualizado se encontra na BD
+        $updateExercise = Exercise::find()->where(['id' => $exercise->id, 'name' => 'Exercise1'])->one();
+        $this->assertNotNull($updateExercise);
+        $this->assertIsObject($updateExercise);
+
+        // Apagar o registo
+        $updateExercise->delete();
+
+        // Verificar que o registo não se encontra na BD
+        $deletedExercise = Exercise::find()->where(['id' => $exercise->id])->one();
+        $this->assertNull($deletedExercise);
     }
 }

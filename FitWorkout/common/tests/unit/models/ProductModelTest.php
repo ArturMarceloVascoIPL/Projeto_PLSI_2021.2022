@@ -18,11 +18,11 @@ class ProductModelTest extends \Codeception\Test\Unit
     {
     }
 
-
-    // Despoletar todas as regras de validação;
-    public function testValidations()
+    public function testModelCrud()
     {
         $product = new Product();
+
+        /** Despoletar todas as regras de validação; */
 
         // region name
         $product->name = null;
@@ -134,47 +134,31 @@ class ProductModelTest extends \Codeception\Test\Unit
         $product->categoryId = 1;
         $this->assertTrue($product->validate(['categoryId'])); // VALID
         //endregion
-    }
 
-    /** Teste de CRUD no modelo */
+        /** Teste de CRUD no modelo */
 
-    // Criar um registo válido e guardar na BD
-    // Ver se o registo válido se encontra na BD
-    public function testCreate()
-    {
-        $product = new Product();
-
-        $product->name = 'Product Name 1';
-        $product->description = 'Very Descriptive Description';
-        $product->stock = 20;
-        $product->price = 5;
-        $product->imageFileName = null;
-        $product->categoryId = 1;
-
+        // Criar um registo válido e guardar na BD
         $product->save();
 
-        $this->tester->seeInDatabase(
-            'product',
-            [
-                'name' => 'Product Name 1',
-                'description' => 'Very Descriptive Description',
-                'stock' => 20,
-                'price' => 5,
-                'imageFileName' => null,
-                'categoryId' => 1
-            ]
-        );
-    }
+        // Ver se o registo válido se encontra na BD
+        $readProduct = Product::findOne($product->id);
+        $this->assertNotNull($readProduct);
+        $this->assertIsObject($readProduct);
 
-    // Ler o registo anterior e aplicar um update
-    // Ver se o registo atualizado se encontra na BD
-    public function testUpdate()
-    {
-    }
+        // Ler o registo anterior e aplicar um update
+        $readProduct->stock = 5; // stock=1234 -> stock=5
+        $readProduct->save();
 
-    // Apagar o registo
-    // Verificar que o registo não se encontra na BD
-    public function testDelete()
-    {
+        // Ver se o registo atualizado se encontra na BD
+        $updateProduct = Product::find()->where(['id' => $product->id, 'stock' => 5])->one();
+        $this->assertNotNull($updateProduct);
+        $this->assertIsObject($updateProduct);
+
+        // Apagar o registo
+        $updateProduct->delete();
+
+        // Verificar que o registo não se encontra na BD
+        $deletedProduct = Product::find()->where(['id' => $product->id])->one();
+        $this->assertNull($deletedProduct);
     }
 }

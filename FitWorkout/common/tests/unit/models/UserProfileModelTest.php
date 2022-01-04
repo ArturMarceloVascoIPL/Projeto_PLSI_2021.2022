@@ -19,7 +19,7 @@ class UserProfileModelTest extends \Codeception\Test\Unit
     }
 
     // Despoletar todas as regras de validação;
-    public function testValidations()
+    public function testModelCrud()
     {
         $profile = new Userprofile();
 
@@ -116,45 +116,32 @@ class UserProfileModelTest extends \Codeception\Test\Unit
         $profile->city = 'Valid City';
         $this->assertTrue($profile->validate(['city'])); // VALID (String)
         //endregion
-    }
 
-    /** Teste de CRUD no modelo */
+        /** Teste de CRUD no modelo */
 
-    // Criar um registo válido e guardar na BD
-    // Ver se o registo válido se encontra na BD
-    public function testCreate()
-    {
-        $profile = new Userprofile();
-
-        $profile->userId = 1;
-        $profile->address = 'Address 1, city';
-        $profile->nif = 123456789;
-        $profile->postalCode = '1234-567';
-        $profile->city = 'City';
-
+        // Criar um registo válido e guardar na BD
+        $profile->userId = 2;
         $profile->save();
 
-        $this->tester->seeInDatabase(
-            'userprofile',
-            [
-                'userId' => 1,
-                'address' => 'Address 1, city',
-                'nif' => 123456789,
-                'postalCode' => '1234-567',
-                'city' => 0
-            ]
-        );
-    }
+        // Ver se o registo válido se encontra na BD
+        $readProfile = Userprofile::findOne($profile->userId);
+        $this->assertNotNull($readProfile);
+        $this->assertIsObject($readProfile);
 
-    // Ler o registo anterior e aplicar um update
-    // Ver se o registo atualizado se encontra na BD
-    public function testUpdate()
-    {
-    }
+        // Ler o registo anterior e aplicar um update
+        $readProfile->address = 'Address 1, City'; // address='Valid Address' -> address='Address 1, City'
+        $readProfile->save();
 
-    // Apagar o registo
-    // Verificar que o registo não se encontra na BD
-    public function testDelete()
-    {
+        // Ver se o registo atualizado se encontra na BD
+        $updateProfile = Userprofile::find()->where(['userId' => $profile->userId, 'address' => 'Address 1, City'])->one();
+        $this->assertNotNull($updateProfile);
+        $this->assertIsObject($updateProfile);
+
+        // Apagar o registo
+        $updateProfile->delete();
+
+        // Verificar que o registo não se encontra na BD
+        $deletedProfile = Userprofile::find()->where(['userId' => $profile->userId])->one();
+        $this->assertNull($deletedProfile);
     }
 }

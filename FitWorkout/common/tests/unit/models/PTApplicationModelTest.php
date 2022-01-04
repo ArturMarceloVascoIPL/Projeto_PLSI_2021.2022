@@ -18,11 +18,11 @@ class PTApplicationModelTest extends \Codeception\Test\Unit
     {
     }
 
-
-    // Despoletar todas as regras de validação;
-    public function testValidations()
+    public function testModelCrud()
     {
         $application = new Ptapplication();
+
+        /** Despoletar todas as regras de validação; */
 
         // region cvFilename
         $application->cvFilename = null;
@@ -134,47 +134,31 @@ class PTApplicationModelTest extends \Codeception\Test\Unit
         $application->userId = 1;
         $this->assertTrue($application->validate(['userId'])); // VALID (Integer)
         //endregion
-    }
 
-    /** Teste de CRUD no modelo */
+        /** Teste de CRUD no modelo */
 
-    // Criar um registo válido e guardar na BD
-    // Ver se o registo válido se encontra na BD
-    public function testCreate()
-    {
-        $application = new Ptapplication();
-
-        $application->cvFilename = 'cv.png';
-        $application->qualificationFilename = 'qualification.png';
-        $application->jobTime = null;
-        $application->comment = null;
-        $application->approved = 0;
-        $application->userId = 1;
-
+        // Criar um registo válido e guardar na BD
         $application->save();
 
-        $this->tester->seeInDatabase(
-            'ptapplication',
-            [
-                'cvFilename' => 'cv.png',
-                'qualificationFilename' => 'qualification.png',
-                'jobTime' => null,
-                'comment' => null,
-                'approved' => 0,
-                'userId' => 1
-            ]
-        );
-    }
+        // Ver se o registo válido se encontra na BD
+        $readApplication = Ptapplication::findOne($application->id);
+        $this->assertNotNull($readApplication);
+        $this->assertIsObject($readApplication);
 
-    // Ler o registo anterior e aplicar um update
-    // Ver se o registo atualizado se encontra na BD
-    public function testUpdate()
-    {
-    }
+        // Ler o registo anterior e aplicar um update
+        $readApplication->cvFilename = 'cv.filename'; // cvFilename='Valid Filename' -> cvFilename='cv.filename'
+        $readApplication->save();
 
-    // Apagar o registo
-    // Verificar que o registo não se encontra na BD
-    public function testDelete()
-    {
+        // Ver se o registo atualizado se encontra na BD
+        $updateApplication = Ptapplication::find()->where(['id' => $application->id, 'cvFilename' => 'cv.filename'])->one();
+        $this->assertNotNull($updateApplication);
+        $this->assertIsObject($updateApplication);
+
+        // Apagar o registo
+        $updateApplication->delete();
+
+        // Verificar que o registo não se encontra na BD
+        $deletedApplication = Ptapplication::find()->where(['id' => $application->id])->one();
+        $this->assertNull($deletedApplication);
     }
 }
