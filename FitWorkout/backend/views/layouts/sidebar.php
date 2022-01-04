@@ -35,7 +35,7 @@ use app\assets\AppAsset;
                     // Exercises Area
                     ['label' => 'Exercicios TAB', 'header' => true],
                     ['label' => 'Exercicios',  'icon' => 'dumbbell', 'url' => ['/exercise/index/']],
-                    ['label' => 'Treinos',  'icon' => 'walking', 'url' => ['/exercise/index/']],
+                    ['label' => 'Treinos',  'icon' => 'walking', 'url' => ['/workout/index/']],
                     
                     //Dev Section
                     ['label' => 'Yii2 PROVIDED', 'header' => true],

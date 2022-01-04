@@ -29,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const ACC_DISABLED = 0;
 
     // public $authAssignment; // = 'client';
-    // public $role;
+    //  public $role;
 
     /**
      * {@inheritdoc}

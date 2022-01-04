@@ -52,8 +52,8 @@ class ProductController extends Controller
 	public function actionCreate()
 	{
 		$model = new Product();
-		\Yii::getAlias('@common') .
-			$path = '/uploads/products/';
+		// \Yii::getAlias('@web')  
+		$path = '/uploads/products/';
 		// var_dump($path);
 		// die();
 		if ($model->load(\Yii::$app->request->post())) {

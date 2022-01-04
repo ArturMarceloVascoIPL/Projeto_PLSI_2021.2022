@@ -75,14 +75,9 @@ class UserController extends Controller
         $auth = \Yii::$app->authManager;
 
         if ($this->request->isPost && $model->load($this->request->post())) {
-            // $userRoles = $auth->getRolesByUser($id);	
-            $role = $model->role;
-            #Change the user role
-            // $auth->revokeAll($id);
-            // $auth->assign($auth->getRole($role), $id);
-
-            // var_dump($model->status);
-            // die();
+            $request = $this->request->post();
+         
+            $role = $request['User']['role'];
 
             $auth->revokeAll($id);
             $user = $auth->getRole($role);

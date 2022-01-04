@@ -13,8 +13,6 @@ $this->title = 'Loja';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="site-about">
-        <h1><?= Html::encode($this->title) ?></h1>
-
         <body style="z-index: -5;">
             <div class="container pt-5">
                 <div class="row">
@@ -69,10 +67,7 @@ $this->title = 'Loja';
 
                                 <?php } ?>
 
-
-
-
-                            </div>
+                           </div>
                             <div class="row sorting mb-5 mt-5">
                                 <div class="col-12">
                                     <a class="btn btn-light">

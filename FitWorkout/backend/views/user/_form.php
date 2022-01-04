@@ -33,7 +33,7 @@ $userRole = array_keys($auth->getRolesByUser($model->id))[0];
         [
             'admin' => 'Admin',
             'client' => 'Cliente',
-            'personalTrainer' => 'Personal Trainer',
+            // 'personalTrainer' => 'Personal Trainer',
         ],
         [
             'options' => [$userRole => ['selected' => true]],

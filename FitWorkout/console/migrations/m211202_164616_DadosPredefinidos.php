@@ -48,6 +48,47 @@ class m211202_164616_DadosPredefinidos extends Migration
             'categoryId' => 1, //Com Equipamento
         ]);
 
+        //Criação do UserProfile do Admin
+        $this->insert('userprofile', [
+            'userId' => 1,
+            'address' =>  'Rua do Admin',
+            'nif' => 123456789,
+            'postalCode' =>  '4444-444',
+            'city' =>  'Porto',
+        ]);
+
+
+        /**
+         * Treinos
+         */
+        //Workouts
+        $this->insert('workout', [
+            'id' => 1,
+            'name' => 'Treino de Peito',
+            'date' => '2020-01-01',
+            'ptId' => 1,
+        ]);
+
+        //WorkoutExercise   
+        $this->insert('workoutexercise', [
+            'exerciseId' => 1,
+            'workoutId' => 1,
+            'exerciseCalories' => 100,
+            'equipmentWeight' =>  0,
+            'seriesSize' =>  1,
+            'seriesNum' =>  1,
+            'restTime' =>  1,
+        ]);
+
+        // $this->insert('workoutexercise', [
+        //     'exerciseId' => 2,
+        //     'workoutId' => 1,
+        //     'exerciseCalories' => 100,
+        //     'equipmentWeight' =>  0,
+        //     'seriesSize' =>  1,
+        //     'seriesNum' =>  1,
+        //     'restTime' =>  1,
+        // ]);
     }
 
     public function down()
