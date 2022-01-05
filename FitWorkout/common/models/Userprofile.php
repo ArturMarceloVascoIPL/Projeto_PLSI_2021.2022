@@ -40,7 +40,7 @@ class Userprofile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nif'], 'integer'],
+            [['nif'], 'integer', 'min' => 111111111, 'max' => 999999999],
             [['address'], 'string', 'max' => 255],
             [['postalCode', 'city'], 'string', 'max' => 45],
             [['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],

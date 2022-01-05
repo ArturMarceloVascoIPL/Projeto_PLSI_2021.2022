@@ -52,8 +52,6 @@ AppAsset::register($this);
                             <div id="w0-collapse" class="navbar-collapse collapse" id="navbarSupportedContent">
                                 <ul id="w1" class="navbar-nav ml-auto main-nav ">
                                     <li class="nav-item">
-                                        <?php ['label' => 'Home', 'url' => ['/'], 'active' => $this->context->route == 'site/index']
-                                        ?>
                                         <?= Html::a('Login', ['/site/login'], ['class' => 'nav-link']) ?>
                                     </li>
                                     <li class="nav-item">

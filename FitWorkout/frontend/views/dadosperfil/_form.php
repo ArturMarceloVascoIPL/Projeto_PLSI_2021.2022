@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
 
 ?>
 <div class="dadosperfil-index">
-    <?php ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
