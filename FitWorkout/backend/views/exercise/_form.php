@@ -1,10 +1,10 @@
 <?php
 
+use common\models\Exercisecategory;
+use common\models\Exercisetype;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\Exercisetype;
-use common\models\Exercisecategory;
 
 $tipos = ArrayHelper::map(Exercisetype::find()->all(), 'id', 'name');
 $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
@@ -50,7 +50,7 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
             '<i class="fas fa-save"></i> Salvar',
             [
                 'class' => 'btn btn-app bg-success',
-                'class' => 'btn btn-app bg-success',  'data' => [
+                'data' => [
                     'confirm' => 'Tem certeza de que deseja salvar este item?',
                     'method' => 'post',
                 ]

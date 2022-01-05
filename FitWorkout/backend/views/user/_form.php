@@ -2,10 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\User;
 
-$auth = \Yii::$app->authManager;
+$auth = Yii::$app->authManager;
 $userRole = array_keys($auth->getRolesByUser($model->id))[0];
 ?>
 
@@ -14,7 +12,7 @@ $userRole = array_keys($auth->getRolesByUser($model->id))[0];
     <?php $form = ActiveForm::begin(
         ['options' => ['enctype' => 'multipart/form-data']]
     ); ?>
-  
+
     <!-- Status -->
     <?= $form->field($model, 'status')->dropDownList(
         [
