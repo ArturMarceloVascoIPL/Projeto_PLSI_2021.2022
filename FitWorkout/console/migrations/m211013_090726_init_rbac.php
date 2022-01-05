@@ -109,10 +109,25 @@ class m211013_090726_init_rbac extends Migration
         $createWorkoutAdmin->description = 'Create an Workout as an Admin';
         $auth->add($createWorkoutAdmin);
 
-        // Create ExerciseSuggestion
+        // Create Exercise Suggestion
         $createExerciseSuggestion = $auth->createPermission('createExerciseSuggestion');
-        $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
+        $createExerciseSuggestion->description = 'Create an Exercise Suggestion';
         $auth->add($createExerciseSuggestion);
+
+        // Create Exercise Category
+        $createExerciseCategory = $auth->createPermission('createExerciseCategory');
+        $createExerciseCategory->description = 'Create an Exercise Category';
+        $auth->add($createExerciseCategory);
+
+        // Create Exercise Type
+        $createExerciseType = $auth->createPermission('createExerciseType');
+        $createExerciseType->description = 'Create an Exercise Type';
+        $auth->add($createExerciseType);
+
+        // Create Product Category
+        $createProductCategory = $auth->createPermission('createProductCategory');
+        $createProductCategory->description = 'Create a Product Category';
+        $auth->add($createProductCategory);
         #endregion
 
         #region - - - - - - - - -  Read  - - - - - - - - -
@@ -200,6 +215,21 @@ class m211013_090726_init_rbac extends Migration
         $readWorkouts  = $auth->createPermission('readWorkouts');
         $readWorkouts->description = 'Read Workouts';
         $auth->add($readWorkouts);
+
+        // Read Exercise Category
+        $readExerciseCategory = $auth->createPermission('readExerciseCategory');
+        $readExerciseCategory->description = 'Read an Exercise Category';
+        $auth->add($readExerciseCategory);
+
+        // Read Exercise Type
+        $readExerciseType = $auth->createPermission('readExerciseType');
+        $readExerciseType->description = 'Read an Exercise Type';
+        $auth->add($readExerciseType);
+
+        // Read Product Category
+        $readProductCategory = $auth->createPermission('readProductCategory');
+        $readProductCategory->description = 'Read a Product Category';
+        $auth->add($readProductCategory);
         #endregion
 
         #region - - - - - - - - - Update - - - - - - - - -
@@ -262,6 +292,21 @@ class m211013_090726_init_rbac extends Migration
         $updateWorkoutsAdmin  = $auth->createPermission('updateWorkoutsAdmin');
         $updateWorkoutsAdmin->description = 'Update Workouts Admin';
         $auth->add($updateWorkoutsAdmin);
+
+        // Update Exercise Category
+        $updateExerciseCategory = $auth->createPermission('updateExerciseCategory');
+        $updateExerciseCategory->description = 'Update an Exercise Category';
+        $auth->add($updateExerciseCategory);
+
+        // Update Exercise Type
+        $updateExerciseType = $auth->createPermission('updateExerciseType');
+        $updateExerciseType->description = 'Update an Exercise Type';
+        $auth->add($updateExerciseType);
+
+        // Update Product Category
+        $updateProductCategory = $auth->createPermission('updateProductCategory');
+        $updateProductCategory->description = 'Update a Product Category';
+        $auth->add($updateProductCategory);
         #endregion
 
         #region - - - - - - - - - Delete - - - - - - - - -
@@ -284,6 +329,21 @@ class m211013_090726_init_rbac extends Migration
         $deleteWorkoutsAdmin = $auth->createPermission('deleteWorkoutsAdmin');
         $deleteWorkoutsAdmin->description = 'Delete Workouts';
         $auth->add($deleteWorkoutsAdmin);
+
+        // Delete Exercise Category
+        $deleteExerciseCategory = $auth->createPermission('deleteExerciseCategory');
+        $deleteExerciseCategory->description = 'Delete an Exercise Category';
+        $auth->add($deleteExerciseCategory);
+
+        // Delete Exercise Type
+        $deleteExerciseType = $auth->createPermission('deleteExerciseType');
+        $deleteExerciseType->description = 'Delete an Exercise Type';
+        $auth->add($deleteExerciseType);
+
+        // Delete Product Category
+        $deleteProductCategory = $auth->createPermission('deleteProductCategory');
+        $deleteProductCategory->description = 'Delete a Product Category';
+        $auth->add($deleteProductCategory);
         #endregion
 
         //endregion
@@ -291,12 +351,18 @@ class m211013_090726_init_rbac extends Migration
         //region Atribuição Permissões aos Roles
 
         //Admin
+        $auth->addChild($admin, $createExerciseCategory);
+        $auth->addChild($admin, $createExerciseType);
         $auth->addChild($admin, $createExercise);
+        $auth->addChild($admin, $createProductCategory);
         $auth->addChild($admin, $createProduct);
         $auth->addChild($admin, $createWorkoutAdmin);
 
         $auth->addChild($admin, $readUsers);
+        $auth->addChild($admin, $readExerciseCategory);
+        $auth->addChild($admin, $readExerciseType);
         $auth->addChild($admin, $readExercises);
+        $auth->addChild($admin, $readProductCategory);
         $auth->addChild($admin, $readProducts);
         $auth->addChild($admin, $readOrders);
         $auth->addChild($admin, $readExercisesSuggestionsAdmin);
@@ -304,14 +370,20 @@ class m211013_090726_init_rbac extends Migration
         $auth->addChild($admin, $readWorkouts);
 
         $auth->addChild($admin, $updateUsers);
+        $auth->addChild($admin, $updateExerciseCategory);
+        $auth->addChild($admin, $updateExerciseType);
         $auth->addChild($admin, $updateExercises);
+        $auth->addChild($admin, $updateProductCategory);
         $auth->addChild($admin, $updateProducts);
         $auth->addChild($admin, $updateOrdersStatus);
         $auth->addChild($admin, $updateExercisesSuggestions);
         $auth->addChild($admin, $updatePTApplication);
         $auth->addChild($admin, $updateWorkoutsAdmin);
 
+        $auth->addChild($admin, $deleteExerciseCategory);
+        $auth->addChild($admin, $deleteExerciseType);
         $auth->addChild($admin, $deleteExercises);
+        $auth->addChild($admin, $deleteProductCategory);
         $auth->addChild($admin, $deleteWorkoutsAdmin);
 
         //Cliente
