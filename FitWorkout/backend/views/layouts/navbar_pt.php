@@ -17,21 +17,24 @@ use yii\helpers\Url;
         <span class="brand-text font-weight-light">Fit Workout</span>
         | Personal Trainer
     </a>
-    
+
     <ul class="navbar-nav">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('workout/index') ?>" class="nav-link">Planos de Treino</a>
+            <a href="<?php echo Url::toRoute('index') ?>" class="nav-link">Clientes</a>
         </li>
+
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('clientchat/index') ?>" class="nav-link">Clientes</a>
+            <a href="<?php echo Url::toRoute('/plan') ?>" class="nav-link">Planos de Treino</a>
+        </li>
+
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="<?php echo Url::toRoute('/workout/index') ?>" class="nav-link">Treinos</a>
         </li>
 
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo Url::toRoute('/exercise/index') ?>" class="nav-link">Exercicios</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo Url::toRoute('index') ?>" class="nav-link">Treinos</a>
-        </li>
+
     </ul>
 
     <ul class="navbar-nav ml-auto dropdown-slide">

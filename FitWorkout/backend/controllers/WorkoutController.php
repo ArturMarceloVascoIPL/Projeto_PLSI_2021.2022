@@ -12,6 +12,7 @@ use common\models\Exercisecategory;
 use common\models\Exercisetype;
 use common\models\Workoutexercise;
 use yii\helpers\ArrayHelper;
+use yii\filters\AccessControl;
 
 /**
  * WorkoutController implements the CRUD actions for Workout model.
@@ -32,6 +33,22 @@ class WorkoutController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'acess' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'create', 'update', 'delete', 'logout', 'error', 'exercisesadd', 'addexercise'],
+                            'roles' => ['admin', 'personalTrainer'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'logout', 'error'],
+                            'roles' => ['?'],
+                        ],
+                    ],
+                ],
             ]
         );
     }
@@ -42,9 +59,11 @@ class WorkoutController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Workout::find(),
-            /*
+        if (\Yii::$app->user->can('admin')) {
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => Workout::find(),
+                /*
             'pagination' => [
                 'pageSize' => 50
             ],
@@ -54,11 +73,30 @@ class WorkoutController extends Controller
                 ]
             ],
             */
-        ]);
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        } else if (\Yii::$app->user->can('personalTrainer')) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Workout::find()->where(['ptId' => \Yii::$app->user->id]),
+                /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+            ]);
+
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -141,7 +179,7 @@ class WorkoutController extends Controller
         $model = new Workoutexercise();
 
         if ($this->request->post()) {
-             
+
             if ($model->save()) {
                 return $this->redirect(['index']);
             }
