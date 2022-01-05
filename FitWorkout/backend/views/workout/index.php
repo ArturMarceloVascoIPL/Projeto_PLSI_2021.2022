@@ -3,26 +3,16 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Workouts';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Treinos';
 ?>
 <div class="workout-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
         <div class="col">
-            <?= Html::a('Create Workout', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Criar Treino', ['create'], ['class' => 'btn btn-success']) ?>
         </div>
-        <div class="col">
-            <div class="float-right">
-                <?= Html::a('Ver Workout Exercises', ['/workoutexercise'], ['class' => 'btn btn-success']) ?>
-            </div>
-        </div>
-    </div>
+    </div> 
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,8 +23,36 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'date',
             'ptId',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Actions',
+                'contentOptions' => ['style' => 'width: 25%'],
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url) {
+                        return Html::a('<span>Ver</span>', $url, [
+                            'title' => Yii::t('app', 'View'),
+                            'class' => 'btn bg-gradient-success',
+                        ]);
+                    },
+                    'update' => function ($url) {
+                        return Html::a('<span>Editar</span>', $url, [
+                            'title' => Yii::t('app', 'Update'),
+                            'class' => 'btn btn-info',
+                        ]);
+                    },
+                    'delete' => function ($url) {
+                        return Html::a('<span>Apagar</span>', $url, [
+                            'title' => Yii::t('app', 'Delete'),
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => 'Tem a certeza que pretende apagar este item?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

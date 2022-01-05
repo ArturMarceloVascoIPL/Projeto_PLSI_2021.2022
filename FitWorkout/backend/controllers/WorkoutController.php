@@ -7,6 +7,11 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Exercise;
+use common\models\Exercisecategory;
+use common\models\Exercisetype;
+use common\models\Workoutexercise;
+use yii\helpers\ArrayHelper;
 
 /**
  * WorkoutController implements the CRUD actions for Workout model.
@@ -64,8 +69,18 @@ class WorkoutController extends Controller
      */
     public function actionView($id)
     {
+        $exerciseWorkoutList =  Workoutexercise::find()->where(['workoutId' => $id])->all();
+        $exerciseList = [];
+        foreach ($exerciseWorkoutList as $exerciseWorkout) {
+            $exerciseList[] = $exerciseWorkout->exerciseId;
+        }
+
+        $exerciseModel = Exercise::find()->where(['id' => $exerciseList])->all();
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'exerciseModel' => $exerciseModel,
         ]);
     }
 
@@ -79,7 +94,10 @@ class WorkoutController extends Controller
         $model = new Workout();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->ptId = \Yii::$app->user->id;
+
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -91,13 +109,6 @@ class WorkoutController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Workout model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -123,6 +134,41 @@ class WorkoutController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionExercisesadd($id)
+    {
+        $model = new Workoutexercise();
+
+        if ($this->request->post()) {
+             
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('exercisesadd', [
+            'model' => $model,
+            'workoutModel' => $this->findModel($id),
+            "exerciseList" => Exercise::find()->all(),
+        ]);
+    }
+
+    public function actionAddexercise()
+    {
+        $model = new Workoutexercise();
+
+        $model->exerciseId = \Yii::$app->request->post('exerciseId', null);;
+        $model->workoutId = \Yii::$app->request->post('workoutId', null);;
+        $model->exerciseCalories = 10;
+        $model->equipmentWeight = 10;
+        $model->seriesSize = 3;
+        $model->seriesNum = 2;
+        $model->restTime = 10;
+
+        if ($model->save()) {
+            return $this->redirect(['/workout']);
+        }
     }
 
     /**

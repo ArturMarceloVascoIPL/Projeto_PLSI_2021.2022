@@ -20,7 +20,6 @@ $this->title = $model->name;
         </div>
     </div>
 
-
     <div class="row mb-2">
         <div class="col">
             <?= DetailView::widget([

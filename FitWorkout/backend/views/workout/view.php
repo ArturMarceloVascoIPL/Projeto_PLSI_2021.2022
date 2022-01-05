@@ -7,24 +7,23 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Workout */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Workouts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="workout-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <!-- Buttons Funcionalidades -->
+    <div class="row mb-4">
+        <div class="col">
+            <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index'], ['class' => 'btn.block btn btn-info']) ?>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <?= Html::a('Adicionar Exercicios', ['exercisesadd', 'id' => $model->id], ['class' => 'btn bg-gradient-success']) ?>
+                <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            </div>
+        </div>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -35,5 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'ptId',
         ],
     ]) ?>
+
+    <?php foreach ($exerciseModel as $key => $exercise) {
+        echo "<br>".$exercise->name;
+    }  ?>
 
 </div>
