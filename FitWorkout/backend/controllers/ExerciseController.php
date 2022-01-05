@@ -2,12 +2,13 @@
 
 namespace backend\controllers;
 
-use common\models\Exercise;
 use backend\models\ExerciseSearch;
+use common\models\Exercise;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * ExerciseController implements the CRUD actions for Exercise model.
@@ -63,63 +64,30 @@ class ExerciseController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ExerciseSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('readExercises')) {
+            $searchModel = new ExerciseSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+
+        return 0;
     }
 
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-
-    public function actionCreate()
-    {
-        $model = new Exercise();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                if (\Yii::$app->user->can('personalTrainer')) {
-                    $model->approved = 0;
-                }
-                $model->save();
-                 
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('readExercises')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        return 0;
     }
 
     protected function findModel($id)
@@ -129,5 +97,62 @@ class ExerciseController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionCreate()
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('createExercise')) {
+            $model = new Exercise();
+
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post())) {
+                    if (Yii::$app->user->can('personalTrainer')) {
+                        $model->approved = 0;
+                    }
+                    $model->save();
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
+        return 0;
+    }
+
+    public function actionUpdate($id)
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('updateExercises')) {
+            $model = $this->findModel($id);
+
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+
+        return 0;
+    }
+
+    public function actionDelete($id)
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('deleteExercises')) {
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        }
+
+        return 0;
     }
 }

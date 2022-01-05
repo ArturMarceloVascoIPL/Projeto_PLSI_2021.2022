@@ -2,120 +2,140 @@
 
 namespace backend\controllers;
 
+use common\models\Product;
+use common\models\ProductSearch;
+use common\models\UploadForm;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use yii\helpers\FileHelper;
-use common\models\Product;
-use common\models\UploadForm;
-use common\models\ProductSearch;
 
 class ProductController extends Controller
 {
-	/**
-	 * @inheritDoc
-	 */
-	public function behaviors()
-	{
-		return array_merge(
-			parent::behaviors(),
-			[
-				'verbs' => [
-					'class' => VerbFilter::className(),
-					'actions' => [
-						'delete' => ['POST'],
-					],
-				],
-			]
-		);
-	}
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
+    }
 
-	public function actionIndex()
-	{
-		$searchModel = new ProductSearch();
-		$dataProvider = $searchModel->search($this->request->queryParams);
+    public function actionIndex()
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('readProducts')) {
+            $searchModel = new ProductSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-		return $this->render('index', [
-			'searchModel' => $searchModel,
-			'dataProvider' => $dataProvider,
-		]);
-	}
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
 
-	public function actionView($id)
-	{
-		return $this->render('view', [
-			'model' => $this->findModel($id),
-		]);
-	}
+        return 0;
+    }
 
-	public function actionCreate()
-	{
-		$model = new Product();
-		// \Yii::getAlias('@web')  
-		$path = '/uploads/products/';
-		// var_dump($path);
-		// die();
-		if ($model->load(\Yii::$app->request->post())) {
+    public function actionView($id)
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('readProducts')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
 
-			$model->file = UploadedFile::getInstance($model, 'file');
-			$model->file->saveAS('@common' . $path . $model->name . '.' . $model->file->extension);
-			$model->imageFileName = $model->name . '.' . $model->file->extension;
+        return 0;
+    }
 
-			if ($model->load($this->request->post()) && $model->save()) {
-				return $this->redirect(['view', 'id' => $model->id]);
-			}
-		} else {
-			$model->loadDefaultValues();
-		}
+    protected function findModel($id)
+    {
+        if (($model = Product::findOne($id)) !== null) {
+            return $model;
+        }
 
-		return $this->render('create', [
-			'model' => $model,
-		]);
-	}
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 
-	public function actionUpdate($id)
-	{
-		$model = $this->findModel($id);
-		$model->scenario = 'update';
-		$imgName = '@common/uploads/products/' . $model->name;
+    public function actionCreate()
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('createProduct')) {
+            $model = new Product();
+            // \Yii::getAlias('@web')
+            $path = '/uploads/products/';
+            // var_dump($path);
+            // die();
+            if ($model->load(Yii::$app->request->post())) {
 
-		if ($model->load(\Yii::$app->request->post())) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->file->saveAS('@common' . $path . $model->name . '.' . $model->file->extension);
+                $model->imageFileName = $model->name . '.' . $model->file->extension;
 
-			$model->file = UploadedFile::getInstance($model, 'file');
-			if ($model->file == "" || $model->file == null)
-				$model->imageFileName = "NoFile";
-			else {
-				$model->file->saveAs($imgName . '.' . $model->file->extension);
-				$model->imageFileName = $imgName . '.' . $model->file->extension;
-			}
-			$model->save(false);
-			return $this->redirect(['view', 'id' => $model->id]);
-		}
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
+            }
 
-		return $this->render('update', [
-			'model' => $model,
-		]);
-	}
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
 
-	public function actionDelete($id)
-	{
-		$this->findModel($id)->delete();
+        return 0;
+    }
 
-		return $this->redirect(['index']);
-	}
+    public function actionUpdate($id)
+    {
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('updateProducts')) {
+            $model = $this->findModel($id);
+            $model->scenario = 'update';
+            $imgName = '@common/uploads/products/' . $model->name;
 
-	protected function findModel($id)
-	{
-		if (($model = Product::findOne($id)) !== null) {
-			return $model;
-		}
+            if ($model->load(Yii::$app->request->post())) {
 
-		throw new NotFoundHttpException('The requested page does not exist.');
-	}
+                $model->file = UploadedFile::getInstance($model, 'file');
+                if ($model->file == "" || $model->file == null)
+                    $model->imageFileName = "NoFile";
+                else {
+                    $model->file->saveAs($imgName . '.' . $model->file->extension);
+                    $model->imageFileName = $imgName . '.' . $model->file->extension;
+                }
+                $model->save(false);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
 
-	private function IsNullOrEmptyString($str)
-	{
-		return (!isset($str) || trim($str) === '');
-	}
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+
+        return 0;
+    }
+
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    private function IsNullOrEmptyString($str)
+    {
+        return (!isset($str) || trim($str) === '');
+    }
 }
