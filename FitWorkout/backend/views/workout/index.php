@@ -22,7 +22,7 @@ $this->title = 'Treinos';
             'id',
             'name',
             'date',
-            'ptId',
+            'user.username',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Actions',

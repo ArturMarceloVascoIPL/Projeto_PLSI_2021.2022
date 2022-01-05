@@ -11,7 +11,6 @@ $this->title = $model->name;
 ?>
 <div class="workout-view">
 
-
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
         <div class="col">
@@ -31,12 +30,12 @@ $this->title = $model->name;
             'id',
             'name',
             'date',
-            'ptId',
+            'user.username',
         ],
     ]) ?>
 
     <?php foreach ($exerciseModel as $key => $exercise) {
-        echo "<br>".$exercise->name;
+        echo "<br>" . $exercise->name;
     }  ?>
 
 </div>
