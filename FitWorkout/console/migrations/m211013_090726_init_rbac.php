@@ -11,7 +11,7 @@ class m211013_090726_init_rbac extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        /*Criacao Roles */
+        //region Criação de Roles
 
         // Role Cliente 
         $client = $auth->createRole('client');
@@ -25,10 +25,9 @@ class m211013_090726_init_rbac extends Migration
         $admin = $auth->createRole('admin');
         $auth->add($admin);
 
-        //Definicao manual dos dados do administrador
-        // $adminUsername = '{adminUsername}';
-        // $adminPassword = '{adminPasswordExemplo}';
-        // $adminEmail = '{admin@exemplo.com}';
+        //endregion
+
+        //region Criação do User Admin
 
         $adminUsername = 'admin';
         $adminPassword = 'adminadmin';
@@ -47,11 +46,14 @@ class m211013_090726_init_rbac extends Migration
             'created_at' => Yii::$app->formatter->asTimestamp('now'),
             'updated_at' => Yii::$app->formatter->asTimestamp('now'),
         ]);
+
         $auth->assign($admin, $this->db->getLastInsertID());
 
-        /*Criacao Permissoes */
+        //endregion
 
-        # - - - - - - - - - Create - - - - - - - - - 
+        //region Criação de Permissões
+
+        #region - - - - - - - - - Create - - - - - - - - -
         // Create Order
         $createOrder = $auth->createPermission('createOrder');
         $createOrder->description = 'Create an Order';
@@ -79,7 +81,7 @@ class m211013_090726_init_rbac extends Migration
 
         // Create Request to be a Personal Trainer
         $createPTApplication  = $auth->createPermission('createPTApplication');
-        $createPTApplication->description = 'Create an Request to be a Personal Trainer';
+        $createPTApplication->description = 'Create a Request to be a Personal Trainer';
         $auth->add($createPTApplication);
 
         // Create Exercises
@@ -89,30 +91,31 @@ class m211013_090726_init_rbac extends Migration
 
         // Create Products
         $createProduct = $auth->createPermission('createProduct');
-        $createProduct->description = 'Create an Product';
+        $createProduct->description = 'Create a Product';
         $auth->add($createProduct);
 
         // Create Workout Plans
         $createWorkoutPlan = $auth->createPermission('createWorkoutPlan');
-        $createWorkoutPlan->description = 'Create an Workout Plans';
+        $createWorkoutPlan->description = 'Create a Workout Plan';
         $auth->add($createWorkoutPlan);
 
         // Create Workouts Personal Trainer
         $createWorkoutPT = $auth->createPermission('createWorkoutPT');
-        $createWorkoutPT->description = 'Create an Workout Personal Trainer';
+        $createWorkoutPT->description = 'Create a Workout as a Personal Trainer';
         $auth->add($createWorkoutPT);
 
         // Create Workouts Admin
         $createWorkoutAdmin = $auth->createPermission('createWorkoutAdmin');
-        $createWorkoutAdmin->description = 'Create an Workout Admin';
+        $createWorkoutAdmin->description = 'Create an Workout as an Admin';
         $auth->add($createWorkoutAdmin);
 
         // Create ExerciseSuggestion
         $createExerciseSuggestion = $auth->createPermission('createExerciseSuggestion');
         $createExerciseSuggestion->description = 'Create an  Exercise Suggestion';
         $auth->add($createExerciseSuggestion);
+        #endregion
 
-        # - - - - - - - - - Read - - - - - - - - - 
+        #region - - - - - - - - -  Read  - - - - - - - - -
         // Read Statistics
         $readStatistics = $auth->createPermission('readStatistics');
         $readStatistics->description = 'Read Statistics';
@@ -123,15 +126,15 @@ class m211013_090726_init_rbac extends Migration
         $readProducts->description = 'Read Products';
         $auth->add($readProducts);
 
-        // Read Profile Data Client
-        $readProfileDataClient = $auth->createPermission('readProfileDataClient');
-        $readProfileDataClient->description = 'Read Profile Data Client';
-        $auth->add($readProfileDataClient);
+        // Read User Profile
+        $readUserProfile = $auth->createPermission('readUserProfile');
+        $readUserProfile->description = 'Read Users Profile';
+        $auth->add($readUserProfile);
 
-        // Read Profile Data Personal Trainer
-        $readProfileDataPT = $auth->createPermission('readProfileDataPT');
-        $readProfileDataPT->description = 'Read Profile Data Personal Trainer';
-        $auth->add($readProfileDataPT);
+        // Read User Data
+        $readUserData = $auth->createPermission('readUserData');
+        $readUserData->description = 'Read Users Data';
+        $auth->add($readUserData);
 
         // Read Personal Trainers
         $readPersonalTrainers = $auth->createPermission('readPersonalTrainers');
@@ -145,12 +148,12 @@ class m211013_090726_init_rbac extends Migration
 
         // Read Chat Cliente 
         $readChatClient = $auth->createPermission('readChatClient');
-        $readChatClient->description = 'Read an Chat Client Side';
+        $readChatClient->description = 'Read a Chat Client Side';
         $auth->add($readChatClient);
 
         // Read Chat Personal Trainer
         $readChatPersonalTrainer = $auth->createPermission('readChatPersonalTrainer');
-        $readChatPersonalTrainer->description = 'Read an Chat Personal Trainer Side';
+        $readChatPersonalTrainer->description = 'Read a Chat Personal Trainer Side';
         $auth->add($readChatPersonalTrainer);
 
         // Read Users
@@ -197,17 +200,18 @@ class m211013_090726_init_rbac extends Migration
         $readWorkouts  = $auth->createPermission('readWorkouts');
         $readWorkouts->description = 'Read Workouts';
         $auth->add($readWorkouts);
+        #endregion
 
-        # - - - - - - - - - Update - - - - - - - - -  
-        // Update Client Profile Data
-        $updateProfileDataClient  = $auth->createPermission('updateProfileDataClient');
-        $updateProfileDataClient->description = 'Update Client Profile Data';
-        $auth->add($updateProfileDataClient);
+        #region - - - - - - - - - Update - - - - - - - - -
+        // Update User Profile
+        $updateUserProfile  = $auth->createPermission('updateUserProfile');
+        $updateUserProfile->description = 'Update Users Profile';
+        $auth->add($updateUserProfile);
 
-        // Update Personal Trainer Profile Data
-        $updateProfileDataPersonalTrainer  = $auth->createPermission('updateProfileDataPersonalTrainer');
-        $updateProfileDataPersonalTrainer->description = 'Update Personal Trainer Profile Data';
-        $auth->add($updateProfileDataPersonalTrainer);
+        // Update User Data
+        $updateUserData  = $auth->createPermission('updateUserData');
+        $updateUserData->description = 'Update Users Data';
+        $auth->add($updateUserData);
 
         // Update Personal Trainer Contract
         $updatePersonalTrainerContract  = $auth->createPermission('updatePersonalTrainerContract');
@@ -258,8 +262,9 @@ class m211013_090726_init_rbac extends Migration
         $updateWorkoutsAdmin  = $auth->createPermission('updateWorkoutsAdmin');
         $updateWorkoutsAdmin->description = 'Update Workouts Admin';
         $auth->add($updateWorkoutsAdmin);
+        #endregion
 
-        # - - - - - - - - Delete - - - - - - - - - 
+        #region - - - - - - - - - Delete - - - - - - - - -
         // Delete Exercises
         $deleteExercises  = $auth->createPermission('deleteExercises');
         $deleteExercises->description = 'Delete Exercises';
@@ -279,8 +284,12 @@ class m211013_090726_init_rbac extends Migration
         $deleteWorkoutsAdmin = $auth->createPermission('deleteWorkoutsAdmin');
         $deleteWorkoutsAdmin->description = 'Delete Workouts';
         $auth->add($deleteWorkoutsAdmin);
+        #endregion
 
-        /* Atribuição Permissões aos Roles */
+        //endregion
+
+        //region Atribuição Permissões aos Roles
+
         //Admin
         $auth->addChild($admin, $createExercise);
         $auth->addChild($admin, $createProduct);
@@ -314,12 +323,14 @@ class m211013_090726_init_rbac extends Migration
 
         $auth->addChild($client, $readStatistics);
         $auth->addChild($client, $readProducts);
-        $auth->addChild($client, $readProfileDataClient);
+        $auth->addChild($client, $readUserProfile);
+        $auth->addChild($client, $readUserData);
         $auth->addChild($client, $readOrderStatus);
         $auth->addChild($client, $readPersonalTrainers);
         $auth->addChild($client, $readChatClient);
 
-        $auth->addChild($client, $updateProfileDataClient);
+        $auth->addChild($client, $updateUserProfile);
+        $auth->addChild($client, $updateUserData);
         $auth->addChild($client, $updatePersonalTrainerContract);
 
         //Personal Trainer
@@ -330,18 +341,18 @@ class m211013_090726_init_rbac extends Migration
 
         $auth->addChild($personalTrainer, $readChatPersonalTrainer);
         $auth->addChild($personalTrainer, $readWorkoutPlansPT);
-        $auth->addChild($personalTrainer, $readProfileDataPT);
         $auth->addChild($personalTrainer, $readWorkoutsPT);
         $auth->addChild($personalTrainer, $readExercisesSuggestionsPT);
 
         $auth->addChild($personalTrainer, $updateWorkoutPlansPT);
-        $auth->addChild($personalTrainer, $updateProfileDataPersonalTrainer);
         $auth->addChild($personalTrainer, $updateWorkoutsPT);
 
         $auth->addChild($personalTrainer, $deleteWorkoutPlans);
         $auth->addChild($personalTrainer, $deleteWorkoutsPT);
 
         $auth->addChild($personalTrainer, $client);
+
+        //endregion
     }
 
     public function down()
