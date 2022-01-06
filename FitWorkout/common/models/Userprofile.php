@@ -40,6 +40,8 @@ class Userprofile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['userId'], 'required'],
+            [['userId'], 'integer'],
             [['nif'], 'integer', 'min' => 111111111, 'max' => 999999999],
             [['address'], 'string', 'max' => 255],
             [['postalCode', 'city'], 'string', 'max' => 45],
@@ -98,7 +100,7 @@ class Userprofile extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::className(), ['clientId' => 'userId']);
+        return $this->hasMany(Order::className(), ['userId' => 'userId']);
     }
 
     /**
