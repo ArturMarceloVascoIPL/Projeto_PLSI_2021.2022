@@ -79,9 +79,9 @@ AppAsset::register($this);
                                         <?= Html::a('Estatisticas', ['/site/statistics'], ['class' => 'nav-link']) ?>
                                     </li>
 
-                                    <li class="nav-item">
-                                        <?= Html::a('Personal Trainer', ['/site/personaltrainer'], ['class' => 'nav-link']) ?>
-                                    </li>
+                                <li class="nav-item">
+                                    <?= Html::a('Personal Trainer', ['/personaltrainer'], ['class' => 'nav-link']) ?>
+                                </li>
 
                                     <li class="nav-item">
                                         <?= Html::a('Encomendas', ['/site/orders'], ['class' => 'nav-link']) ?>

@@ -68,7 +68,7 @@ Informação de como instalar o nosso projeto:
 > >
 > > > `php yii serve --docroot="frontend/web/" --port=7070`
 > >
-> > **Backend** - Para a aplicação frontend
+> > **Backend** - Para a aplicação backend
 > >
 > > > `php yii serve --docroot="backend/web/" --port=9090`
 > >

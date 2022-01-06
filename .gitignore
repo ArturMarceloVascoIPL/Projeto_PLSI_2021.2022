@@ -1,2 +1,8 @@
 ﻿.vscode
 FitWorkout/api/runtime
+
+FitWorkout/backend/web/uploads/
+
+FitWorkout/common/uploads/
+
+FitWorkout/frontend/web/uploads/
