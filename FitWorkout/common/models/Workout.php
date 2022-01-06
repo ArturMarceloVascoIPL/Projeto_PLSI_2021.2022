@@ -52,6 +52,7 @@ class Workout extends \yii\db\ActiveRecord
             'name' => 'Nome',
             'date' => 'Data',
             'ptId' => 'ID do Personal Trainer',
+            'user.username' => 'Nome do Personal Trainer',
         ];
     }
 
@@ -93,6 +94,11 @@ class Workout extends \yii\db\ActiveRecord
     public function getPt()
     {
         return $this->hasOne(Userprofile::className(), ['userId' => 'ptId']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'ptId']);
     }
 
     /**

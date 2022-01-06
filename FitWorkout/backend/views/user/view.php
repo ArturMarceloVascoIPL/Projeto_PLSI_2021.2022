@@ -22,16 +22,16 @@ $this->title = 'Ver Utilizador: ' . $model->username;
             <div class="float-right">
                 <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             </div><?php
-        #todo Implementar func update disabled account 
-        //(ter q mandar func diretamente para o controller)
-        //  Html::a('Disable', ['update', 'id' => $model->id], [
-        //     'class' => 'btn btn-danger',
-        //     'data' => [
-        //         'confirm' => 'Are you sure you want to delete this item?',
-        //         'method' => 'post',
-        //     ],
-        // ]) 
-        ?>
+                    #todo Implementar func update disabled account 
+                    //(ter q mandar func diretamente para o controller)
+                    //  Html::a('Disable', ['update', 'id' => $model->id], [
+                    //     'class' => 'btn btn-danger',
+                    //     'data' => [
+                    //         'confirm' => 'Are you sure you want to delete this item?',
+                    //         'method' => 'post',
+                    //     ],
+                    // ]) 
+                    ?>
         </div>
     </div>
 

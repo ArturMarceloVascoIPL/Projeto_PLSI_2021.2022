@@ -50,6 +50,8 @@ $script = <<< JS
         var day = currentTime.getDate();
         var year = currentTime.getFullYear();
         
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
         var strTime = day + '/' + month + '/' + year + ' | ' + hours + ':' + minutes + ':' + seconds;

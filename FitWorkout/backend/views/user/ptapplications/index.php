@@ -14,12 +14,7 @@ $this->title = 'Aplicações para Personal Trainer';
     <div class="col">
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['mainindex'], ['class' => 'btn.block btn btn-info']) ?>
     </div>
-    <div class="col">
-        <div class="float-right">
-            <?= Html::a('Adicionar Categoria', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-    </div>
-</div>
+  </div>
 
 
 <?= GridView::widget([

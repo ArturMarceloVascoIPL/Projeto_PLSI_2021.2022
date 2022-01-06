@@ -2,7 +2,6 @@
 
 /* @var $this yii\web\View */
 
-use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap4\Html;
 
 $this->title = 'Fit Workout';
@@ -10,7 +9,7 @@ $this->title = 'Fit Workout';
 
 
 <body class="body-wrapper">
-  <!-- //Html::a('Editar', ['editarperfil', 'id' => $model->id], ['class' => 'dropdown-item'])   -->
+<!-- //Html::a('Editar', ['editarperfil', 'id' => $model->id], ['class' => 'dropdown-item'])   -->
 
 <div class="site-index">
     <div class="container">
@@ -27,7 +26,7 @@ $this->title = 'Fit Workout';
             </div>
 
             <div class="jumbotron text-center bg-transparent">
-                <h1 class="display-4">😎</h1>
+
                 <?php if (Yii::$app->user->isGuest) { ?>
 
                 <?php } else { ?>
@@ -41,18 +40,18 @@ $this->title = 'Fit Workout';
                                     </div>
 
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Cras justo odio
+                                        <li class="list-group-item">Encomenda 1
                                             <?=
                                             Html::img('@web/img/truck.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
                                             ?>
                                         </li>
 
-                                        <li class="list-group-item">Dapibus ac facilisis in
+                                        <li class="list-group-item">Encomenda 2
                                             <?=
                                             Html::img('@web/img/shop.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
                                             ?></li>
                                         </li>
-                                        <li class="list-group-item">Vestibulum at eros
+                                        <li class="list-group-item">Encomenda 3
                                             <?=
                                             Html::img('@web/img/shop.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
                                             ?></li>
@@ -67,9 +66,7 @@ $this->title = 'Fit Workout';
                                         <h2>Plano de Treino de Hoje</h2>
                                     </div>
                                     <div class="card-body">
-                                        <div class="card-title">
-
-                                        </div>
+                                        <li class="list-group-item">Treino 1
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +82,7 @@ $this->title = 'Fit Workout';
                                         <p class="cart-text">'mensagem do personal trainer'
                                             <?=
                                             Html::img('@web/img/bell-fill.svg', $options = ['class' => 'float-right', 'alt' => 'logo']);
-                                            ?></li>
+                                            ?>
                                         </p>
                                     </div>
                                 </div>

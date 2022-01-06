@@ -4,12 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Exercise */
+/* @var $model common\models\Workout */
 
 $this->title = $model->name;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="exercise-view">
+<div class="workout-view">
 
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
@@ -18,14 +18,8 @@ $this->title = $model->name;
         </div>
         <div class="col">
             <div class="float-right">
+                <?= Html::a('Adicionar Exercicios', ['exercisesadd', 'id' => $model->id], ['class' => 'btn bg-gradient-success']) ?>
                 <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => 'Tem certeza de que deseja excluir este item?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
             </div>
         </div>
     </div>
@@ -35,15 +29,13 @@ $this->title = $model->name;
         'attributes' => [
             'id',
             'name',
-            'type.name',
-            'category.name',
-            'description', [
-                'attribute' => 'approved',
-                'value' => function ($model) {
-                    return $model->approved ? 'Aprovado' : 'Não Aprovado';
-                },
-            ],
+            'date',
+            'user.username',
         ],
     ]) ?>
+
+    <?php foreach ($exerciseModel as $key => $exercise) {
+        echo "<br>" . $exercise->name;
+    }  ?>
 
 </div>

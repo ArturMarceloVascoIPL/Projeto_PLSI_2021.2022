@@ -69,10 +69,7 @@ $this->title = 'Loja';
 
                                 <?php } ?>
 
-
-
-
-                            </div>
+                           </div>
                             <div class="row sorting mb-5 mt-5">
                                 <div class="col-12">
                                     <a class="btn btn-light">

@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\LoginForm;
 use Yii;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\helpers\Url;
-use common\models\LoginForm;
 
 /**
  * Site controller
@@ -31,9 +31,9 @@ class SiteController extends Controller
                     ],
                     [
                         #TODO ver o que fazer com o acesso aos usuários logados (permissoess e vistas)
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['index', 'logout', 'error'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin', 'personalTrainer'],
                     ],
                 ],
             ],
@@ -93,7 +93,7 @@ class SiteController extends Controller
                     #TODO verificar se o usuário tem permissão para acessar o sistema
 
                 } else
-                    return  $this->goHome();
+                    return $this->goHome();
             }
         }
 

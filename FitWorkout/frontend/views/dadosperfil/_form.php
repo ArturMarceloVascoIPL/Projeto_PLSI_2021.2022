@@ -10,22 +10,21 @@ use yii\widgets\ActiveForm;
 
 ?>
 <div class="dadosperfil-index">
-    <?php ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($modelclient, 'weight') ?>
-        <?= $form->field($modelclient, 'height') ?>
+    <?= $form->field($modelProfile, 'address') ?>
 
-        <?= $form->field($modeluser, 'email') ?>
+    <?= $form->field($modelProfile, 'nif') ?>
 
+    <?= $form->field($modelProfile, 'postalCode') ?>
 
-        <!-- //TODO: Acrescentar nome e apelido à base de dados -->
-        
-    
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
+    <?= $form->field($modelProfile, 'city') ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Salvar', ['class' => 'btn btn-app bg-success']) ?>
+    </div>
+
     <?php ActiveForm::end(); ?>
 
 </div><!-- dadosperfil-index -->

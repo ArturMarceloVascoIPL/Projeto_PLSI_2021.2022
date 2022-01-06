@@ -1,10 +1,10 @@
 <?php
 
+use common\models\Exercisecategory;
+use common\models\Exercisetype;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\Exercisetype;
-use common\models\Exercisecategory;
 
 $tipos = ArrayHelper::map(Exercisetype::find()->all(), 'id', 'name');
 $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
@@ -28,13 +28,14 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
         <?= $form->field($model, 'approved')->dropDownList(
             [0 => 'Não Aprovado', 1 => 'Aprovado'],
             ['options' => ['approved' => ['selected' => true]]]
-        )->label('Tipo de Exercício') ?>
+        )->label('Aprovação de Exercício') ?>
+
     <?php } ?>
 
     <!-- Tipo de Exercicio -->
-    <?= $form->field($model, 'type')->dropDownList(
+    <?= $form->field($model, 'typeId')->dropDownList(
         $tipos,
-        ['options' => ['type' => ['selected' => true]]]
+        ['options' => ['typeId' => ['selected' => true]]]
     )->label('Tipo de Exercício') ?>
 
     <!-- Categoria do Exercicio -->
@@ -49,7 +50,7 @@ $categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
             '<i class="fas fa-save"></i> Salvar',
             [
                 'class' => 'btn btn-app bg-success',
-                'class' => 'btn btn-app bg-success',  'data' => [
+                'data' => [
                     'confirm' => 'Tem certeza de que deseja salvar este item?',
                     'method' => 'post',
                 ]
