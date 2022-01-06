@@ -1,13 +1,15 @@
 <?php
 
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+
 ?>
 <div class="card m-b-4">
     <div class="card-body login-card-body">
         <p class="login-box-msg">Backend | Login Page (Admin - Personal Trainer)</p>
 
         <div class="col-4">
-            <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+            <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
             <?= $form->field($model, 'username', [
                 'options' => ['class' => 'form-group has-feedback'],
@@ -26,16 +28,12 @@ use yii\helpers\Html;
             ])
                 ->label(false)
                 ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
-        </div>
-        
-        <div class="row">
 
-            <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
-            </div>
+            <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
+
+            <?php ActiveForm::end(); ?>
         </div>
 
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
     </div>
     <!-- /.login-card-body -->
 </div>
