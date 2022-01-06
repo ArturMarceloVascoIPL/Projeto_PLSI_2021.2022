@@ -12,10 +12,18 @@
 </p>
 
 ---
+>Credenciais de Administrador (default):
+>> **Username:** `admin`
+>>
+>> **Password:** `adminadmin`
+>>
+>Se quiser pode aceder à migracao `m211013_090726_init_rbac.php` e alterar as credencias para o adminstrador default
 
-Informação de como instalar o nosso projeto:
+---
 
 **A pasta do repositório Git tem de estar dentro da pasta "www" do Wamp**
+
+Colocar projeto dentro da pasta _www_
 
 > **1º Passo** - Verificação do Composer
 >
@@ -76,3 +84,18 @@ Informação de como instalar o nosso projeto:
 > >
 > > > `php yii serve --docroot="backend/web/" --port=8080`
 > >
+
+---
+<p align="center">
+    <h4>Testes:</h4>
+</p>
+
+Informação de como inicializar os testes:
+
+> Entrar dentro da pasta projeto FitWorkout
+> 
+> Dentro da pasta **common** correr esta linha para fazer os testes unitarios dos modelos
+>>`php ../vendor/bin/codecept run unit models`
+>
+> Dentro da pasta **backend** ou **frontend** correr esta linha para fazer os testes unitarios dos modelos
+>> `php ../vendor/bin/codecept run functional`
