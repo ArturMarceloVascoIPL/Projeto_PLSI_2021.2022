@@ -89,6 +89,16 @@ class Plan extends \yii\db\ActiveRecord
         return $this->hasOne(Userprofile::className(), ['userId' => 'userId']);
     }
 
+    public function getPt()
+    {
+        return $this->hasOne(User::className(), ['id' => 'ptPlan']);
+    }
+    
+    public function getClient()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+
     /**
      * Gets query for [[Workouts]].
      *

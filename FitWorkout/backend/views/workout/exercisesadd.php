@@ -14,9 +14,6 @@ use yii\helpers\ArrayHelper;
 
 
 //get all exercises into a array list from exercise model
-$tipos = ArrayHelper::map(Exercisetype::find()->all(), 'id', 'name');
-$categorias = ArrayHelper::map(Exercisecategory::find()->all(), 'id', 'name');
-
 $this->title = 'Adicionar Exercicios';
 \yii\web\YiiAsset::register($this);
 ?>
@@ -26,12 +23,6 @@ $this->title = 'Adicionar Exercicios';
 	<div class="row mb-4">
 		<div class="col">
 			<?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['/workout'], ['class' => 'btn.block btn btn-info']) ?>
-		</div>
-
-		<div class="col">
-			<div class="float-right">
-				<?= Html::submitButton('<i class="fas fa-save"></i> Salvar', ['class' => 'btn btn-success']) ?>
-			</div>
 		</div>
 	</div>
 

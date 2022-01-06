@@ -2,22 +2,19 @@
 
 namespace backend\controllers;
 
+use common\models\Plan;
+use common\models\Planworkout;
 use common\models\Workout;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\Exercise;
-use common\models\Exercisecategory;
-use common\models\Exercisetype;
-use common\models\Workoutexercise;
-use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 
 /**
- * WorkoutController implements the CRUD actions for Workout model.
+ * PlanController implements the CRUD actions for Plan model.
  */
-class WorkoutController extends Controller
+class PlanController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,19 +30,19 @@ class WorkoutController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-                'acess' => [
+                'access' => [
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
-
+                            'actions' => ['login', 'error'],
                             'allow' => true,
-                            'actions' => ['index', 'view', 'create', 'update', 'delete', 'logout', 'error', 'exercisesadd', 'addexercise'],
-                            'roles' => ['admin', 'personalTrainer'],
+                            'roles' => ['?'],
                         ],
                         [
+                            #TODO ver o que fazer com o acesso aos usuários logados (permissoess e vistas)
+                            'actions' => ['index', 'logout', 'error', 'view', 'create', 'update', 'delete', 'addtreinos', 'addtreino'],
                             'allow' => true,
-                            'actions' => ['index', 'view', 'logout', 'error'],
-                            'roles' => ['?'],
+                            'roles' => ['personalTrainer'],
                         ],
                     ],
                 ],
@@ -54,16 +51,15 @@ class WorkoutController extends Controller
     }
 
     /**
-     * Lists all Workout models.
-     * @return mixed
+     * Lists all Plan models.
+     *
+     * @return string
      */
     public function actionIndex()
     {
-        if (\Yii::$app->user->can('admin')) {
-
-            $dataProvider = new ActiveDataProvider([
-                'query' => Workout::find(),
-                /*
+        $dataProvider = new ActiveDataProvider([
+            'query' => Plan::find(),
+            /*
             'pagination' => [
                 'pageSize' => 50
             ],
@@ -73,67 +69,52 @@ class WorkoutController extends Controller
                 ]
             ],
             */
-            ]);
+        ]);
 
-            return $this->render('index', [
-                'dataProvider' => $dataProvider,
-            ]);
-        } else if (\Yii::$app->user->can('personalTrainer')) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => Workout::find()->where(['ptId' => \Yii::$app->user->id]),
-                /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
-            ]);
-
-            return $this->render('index', [
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-    }
-
-    /**
-     * Displays a single Workout model.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        $exerciseWorkoutList =  Workoutexercise::find()->where(['workoutId' => $id])->all();
-        $exerciseList = [];
-        foreach ($exerciseWorkoutList as $exerciseWorkout) {
-            $exerciseList[] = $exerciseWorkout->exerciseId;
-        }
-
-        $exerciseModel = Exercise::find()->where(['id' => $exerciseList])->all();
-
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-            'exerciseModel' => $exerciseModel,
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new Workout model.
+     * Displays a single Plan model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        $workoutPlanList =  Planworkout::find()->where(['planId' => $id])->all();
+        $workoutList = [];
+        foreach ($workoutPlanList as $workouts) {
+            $workoutList[] = $workouts->workoutId;
+        }
+
+        $workoutModel = Workout::find()->where(['id' => $workoutList])->all();
+
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+            'workoutModel' => $workoutModel,
+        ]);
+
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Plan model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Workout();
+        $model = new Plan();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->ptId = \Yii::$app->user->id;
-
+                $model->ptPlan =  \Yii::$app->user->identity->id;
+                $model->userId = \Yii::$app->user->identity->id;
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -146,6 +127,13 @@ class WorkoutController extends Controller
         ]);
     }
 
+    /**
+     * Updates an existing Plan model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -160,10 +148,10 @@ class WorkoutController extends Controller
     }
 
     /**
-     * Deletes an existing Workout model.
+     * Deletes an existing Plan model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return mixed
+     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -173,9 +161,10 @@ class WorkoutController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionExercisesadd($id)
+
+    public function actionAddtreinos($id)
     {
-        $model = new Workoutexercise();
+        $model = new Planworkout();
 
         if ($this->request->post()) {
 
@@ -184,40 +173,40 @@ class WorkoutController extends Controller
             }
         }
 
-        return $this->render('exercisesadd', [
+        return $this->render('addtreinos', [
             'model' => $model,
-            'workoutModel' => $this->findModel($id),
-            "exerciseList" => Exercise::find()->all(),
+            'planPt' => $this->findModel($id),
+            'workoutsPt' => Workout::find()->where(['ptId' => \Yii::$app->user->identity->id])->all(),
         ]);
     }
 
-    public function actionAddexercise()
+    public function actionAddtreino()
     {
-        $model = new Workoutexercise();
+        $model = new Planworkout();
 
-        $model->exerciseId = \Yii::$app->request->post('exerciseId', null);;
+        $model->planId = \Yii::$app->request->post('planId', null);;
         $model->workoutId = \Yii::$app->request->post('workoutId', null);;
-        $model->exerciseCalories = 10;
-        $model->equipmentWeight = 10;
-        $model->seriesSize = 3;
-        $model->seriesNum = 2;
-        $model->restTime = 10;
 
         if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->workoutId]);
+            return $this->redirect(['view', 'id' => $model->planId]);
         }
+
+        return $this->render('addtreinos', [
+            'model' => $model,
+            'workoutsPt' => Workout::find()->where(['ptId' => \Yii::$app->user->identity->id])->all(),
+        ]);
     }
 
     /**
-     * Finds the Workout model based on its primary key value.
+     * Finds the Plan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Workout the loaded model
+     * @return Plan the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Workout::findOne($id)) !== null) {
+        if (($model = Plan::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

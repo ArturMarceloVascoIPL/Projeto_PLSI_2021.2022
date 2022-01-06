@@ -80,38 +80,46 @@ $number_of_orders = Order::find()->count();
         <!-- Personal Trainer -->
     <?php } else { ?>
 
-        <div class="row">
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Encomendas</h2>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Notificacoes de Clientes</h2>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>0</b> Notificacoes</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in </li>
-                    <li class="list-group-item">Vestibulum at eros </li>
-                </ul>
-            </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Treinos Criados Recentemente</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title"></div>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Plano de Treino de Hoje</h2>
-                </div>
-                <div class="card-body">
-                    <div class="card-title"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2>Notificações do Personal Trainer</h2>
-                </div>
-                <div class="card-body">
-                    <div class="card-title">Personal Trainer</div>
-                    <p class="cart-text">'mensagem do personal trainer'</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Top Calorias Gastas</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Personal Trainer</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     <?php } ?>
 </body>

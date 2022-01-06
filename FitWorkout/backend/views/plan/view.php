@@ -4,12 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Workout */
+/* @var $model common\models\Plan */
+use yii\web\User;
+use common\models\Userprofile;
 
-$this->title = "Treino: " . $model->name;
+$this->title = "Plano Treino: " . $model->id;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="workout-view">
+<div class="plan-view">
 
     <!-- Buttons Funcionalidades -->
     <div class="row mb-4">
@@ -18,7 +20,7 @@ $this->title = "Treino: " . $model->name;
         </div>
         <div class="col">
             <div class="float-right">
-                <?= Html::a('Adicionar Exercicios', ['exercisesadd', 'id' => $model->id], ['class' => 'btn bg-gradient-success']) ?>
+                <?= Html::a('Adicionar Treinos', ['addtreinos', 'id' => $model->id], ['class' => 'btn bg-gradient-success']) ?>
                 <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
@@ -27,15 +29,18 @@ $this->title = "Treino: " . $model->name;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'date',
-            'user.username',
+            'dateStart',
+            'dateEnd',
+            'description',
+            'pt.username',
+            'client.username'
         ],
     ]) ?>
 
-    <h3>Lista de Exercicios: </h3>
-    <?php foreach ($exerciseModel as $key => $exercise) {
-        echo "<hr>" . $exercise->name;
+    <h3>Lista de Treinos: </h3>
+    <?php foreach ($workoutModel as $key => $workout) {
+        echo "<hr>";
+        echo Html::a('Ver Treino: ' . $workout->name, ['/workout/view', 'id' => $workout->id]);
     }  ?>
     <hr>
 </div>
