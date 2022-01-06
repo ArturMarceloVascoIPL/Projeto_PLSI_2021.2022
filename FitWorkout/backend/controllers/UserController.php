@@ -3,13 +3,12 @@
 namespace backend\controllers;
 
 use common\models\User;
-use common\models\Userprofile;
+use common\models\UserSearch;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use common\models\UserSearch;
-use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -69,14 +68,30 @@ class UserController extends Controller
         ]);
     }
 
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
+
+    //     return $this->redirect(['index']);
+    // } 
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $auth = \Yii::$app->authManager;
+        $auth = Yii::$app->authManager;
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             $request = $this->request->post();
-         
+
             $role = $request['User']['role'];
 
             $auth->revokeAll($id);
@@ -90,21 +105,5 @@ class UserController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    // public function actionDelete($id)
-    // {
-    //     $this->findModel($id)->delete();
-
-    //     return $this->redirect(['index']);
-    // } 
-
-    protected function findModel($id)
-    {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

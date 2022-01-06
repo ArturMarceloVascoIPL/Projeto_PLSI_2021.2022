@@ -5,10 +5,9 @@ namespace backend\controllers;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 
-class SettingsController extends \yii\web\Controller
+class SettingsController extends Controller
 {
     public function behaviors()
     {
@@ -40,6 +39,7 @@ class SettingsController extends \yii\web\Controller
             ]
         );
     }
+
     public function actionIndex()
     {
         return $this->render('index');

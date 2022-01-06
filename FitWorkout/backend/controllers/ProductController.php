@@ -129,9 +129,13 @@ class ProductController extends Controller
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        /** Verificar permissão do utilizador */
+        if (Yii::$app->user->can('deleteProduct')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        }
 
-        return $this->redirect(['index']);
+        return 0;
     }
 
     private function IsNullOrEmptyString($str)
