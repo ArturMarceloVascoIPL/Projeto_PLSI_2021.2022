@@ -2027,6 +2027,60 @@
             "time": "2020-10-21T16:48:15+00:00"
         },
         {
+            "name": "codeception/module-db",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/module-db.git",
+                "reference": "23f4fe67ecc1902982001839dd131397d605d681"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/module-db/zipball/23f4fe67ecc1902982001839dd131397d605d681",
+                "reference": "23f4fe67ecc1902982001839dd131397d605d681",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/codeception": "*@dev",
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "php": "^7.4 | ^8.0"
+            },
+            "conflict": {
+                "codeception/codeception": "<4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk"
+                },
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "DB module for Codeception",
+            "homepage": "https://codeception.com/",
+            "keywords": [
+                "codeception",
+                "database-testing",
+                "db-testing"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/module-db/issues",
+                "source": "https://github.com/Codeception/module-db/tree/2.0.0"
+            },
+            "time": "2021-12-04T03:21:22+00:00"
+        },
+        {
             "name": "codeception/module-filesystem",
             "version": "1.0.3",
             "source": {
