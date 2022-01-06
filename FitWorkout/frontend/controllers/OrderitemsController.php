@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use common\models\Order;
+use common\models\Orderitems;
+use common\models\OrderitemsSearch;
 use common\models\Product;
-use frontend\models\ShopSearch;
-use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ShopController implements the CRUD actions for Product model.
+ * OrderitemsController implements the CRUD actions for Orderitems model.
  */
-class ShopController extends Controller
+class OrderitemsController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,12 +34,13 @@ class ShopController extends Controller
     }
 
     /**
-     * Lists all Product models.
-     * @return mixed
+     * Lists all Orderitems models.
+     *
+     * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ShopSearch();
+        $searchModel = new OrderitemsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,9 +50,9 @@ class ShopController extends Controller
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Orderitems model.
      * @param int $id ID
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
@@ -62,13 +63,13 @@ class ShopController extends Controller
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Orderitems model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Orderitems();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -84,10 +85,10 @@ class ShopController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Orderitems model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return mixed
+     * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -104,10 +105,10 @@ class ShopController extends Controller
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Orderitems model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return mixed
+     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -118,47 +119,31 @@ class ShopController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Orderitems model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Product the loaded model
+     * @return Orderitems the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Orderitems::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public static function actionSearchorder($productId)
+    public static function createOrderItem($productId,$orderId)
     {
-        $userId = Yii::$app->user->identity->id;
+        $orderItems = new Orderitems();
 
+        $product = Product::findOne($productId);
 
-        if(!Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->all())
-        {
-            $order = new Order();
-
-            $order->priceTotal = 0;
-            $order->status = 0;
-            $order->userId = $userId;
-            
-            $order->save();
-            Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $order->id]);
-
-            var_dump($order);
-            die();
-        }
-        else
-        {
-            $orderEncontrada = Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->one();
-            Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $orderEncontrada->id]);
-            var_dump($orderEncontrada);
-            die();
-        } 
+        $orderItems->price = $product->price;
+        $orderItems->productId = $productId;
+        $orderItems->orderId = $orderId;
         
+        $orderItems->save();
     }
 }
