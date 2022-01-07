@@ -33,7 +33,7 @@ class ExercisecategoryController extends Controller
     public function actionIndex()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readExerciseCategory')) {
+        // if (Yii::$app->user->can('readExerciseCategory')) {
             $dataProvider = new ActiveDataProvider([
                 'query' => Exercisecategory::find(),
                 /*
@@ -50,21 +50,21 @@ class ExercisecategoryController extends Controller
             return $this->render('/exercise/exercisecategory/index', [
                 'dataProvider' => $dataProvider,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionView($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readExerciseCategory')) {
+        // if (Yii::$app->user->can('readExerciseCategory')) {
             return $this->render('/exercise/exercisecategory/view', [
                 'model' => $this->findModel($id),
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     protected function findModel($id)
@@ -79,7 +79,7 @@ class ExercisecategoryController extends Controller
     public function actionCreate()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('createExerciseCategory')) {
+        // if (Yii::$app->user->can('createExerciseCategory')) {
             $model = new Exercisecategory();
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
@@ -91,15 +91,15 @@ class ExercisecategoryController extends Controller
             return $this->render('/exercise/exercisecategory/create', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionUpdate($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('updateExerciseCategory')) {
+        // if (Yii::$app->user->can('updateExerciseCategory')) {
             $model = $this->findModel($id);
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -107,20 +107,20 @@ class ExercisecategoryController extends Controller
             return $this->render('/exercise/exercisecategory/update', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionDelete($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('deleteExerciseCategory')) {
+        // if (Yii::$app->user->can('deleteExerciseCategory')) {
             $this->findModel($id)->delete();
             return $this->redirect(['index']);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionMainindex()

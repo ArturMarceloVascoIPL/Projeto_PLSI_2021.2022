@@ -34,7 +34,7 @@ class ProductController extends Controller
     public function actionIndex()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readProducts')) {
+        // if (Yii::$app->user->can('readProducts')) {
             $searchModel = new ProductSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -42,19 +42,19 @@ class ProductController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionView($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readProducts')) {
+        // if (Yii::$app->user->can('readProducts')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
-        }
+        // }
 
         return 0;
     }
@@ -71,7 +71,7 @@ class ProductController extends Controller
     public function actionCreate()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('createProduct')) {
+        // if (Yii::$app->user->can('createProduct')) {
             $model = new Product();
             // \Yii::getAlias('@web')
             $path = '/uploads/products/';
@@ -93,15 +93,15 @@ class ProductController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionUpdate($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('updateProducts')) {
+        // if (Yii::$app->user->can('updateProducts')) {
             $model = $this->findModel($id);
             $model->scenario = 'update';
             $imgName = '@common/uploads/products/' . $model->name;
@@ -122,20 +122,20 @@ class ProductController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionDelete($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('deleteProduct')) {
+        // if (Yii::$app->user->can('deleteProduct')) {
             $this->findModel($id)->delete();
             return $this->redirect(['index']);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     private function IsNullOrEmptyString($str)

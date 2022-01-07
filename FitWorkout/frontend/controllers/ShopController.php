@@ -149,15 +149,13 @@ class ShopController extends Controller
             $order->save();
             Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $order->id]);
 
-            var_dump($order);
-            die();
+           
         }
         else
         {
             $orderEncontrada = Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->one();
             Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $orderEncontrada->id]);
-            var_dump($orderEncontrada);
-            die();
+           
         } 
         
     }

@@ -35,7 +35,7 @@ class ProductcategoryController extends Controller
     public function actionIndex()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readProductCategory')) {
+        // if (Yii::$app->user->can('readProductCategory')) {
             $dataProvider = new ActiveDataProvider([
                 'query' => Productcategory::find(),
                 /*
@@ -52,21 +52,21 @@ class ProductcategoryController extends Controller
             return $this->render('/product/productcategory/index', [
                 'dataProvider' => $dataProvider,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionView($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readProductCategory')) {
+        // if (Yii::$app->user->can('readProductCategory')) {
             return $this->render('/product/productcategory/view', [
                 'model' => $this->findModel($id),
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     protected function findModel($id)
@@ -81,7 +81,7 @@ class ProductcategoryController extends Controller
     public function actionCreate()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('createProductCategory')) {
+        // if (Yii::$app->user->can('createProductCategory')) {
             $model = new Productcategory();
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
@@ -93,15 +93,15 @@ class ProductcategoryController extends Controller
             return $this->render('/product/productcategory/create', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionUpdate($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('updateProductCategory')) {
+        // if (Yii::$app->user->can('updateProductCategory')) {
             $model = $this->findModel($id);
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -109,20 +109,20 @@ class ProductcategoryController extends Controller
             return $this->render('/product/productcategory/update', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionDelete($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('deleteProductCategory')) {
+        // if (Yii::$app->user->can('deleteProductCategory')) {
             $this->findModel($id)->delete();
             return $this->redirect(['index']);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionMainindex()

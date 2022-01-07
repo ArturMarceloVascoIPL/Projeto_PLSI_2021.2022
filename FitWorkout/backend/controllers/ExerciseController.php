@@ -65,7 +65,7 @@ class ExerciseController extends Controller
     public function actionIndex()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('readExercises')) {
+        // if (Yii::$app->user->can('readExercises')) {
             $searchModel = new ExerciseSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -73,9 +73,9 @@ class ExerciseController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionView($id)
@@ -102,7 +102,7 @@ class ExerciseController extends Controller
     public function actionCreate()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('createExercise')) {
+        // if (Yii::$app->user->can('createExercise')) {
             $model = new Exercise();
 
             if ($this->request->isPost) {
@@ -121,15 +121,15 @@ class ExerciseController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionUpdate($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('updateExercises')) {
+        // if (Yii::$app->user->can('updateExercises')) {
             $model = $this->findModel($id);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -139,20 +139,20 @@ class ExerciseController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 
     public function actionDelete($id)
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('deleteExercises')) {
+        // if (Yii::$app->user->can('deleteExercises')) {
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
-        }
+        // }
 
-        return 0;
+        // return 0;
     }
 }

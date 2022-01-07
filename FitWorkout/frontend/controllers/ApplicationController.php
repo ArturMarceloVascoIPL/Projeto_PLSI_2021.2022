@@ -13,7 +13,7 @@ class ApplicationController extends Controller
     public function actionIndex()
     {
         /** Verificar permissão do utilizador */
-        if (Yii::$app->user->can('createPTApplication')) {
+        // if (Yii::$app->user->can('createPTApplication')) {
             $userIdLogged = Yii::$app->user->id;
 
             $model_temp = Ptapplication::findOne(['userId' => $userIdLogged]);
@@ -38,6 +38,6 @@ class ApplicationController extends Controller
                 }
             }
             return $this->render('index');
-        }
+        // }
     }
 }
