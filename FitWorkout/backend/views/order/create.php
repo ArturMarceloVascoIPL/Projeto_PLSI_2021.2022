@@ -1,31 +1,20 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Order */
 
-$this->title = $model->id;
+$this->title = 'Create Order';
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
 ?>
-<div class="order-view">
+<div class="order-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
-
-    <?= DetailView::widget([
+    <?= $this->render('_form', [
         'model' => $model,
-        'attributes' => [
-            'id',
-            'date',
-            'priceTotal',
-            'status',
-            'userId',
-        ],
     ]) ?>
 
 </div>

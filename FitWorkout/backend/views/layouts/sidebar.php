@@ -30,7 +30,7 @@ use app\assets\AppAsset;
                     ['label' => 'DASHBOARD', 'header' => true],
                     ['label' => 'Utilizadores',  'icon' => 'users', 'url' => ['/user/index/']],
                     ['label' => 'Produtos',  'icon' => 'store', 'url' => ['/product/index']],
-                    ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['']],
+                    ['label' => 'Encomendas',  'icon' => 'cubes', 'url' => ['/order']],
 
                     // Exercises Area
                     ['label' => 'Exercicios TAB', 'header' => true],
