@@ -50,6 +50,7 @@ class Order extends \yii\db\ActiveRecord
             'priceTotal' => 'Preço Total',
             'status' => 'Estado',
             'userId' => 'ID de Utilizador',
+            'username.username' => 'Username'
         ];
     }
 
@@ -62,7 +63,10 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Userprofile::className(), ['userId' => 'userId']);
     }
-
+    public function getUsername()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
     /**
      * Gets query for [[Orderitems]].
      *

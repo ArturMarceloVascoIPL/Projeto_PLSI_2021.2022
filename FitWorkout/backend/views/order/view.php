@@ -26,37 +26,33 @@ $this->title = 'Order ' . $model->id;
             'date',
             'priceTotal',
             'status',
-            'userId',
+            'username.username',
         ],
     ]) ?>
 
-
-
     <div class="row justify-content-center">
 
+        <!-- Em Processamento -->
         <div class="col-lg-4 col-md-12">
             <?= Html::a('<i class="fas fa-shopping-cart"></i> Em processamento', ['index'], ['class' => 'btn.block btn  bg-primary btn-block btn-lg']) ?>
         </div>
 
+        <!-- Em Transito -->
         <div class="col-lg-4 col-md-12">
             <?= Html::a('<i class="fas fa-truck-moving"></i> Em trânsito', ['index'], ['class' => 'btn.block btn bg-warning btn-block btn-lg']) ?>
         </div>
 
+        <!-- Entregue -->
         <div class="col-lg-4 col-md-12">
             <?= Html::a('<i class="fas fa-home"></i> Entregue', ['index'], ['class' => 'btn.block btn bg-success btn-block btn-lg']) ?>
         </div>
-
-
     </div>
 
-        <div class="row justify-content-center">
-
-            <div class="col-12 ">
-                <div class = "bg-primary w-100 mt-2 bg-danger text-center"> 
-                    STATUS
-                </div>
-                
+    <div class="row justify-content-center">
+        <div class="col-12 ">
+            <div class="bg-primary w-100 mt-2 bg-danger text-center">
+                STATUS: <div id="statusMessage"></div>
             </div>
+        </div>
     </div>
-
 </div>
