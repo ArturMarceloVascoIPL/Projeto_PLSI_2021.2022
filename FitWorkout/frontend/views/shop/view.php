@@ -23,7 +23,7 @@ $this->title = $model->name;
             <h3 class=""><?= $model->description?></h3>
             <br><br>
 
-            <?=Html::a('Comprar por '. $model->price . '€', ['searchorder','productId' => $model->id], ['class'=>'btn btn-primary']) ?>
+            <?=Html::a('Comprar por '. $model->price . '€', ['createorder','productId' => $model->id], ['class'=>'btn btn-primary']) ?>
         </div>
     </div>
     </div>

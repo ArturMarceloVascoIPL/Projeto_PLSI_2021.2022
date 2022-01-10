@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Order;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -16,9 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -27,17 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'date',
             'priceTotal',
             'status',
-            'userId',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Order $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Actions',
+                'contentOptions' => ['style' => 'width: 10%'],
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url) {
+                        return Html::a('<span>Ver</span>', $url, [
+                            'title' => Yii::t('app', 'View'),
+                            'class' => 'btn bg-primary bg-gradient',
+                        ]);
+                    },
+                ],
             ],
         ],
     ]); ?>
