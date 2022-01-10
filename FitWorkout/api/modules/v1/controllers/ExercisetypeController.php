@@ -19,6 +19,25 @@ class ExercisetypeController extends ActiveController
 {
     public $modelClass = 'common\models\Exercisetype';
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::className(),
+            'auth' => [$this, 'auth']
+            // 'class' => QueryParamAuth::className(),
+        ];
+        return $behaviors;
+    }
+
+    public function auth($username, $password)
+    {
+        var_dump($username);
+        $user = \common\models\User::findByUsername($username);
+        if ($user && $user->validatePassword($password)) {
+            return $user;
+        }
+    }
     public function actionTotal()
     {
         $climodel = new $this->modelClass;
