@@ -133,30 +133,41 @@ class ShopController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public static function actionSearchorder($productId)
+    public function actionCreateorder($productId)
     {
         $userId = Yii::$app->user->identity->id;
 
-
-        if(!Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->all())
-        {
-            $order = new Order();
-
-            $order->priceTotal = 0;
-            $order->status = 0;
-            $order->userId = $userId;
+        $order = new Order();
             
-            $order->save();
-            Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $order->id]);
+        $order->date = '2022-01-19';
+        $order->priceTotal = 0;
+        $order->status = 0;
+        $order->userId = $userId;
+        
+        $order->save();
+
+        return $this->redirect(['/order']);
+
+        // if(!Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->all())
+        // {
+        //     $order = new Order();
+            
+        //     $order->date = '2022-01-19';
+        //     $order->priceTotal = 0;
+        //     $order->status = 0;
+        //     $order->userId = $userId;
+            
+        //     $order->save();
+        //     Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $order->id]);
 
            
-        }
-        else
-        {
-            $orderEncontrada = Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->one();
-            Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $orderEncontrada->id]);
+        // }
+        // else
+        // {
+        //     $orderEncontrada = Order::find()->where(['userId' => $userId])->andWhere(['status' => 0])->one();
+        //     Yii::$app->runAction('OrderitemsController/createOrderItem',['productId' => $productId, 'orderId' => $orderEncontrada->id]);
            
-        } 
+        // } 
         
     }
 }
