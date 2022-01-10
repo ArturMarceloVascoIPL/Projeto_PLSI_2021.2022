@@ -19,18 +19,19 @@ class DefaultController extends \yii\rest\ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            // 'class' => HttpBasicAuth::className(),
-            // 'auth' => [$this, 'auth']
-            'class' => QueryParamAuth::className(),
+            'class' => HttpBasicAuth::className(),
+            'auth' => [$this, 'auth']
+            // 'class' => QueryParamAuth::className(),
         ];
         return $behaviors;
     }
 
-    // public function auth($username, $password)
-    // {
-    //     $user = \common\models\User::findByUsername($username);
-    //     if ($user && $user->validatePassword($password)) {
-    //         return $user;
-    //     }
-    // }
+    public function auth($username, $password)
+    {
+        var_dump($username);
+        $user = \common\models\User::findByUsername($username);
+        if ($user && $user->validatePassword($password)) {
+            return $user;
+        }
+    }
 }
